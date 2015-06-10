@@ -1,0 +1,151 @@
+/*
+   ******
+Définitions des principaux conteneurs
+   ******
+*/
+
+body {
+	background-color: #FFFFCC;
+	font-family: Verdana, sans-serif;
+	font-size: 12px;
+}
+
+#container {
+	position: relative;
+	height:100%;
+	width: 900px;
+	margin: auto;
+	margin-top: 20px;
+}
+
+#top {
+	position: relative;
+	width: 100%;
+}
+
+#left_top {
+	float: left;
+	width: 250px;
+	text-align: center;
+}
+
+#right_top {
+	margin-left: 260px;
+}
+
+#language {
+	text-align: right;
+}
+
+#language a img {
+	border: none;
+}
+
+#description {
+	text-align: right;
+}
+
+#description h1 {
+	margin-bottom:-15px;
+}
+
+#menu {
+	margin-top:30px;
+	text-align: right;
+}
+
+#middle {
+	position: relative;
+	width: 100%;
+	text-align: justify;
+}
+
+#news {
+	font-size: 11px;
+	margin-left: 10px;
+	padding: 0px 5px 0px 5px;
+	float: right;
+	width: 200px;
+	border:1px solid #FFCC33;
+	background-color: #FFFF99;
+}
+
+#news h3 {
+	font-size: 11px;
+	margin-top: 2px;
+	padding-bottom: 2px;
+	border-bottom: 1px solid #FFCC33;
+	text-align: center;
+}
+
+#footer {
+	margin-top:100px;
+}
+
+#mentions {
+	float: left;
+}
+
+#w3c {
+	float:right;
+}
+
+.clean {
+  clear: both;
+}
+
+/*
+   ******
+Définitions des classes de span
+   ******
+*/
+
+.publink {
+	float: right;
+}
+.highlight {
+	font-weight: bold;
+	color: red;
+}
+
+/*
+   ******
+Définitions des listes
+   ******
+*/
+
+#menu a:link, #menu a:visited {
+	margin: auto;	
+	padding: 5px;
+	border: 1px solid #FFCC33;
+	text-decoration: none;
+	text-align: center;
+	color: black;
+	font-weight: bold;
+}
+
+#menu a:hover {
+	background-color: #FFFF99;
+}
+
+#menu #current {
+	background-color: #FFFF99;
+}
+
+#menu li {
+display:inline;
+padding-right:5px;
+}
+
+#menu ul {
+	margin:0;
+	padding:0;
+}
+
+#middle ul {
+	list-style-type: square;
+}
+
+h2.sigle {
+  font-size:1.4em;
+}
