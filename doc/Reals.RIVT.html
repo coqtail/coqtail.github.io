@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.RIVT</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.RIVT</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RiemannInt</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">SeqProp</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRIneq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Local</span> <span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Intermediate Value Theorem on an Interval and its corollary</h1>
+
+</div>
+<div class="code">
+</div>
+
+<div class="doc">
+This proof was mainly taken from Reals.Rsqrt_def 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">IVT_interv_prelim0</span> : ∀ (<span class="id" type="var">x</span> <span class="id" type="var">y</span>:R) (<span class="id" type="var">P</span>:R-&gt;bool) (<span class="id" type="var">N</span>:nat),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> (<span class="id" type="var">Dichotomy_ub</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">P</span> <span class="id" type="var">N</span>) ∧ <span class="id" type="var">interval</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> (<span class="id" type="var">Dichotomy_lb</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">P</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">IVT_interv_prelim1</span> : ∀ (<span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">b</span>:R) (<span class="id" type="var">D</span> : <span class="id" type="var">R</span> → <span class="id" type="var">bool</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">dicho_up</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">D</span>) <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">IVT_interv</span> : ∀ (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f</span> <span class="id" type="var">y</span>) 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">z</span> : <span class="id" type="var">R</span> | <span class="id" type="var">interval</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span> ∧ <span class="id" type="var">f</span> <span class="id" type="var">z</span> = 0}.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

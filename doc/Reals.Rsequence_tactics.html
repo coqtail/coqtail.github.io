@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rsequence_tactics</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rsequence_tactics</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">A tactic that constructs the limit of a sequence and the proof that this</h1>
+
+ limit is exact 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">neq</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : (<span class="id" type="var">n</span> ≠ 0)%R |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>: <span class="id" type="var">id</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : (<span class="id" type="var">n</span> &gt; 0) |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>: (<span class="id" type="var">Rgt_not_eq</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">id</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : (<span class="id" type="var">n</span> &lt; 0) |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>: (<span class="id" type="var">Rlt_not_eq</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">id</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">constr</span>:n <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rabs</span> ?a ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">neq</span> <span class="id" type="var">a</span> <span class="id" type="keyword">in</span> <span class="id" type="var">constr</span>: (<span class="id" type="var">Rabs_no_R0</span> <span class="id" type="var">_</span> <span class="id" type="var">H</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">rseq_fold</span> <span class="id" type="var">Un</span> := <span class="id" type="keyword">match</span> <span class="id" type="var">constr</span>:Un <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| ?Vn ?c ?Wn ⇒ <span class="id" type="keyword">let</span> <span class="id" type="var">Vn'</span> := <span class="id" type="var">rseq_fold</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span> <span class="id" type="keyword">let</span> <span class="id" type="var">Wn'</span> := <span class="id" type="var">rseq_fold</span> <span class="id" type="var">Wn</span> <span class="id" type="keyword">in</span> <span class="id" type="var">constr</span>:(Vn' <span class="id" type="var">c</span> <span class="id" type="var">Wn'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">nat</span> ⇒ ?Vn <span class="id" type="var">x</span> ⇒ <span class="id" type="var">rseq_fold</span> <span class="id" type="var">Vn</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">nat</span> ⇒ (?Vn + ?Wn)%R ⇒ <span class="id" type="var">idtac</span> "bla"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:Un<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">rseq_lim</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">Un</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> ?l |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:id<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:id<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:id<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒ <br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">constr</span>:Un <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">Rseq_constant</span> ?a) ⇒ <span class="id" type="var">constr</span>:(Rseq_constant_cv <span class="id" type="var">a</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (/ ?Vn) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H1</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> ?l ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H2</span> := <span class="id" type="var">neq</span> <span class="id" type="var">l</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">constr</span>:(Rseq_cv_inv_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">constr</span>:(Rseq_cv_pos_infty_inv_compat <span class="id" type="var">_</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">constr</span>:(Rseq_cv_neg_infty_inv_compat <span class="id" type="var">_</span> <span class="id" type="var">H1</span>) <span class="id" type="keyword">end</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (?Vn/ ?Wn) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H1</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H2</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Wn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> ?lv  ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Wn</span> ?lw) ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H3</span> := <span class="id" type="var">neq</span> <span class="id" type="var">lw</span> <span class="id" type="keyword">in</span> <span class="id" type="var">constr</span>:(Rseq_cv_div_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span> <span class="id" type="var">H3</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Wn</span> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">constr</span>:(Rseq_cv_pos_infty_div_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H2</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Wn</span> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">constr</span>:(Rseq_cv_neg_infty_div_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H2</span> <span class="id" type="var">H1</span>) <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" type="keyword">end</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (- ?Vn) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H1</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> ?l ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_opp_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_pos_infty_opp_compat <span class="id" type="var">_</span> <span class="id" type="var">H1</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_neg_infty_opp_compat <span class="id" type="var">_</span> <span class="id" type="var">H1</span>) <span class="id" type="keyword">end</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (?Vn + ?Wn) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H1</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H2</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Wn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> ?lv  ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">_</span> ?lw ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_plus_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>  <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_plus_pos_infty_r <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_plus_neg_infty_r <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">_</span> ?lw ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_plus_pos_infty_l <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H2</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_pos_infty_plus_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">_</span> ?lw ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_plus_neg_infty_l <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H2</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_neg_infty_plus_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (?Vn - ?Wn) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H1</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H2</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Wn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> ?lv  ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Wn</span> ?lw) ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_minus_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>  <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_minus_pos_infty <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_plus_neg_infty_r <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Wn</span> ?lw) ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_minus_pos_infty <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H2</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_pos_minus_neg_infty <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)  <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Wn</span> ?lw) ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_finite_minus_neg_infty <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H2</span> <span class="id" type="var">H1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_neg_minus_pos_infty <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (?Vn × ?Wn) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H1</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H2</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Wn</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> ?lv  ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Wn</span> ?lw) ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_mult_compat <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_pos_pos_infty_mult <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_pos_neg_infty_mult <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)  <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">with</span> <br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_neg_pos_infty_mult <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>) <span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Wn</span> ⇒ <span class="id" type="var">constr</span>:(Rseq_cv_neg_neg_infty_mult <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |?Vn| ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Vn</span> <span class="id" type="keyword">in</span> <span class="id" type="tactic">fail</span><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">rser_lim</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">Un</span> ⇒ <span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> ?l |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:id	<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">Rser_cv_pos_infty</span> <span class="id" type="var">Un</span> |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:id<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">Rser_cv_neg_infty</span> <span class="id" type="var">Un</span> |- <span class="id" type="var">_</span> ⇒ <span class="id" type="var">constr</span>:id<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒     <span class="id" type="keyword">match</span> <span class="id" type="var">constr</span>:Un <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">_</span> ⇒ <span class="id" type="var">idtac</span><br/>
+&nbsp;<span class="id" type="keyword">end</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">rseq_cv_construct</span> := <span class="id" type="tactic">intros</span>; <span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- {<span class="id" type="var">l</span> | <span class="id" type="var">Rseq_cv</span> ?Un <span class="id" type="var">l</span>} ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Un</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">_</span> ?l ⇒ ∃ <span class="id" type="var">l</span> ; <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> ?Un <span class="id" type="var">l</span>} ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rser_lim</span> <span class="id" type="var">Un</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rser_cv</span> <span class="id" type="var">_</span> ?l ⇒ ∃ <span class="id" type="var">l</span> ; <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" type="var">Rseq_cv</span> ?Un ?l ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Un</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">_</span> ?l' ⇒ <span class="id" type="tactic">replace</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span> <span class="id" type="var">l'</span> ; [<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span> | <span class="id" type="tactic">subst</span>; <span class="id" type="tactic">try</span> <span class="id" type="tactic">reflexivity</span>; <span class="id" type="tactic">try</span> <span class="id" type="var">field</span>; <span class="id" type="tactic">intuition</span>]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" type="var">Rser_cv</span> ?Un ?l ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rser_lim</span> <span class="id" type="var">Un</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">type</span> <span class="id" type="var">of</span> <span class="id" type="var">H</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">Rser_cv</span> <span class="id" type="var">_</span> ?l' ⇒ <span class="id" type="tactic">replace</span> <span class="id" type="var">l</span> <span class="id" type="keyword">with</span> <span class="id" type="var">l'</span> ; [<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span> | <span class="id" type="tactic">subst</span>; <span class="id" type="tactic">try</span> <span class="id" type="tactic">reflexivity</span>; <span class="id" type="tactic">try</span> <span class="id" type="var">field</span>; <span class="id" type="tactic">intuition</span>]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" type="var">Rseq_cv_pos_infty</span> ?Un ⇒ <span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Un</span> <span class="id" type="keyword">in</span> <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| |- <span class="id" type="var">Rseq_cv_neg_infty</span> ?Un ⇒ <span class="id" type="keyword">let</span> <span class="id" type="var">H</span> := <span class="id" type="var">rseq_lim</span> <span class="id" type="var">Un</span> <span class="id" type="keyword">in</span> <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

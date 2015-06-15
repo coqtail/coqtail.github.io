@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cdefinitions</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cdefinitions</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h2 class="section">Definition of C and basic operations over C</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C</span> : <span class="id" type="keyword">Set</span> := (<span class="id" type="var">prod</span> <span class="id" type="var">R</span> <span class="id" type="var">R</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">R_R_to_C</span> (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">b</span> : <span class="id" type="var">R</span>) : <span class="id" type="var">C</span> := (<span class="id" type="var">a</span>, <span class="id" type="var">b</span>).<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">C</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h2 class="section">Basic definitions and notations</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C0</span> := <span class="id" type="var">R_R_to_C</span> 0 0.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C1</span> := <span class="id" type="var">R_R_to_C</span> 1 0.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Ci</span> := <span class="id" type="var">R_R_to_C</span> 0 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> "0" := <span class="id" type="var">C0</span>.<br/>
+<span class="id" type="keyword">Notation</span> "1" := <span class="id" type="var">C1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cre</span> (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">R</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> (<span class="id" type="var">r1</span>, <span class="id" type="var">i1</span>) := <span class="id" type="var">z</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="var">r1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cim</span> (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">R</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> (<span class="id" type="var">r1</span>, <span class="id" type="var">i1</span>) := <span class="id" type="var">z</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="var">i1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cadd</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) (<span class="id" type="var">z2</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">R_R_to_C</span> (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span>) (<span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cmult</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) (<span class="id" type="var">z2</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">R_R_to_C</span> (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span> - <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span>) (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span> + <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Copp</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) :C :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">R_R_to_C</span> (-Cre <span class="id" type="var">z1</span>) (-Cim <span class="id" type="var">z1</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cinv</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">R_R_to_C</span> (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> / (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span>)) (-Cim <span class="id" type="var">z1</span> / (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cconj</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">R_R_to_C</span> (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span>) (-Cim <span class="id" type="var">z1</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cnorm_sqr</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">R</span> := <br/>
+&nbsp;&nbsp;(<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">R</span> := <br/>
+&nbsp;&nbsp;(<span class="id" type="var">sqrt</span> (<span class="id" type="var">Cnorm_sqr</span> <span class="id" type="var">z1</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cscal</span> (<span class="id" type="var">lambda</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> := <br/>
+&nbsp;&nbsp;<span class="id" type="var">R_R_to_C</span> (<span class="id" type="var">lambda</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z</span>) (<span class="id" type="var">lambda</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">IRC</span> (<span class="id" type="var">x</span> : <span class="id" type="var">R</span>) : <span class="id" type="var">C</span> := (<span class="id" type="var">R_R_to_C</span> <span class="id" type="var">x</span> 0%R).<br/>
+
+<br/>
+<span class="id" type="keyword">Coercion</span> <span class="id" type="var">IRC</span> : <span class="id" type="var">R</span> &gt;-&gt; <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "+" := <span class="id" type="var">Cadd</span> : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "×" := <span class="id" type="var">Cmult</span> : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "- z" := (<span class="id" type="var">Copp</span> <span class="id" type="var">z</span>) : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "/ z" := (<span class="id" type="var">Cinv</span> <span class="id" type="var">z</span>) : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "`×" := <span class="id" type="var">Cscal</span> (<span class="id" type="tactic">at</span> <span class="id" type="var">level</span> 0): <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cminus</span> (<span class="id" type="var">c1</span> <span class="id" type="var">c2</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> := <span class="id" type="var">c1</span> + - <span class="id" type="var">c2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cdiv</span> (<span class="id" type="var">c1</span> <span class="id" type="var">c2</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span> := <span class="id" type="var">c1</span> × / <span class="id" type="var">c2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "-" := <span class="id" type="var">Cminus</span> : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "/" := <span class="id" type="var">Cdiv</span>   : <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> " '+i' " := <span class="id" type="var">R_R_to_C</span> (<span class="id" type="tactic">at</span> <span class="id" type="var">level</span> 60) : <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h2 class="section">Injection from <span class="inlinecode"><span class="id" type="var">N</span></span> to <span class="inlinecode"><span class="id" type="var">C</span></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">INC</span> (<span class="id" type="var">n</span>:nat) : <span class="id" type="var">C</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">O</span> ⇒ 0<br/>
+&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">O</span> ⇒ 1<br/>
+&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">INC</span> <span class="id" type="var">n</span> + 1<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h2 class="section">Injection from <span class="inlinecode"><span class="id" type="var">Z</span></span> to <span class="inlinecode"><span class="id" type="var">C</span></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">IZC</span> (<span class="id" type="var">z</span>:Z) : <span class="id" type="var">C</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">z</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Z0</span> ⇒ 0<br/>
+&nbsp;&nbsp;| <span class="id" type="var">Zpos</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">INC</span> (<span class="id" type="var">nat_of_P</span> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;| <span class="id" type="var">Zneg</span> <span class="id" type="var">n</span> ⇒ - <span class="id" type="var">INC</span> (<span class="id" type="var">nat_of_P</span> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

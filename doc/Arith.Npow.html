@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Arith.Npow</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Arith.Npow</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Arith</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Ntools</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Nle</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">nat_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Definition of power over <span class="inlinecode"><span class="id" type="var">nat</span></span></h1>
+
+</div>
+<div class="code">
+</div>
+
+<div class="doc">
+Definition using <span class="inlinecode"><span class="id" type="var">iter_nat</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Npower</span> <span class="id" type="var">a</span> <span class="id" type="var">n</span> := <span class="id" type="var">iter_nat</span> <span class="id" type="var">n</span> <span class="id" type="var">nat</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">a</span> × <span class="id" type="var">x</span>) 1.<br/>
+</div>
+
+<div class="doc">
+Notation 
+</div>
+<div class="code">
+<span class="id" type="keyword">Infix</span> "^" := <span class="id" type="var">Npower</span> : <span class="id" type="var">nat_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Simplification</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Simplification of <span class="inlinecode"><span class="id" type="var">n</span> ^ 1</span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_n_1</span>: ∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> ^ 1 = <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Relation with successor 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_succ</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">n</span>, <span class="id" type="var">a</span> ^ (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) = <span class="id" type="var">a</span> × <span class="id" type="var">a</span> ^ <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Simplification of <span class="inlinecode">1 ^ <span class="id" type="var">n</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_1_n</span> : ∀ <span class="id" type="var">n</span>, 1 ^ <span class="id" type="var">n</span> = 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Simplification of <span class="inlinecode">0 ^ <span class="id" type="var">n</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_0_n</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">n</span> &gt; 1 → 0 ^ <span class="id" type="var">n</span> = 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Simplification of <span class="inlinecode"><span class="id" type="var">n</span> ^ 0</span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_n_0</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">n</span>&gt;1 → <span class="id" type="var">n</span> ^ 0 = 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Compatibility with order</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility with addition and order 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_plus_le_compat</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span>, <span class="id" type="var">c</span> &gt; 0 → (<span class="id" type="var">a</span> + <span class="id" type="var">b</span>) ^ <span class="id" type="var">c</span> ≥ <span class="id" type="var">a</span> ^ <span class="id" type="var">c</span> + <span class="id" type="var">b</span> ^ <span class="id" type="var">c</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility and order 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Npower_le_compat_r</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">p</span> <span class="id" type="var">q</span>, <span class="id" type="var">n</span> &gt; 0 → <span class="id" type="var">p</span> ≤ <span class="id" type="var">q</span> → <span class="id" type="var">n</span> ^ <span class="id" type="var">p</span> ≤ <span class="id" type="var">n</span> ^ <span class="id" type="var">q</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

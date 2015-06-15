@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Canalysis_diff</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Canalysis_diff</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cnorm</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ctacfield</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_step1</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>, <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">u</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">u</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ <span class="id" type="var">u</span> ≠ 0 ∧ ∃ <span class="id" type="var">h</span>:R, <span class="id" type="var">h</span> × <span class="id" type="var">u</span> = <span class="id" type="var">v</span>) <span class="id" type="var">l1</span> 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">u</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">u</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ <span class="id" type="var">u</span> ≠ 0 ∧ ∃ <span class="id" type="var">h</span>:R, <span class="id" type="var">h</span> × <span class="id" type="var">u</span> = <span class="id" type="var">v</span>) <span class="id" type="var">l2</span> 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l1</span> = <span class="id" type="var">l2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_step2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>, <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">u</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">u</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ <span class="id" type="var">u</span> ≠ 0 ∧ ∃ <span class="id" type="var">h</span>:R, <span class="id" type="var">h</span> × <span class="id" type="var">u</span> = <span class="id" type="var">v</span>) <span class="id" type="var">l</span> 0.<br/>
+ 
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_step3</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">u</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">u</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ <span class="id" type="var">u</span> ≠ 0 ∧ ∃ <span class="id" type="var">h</span>:R, <span class="id" type="var">h</span> × <span class="id" type="var">u</span> = <span class="id" type="var">v</span>) <span class="id" type="var">l</span> 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_limite</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>, <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> → <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l2</span> → <span class="id" type="var">l1</span> = <span class="id" type="var">l2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differential_pt_eq</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> (<span class="id" type="var">pr</span>:differentiable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>), <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">differential_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span> ↔ <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differential_pt_eq_0</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> (<span class="id" type="var">pr</span>:differentiable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">v</span> ≠ 0 → <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> → <span class="id" type="var">differential_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differential_pt_eq_1</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> (<span class="id" type="var">pr</span>:differentiable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">v</span> ≠ 0 → <span class="id" type="var">differential_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span> → <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">differentiability -&gt; continuity along an axis</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_continuous_along_axis</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> → <span class="id" type="var">continuity_along_axis_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">v</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Main rules</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_plus</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>, <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> → <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> (<span class="id" type="var">f1</span> + <span class="id" type="var">f2</span>) <span class="id" type="var">x</span> <span class="id" type="var">v</span> (<span class="id" type="var">l1</span> + <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_opp</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">v</span> ≠ 0 → <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> (- <span class="id" type="var">f</span>) <span class="id" type="var">x</span> <span class="id" type="var">v</span> (- <span class="id" type="var">l</span>).<br/>
+ 
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_minus</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>, <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> → <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> (<span class="id" type="var">f1</span> - <span class="id" type="var">f2</span>) <span class="id" type="var">x</span> <span class="id" type="var">v</span> (<span class="id" type="var">l1</span> - <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_const</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>, <span class="id" type="var">differentiable_pt_lim</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">a</span>) <span class="id" type="var">x</span> <span class="id" type="var">v</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_mult</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l1</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> (<span class="id" type="var">f1</span> × <span class="id" type="var">f2</span>) <span class="id" type="var">x</span> <span class="id" type="var">v</span> (<span class="id" type="var">l1</span> × <span class="id" type="var">f2</span> <span class="id" type="var">x</span> + <span class="id" type="var">f1</span> <span class="id" type="var">x</span> × <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_scal</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>, <span class="id" type="var">v</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> → <span class="id" type="var">differentiable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">a</span> × <span class="id" type="var">f</span> <span class="id" type="var">x</span>) <span class="id" type="var">x</span> <span class="id" type="var">v</span> (<span class="id" type="var">a</span> × <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">differentiable_pt_lim_id</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">v</span>, <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">id</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">C1</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

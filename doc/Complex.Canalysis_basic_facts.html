@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Canalysis_basic_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Canalysis_basic_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpow</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpser_def</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_deriv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">derivable_pt_lim</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_Cpow</span> : ∀  (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) (<span class="id" type="var">n</span>:nat),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span> ⇒ <span class="id" type="var">z</span> ^ (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) <span class="id" type="var">z</span> (<span class="id" type="var">INC</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) × <span class="id" type="var">z</span> ^ <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_gt_Pser</span> : ∀ <span class="id" type="var">An</span> <span class="id" type="var">z</span> <span class="id" type="var">n</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">C</span> ⇒ <span class="id" type="var">gt_Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) <span class="id" type="var">z</span> (<span class="id" type="var">gt_Pser</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">z</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_sum_f_C0</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Bn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span> → <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">z</span> <span class="id" type="var">n</span>, <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>) <span class="id" type="var">z</span> (<span class="id" type="var">Bn</span> <span class="id" type="var">n</span> <span class="id" type="var">z</span>)) → ∀ <span class="id" type="var">z</span> <span class="id" type="var">n</span>, <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span> ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">An</span> <span class="id" type="var">n</span> <span class="id" type="var">z</span>) <span class="id" type="var">n</span>) <span class="id" type="var">z</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">sum_f_C0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> <span class="id" type="var">z</span>) <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_partial_sum</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span> ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="var">gt_Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">z</span>) <span class="id" type="var">n</span>) <span class="id" type="var">z</span> (<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">O</span> ⇒ 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="var">gt_Pser</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">z</span>) (<span class="id" type="var">pred</span> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">end</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">derivable</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_sum_f_C0</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span> → <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, <span class="id" type="var">derivable</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>)) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">derivable</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span> ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">An</span> <span class="id" type="var">n</span> <span class="id" type="var">z</span>) <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_Cpow</span> : ∀  (<span class="id" type="var">n</span>:nat), <span class="id" type="var">derivable</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span> ⇒ <span class="id" type="var">z</span> ^ <span class="id" type="var">n</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

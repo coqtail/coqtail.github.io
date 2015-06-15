@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Croot_n</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Croot_n</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Complex</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpow_plus</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rdiv_1</span> : ∀ <span class="id" type="var">r</span> : <span class="id" type="var">R</span>, (<span class="id" type="var">r</span>/1)%R = <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">ring_simpl1</span> :=  <br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">_</span>|- <span class="id" type="var">_</span> ⇒ (<span class="id" type="var">ring_simplify</span> <span class="id" type="keyword">in</span> <span class="id" type="var">id</span>) ; <span class="id" type="tactic">generalize</span> <span class="id" type="tactic">dependent</span> <span class="id" type="var">id</span><br/>
+<span class="id" type="keyword">end</span><br/>
+<span class="id" type="keyword">with</span> <span class="id" type="var">ring_simpl</span> := <span class="id" type="tactic">unfold</span> <span class="id" type="var">Rdiv</span> <span class="id" type="keyword">in</span> × ; <span class="id" type="tactic">unfold</span> <span class="id" type="var">Cdiv</span> <span class="id" type="keyword">in</span> × ;<br/>
+<span class="id" type="tactic">do</span> 10 (<span class="id" type="tactic">try</span> <span class="id" type="var">ring_simpl1</span>) ; <span class="id" type="tactic">intros</span> ; <span class="id" type="tactic">try</span> <span class="id" type="var">ring_simplify</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">apply_tactic1</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">tactic</span> ⇒ <br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;| <span class="id" type="var">id</span> : <span class="id" type="var">_</span>|- <span class="id" type="var">_</span> ⇒ (<span class="id" type="tactic">apply</span> <span class="id" type="var">tactic</span> <span class="id" type="keyword">in</span> <span class="id" type="var">id</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof of existence of a squareroot 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Croot_pol_2</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, {<span class="id" type="var">z1</span> | <span class="id" type="var">z1</span> ^ 2 = <span class="id" type="var">z</span>}.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Equality to 0 of a polynom of degree one 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Pol_degree_1</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, (∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> × <span class="id" type="var">x</span> + <span class="id" type="var">b</span> = 0) → (<span class="id" type="var">a</span> = 0 ∧ <span class="id" type="var">b</span> = 0).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Unicicty of roots of a polynom of degree two
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpol_2_root_unicity</span> : ∀ <span class="id" type="var">x1</span> <span class="id" type="var">x2</span> <span class="id" type="var">x3</span> <span class="id" type="var">x4</span>,<br/>
+(∀ <span class="id" type="var">x</span>, (<span class="id" type="var">x</span> + <span class="id" type="var">x1</span>) × (<span class="id" type="var">x</span> + <span class="id" type="var">x2</span>) = (<span class="id" type="var">x</span> + <span class="id" type="var">x3</span>) × (<span class="id" type="var">x</span> + <span class="id" type="var">x4</span>)) →<br/>
+(<span class="id" type="var">x1</span> = <span class="id" type="var">x3</span> ∧ <span class="id" type="var">x2</span> = <span class="id" type="var">x4</span>) ∨ (<span class="id" type="var">x1</span> = <span class="id" type="var">x4</span> ∧ <span class="id" type="var">x2</span> = <span class="id" type="var">x3</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Solve a polynom of degree two in the Complex field as a function of delta 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpol_d_2</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">delta</span>, (<span class="id" type="var">delta</span> = <span class="id" type="var">b</span>^2 - 4*a × <span class="id" type="var">c</span>) →<br/>
+<span class="id" type="var">a</span> ≠ 0 → <span class="id" type="var">Cim</span> <span class="id" type="var">a</span> = 0%R → <span class="id" type="var">Cim</span> <span class="id" type="var">b</span> = 0%R → <span class="id" type="var">Cim</span> <span class="id" type="var">c</span> = 0%R →<br/>
+∃ <span class="id" type="var">x1</span>, ∃ <span class="id" type="var">x2</span>, ∀ <span class="id" type="var">x</span>, <br/>
+<span class="id" type="var">a</span> × <span class="id" type="var">x</span> ^ 2 + <span class="id" type="var">b</span> × <span class="id" type="var">x</span> + <span class="id" type="var">c</span> =  <span class="id" type="var">a</span> × (<span class="id" type="var">x</span> + <span class="id" type="var">x1</span>) × (<span class="id" type="var">x</span> + <span class="id" type="var">x2</span>)<br/>
+∧ ((<span class="id" type="var">Cim</span> <span class="id" type="var">delta</span>) = 0%R ∧ <span class="id" type="var">Cre</span> <span class="id" type="var">delta</span> &gt; 0%R → <span class="id" type="var">Cim</span> <span class="id" type="var">x1</span> = 0%R ∧ <span class="id" type="var">Cim</span> <span class="id" type="var">x2</span> = 0%R) <br/>
+∧ ((<span class="id" type="var">Cim</span> <span class="id" type="var">delta</span>) = 0%R ∧ <span class="id" type="var">Cre</span> <span class="id" type="var">delta</span> &lt; 0%R → <span class="id" type="var">Cim</span> <span class="id" type="var">x1</span> ≠ 0%R ∧ <span class="id" type="var">Cim</span> <span class="id" type="var">x2</span> ≠ 0%R)<br/>
+∧ ((<span class="id" type="var">Cim</span> <span class="id" type="var">delta</span>) = 0%R ∧ <span class="id" type="var">Cre</span> <span class="id" type="var">delta</span> = 0%R → <span class="id" type="var">x1</span> = <span class="id" type="var">x2</span> ∧ <span class="id" type="var">Cim</span> <span class="id" type="var">x1</span> = 0%R).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Real properties that can be deduced from the resolution of a complex polynom
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpol_2_real_delta_pos</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">delta</span>, ((<span class="id" type="var">delta</span> = <span class="id" type="var">b</span>^2 - 4*a × <span class="id" type="var">c</span> ) →<br/>
+<span class="id" type="var">delta</span> &gt; 0 → <span class="id" type="var">a</span> ≠ 0 →<br/>
+∃ <span class="id" type="var">x1</span>, ∃ <span class="id" type="var">x2</span>, ∀ <span class="id" type="var">x</span>,<br/>
+<span class="id" type="var">a</span> × <span class="id" type="var">x</span> ^ 2 + <span class="id" type="var">b</span> × <span class="id" type="var">x</span> + <span class="id" type="var">c</span> =  <span class="id" type="var">a</span> × (<span class="id" type="var">x</span> + <span class="id" type="var">x1</span>) × (<span class="id" type="var">x</span> + <span class="id" type="var">x2</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpol_2_real_delta_eq_0</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">delta</span>, ((<span class="id" type="var">delta</span> = <span class="id" type="var">b</span>^2 - 4*a × <span class="id" type="var">c</span>) →<br/>
+<span class="id" type="var">delta</span> = 0 → <span class="id" type="var">a</span> ≠ 0 →<br/>
+∃ <span class="id" type="var">x1</span>, ∃ <span class="id" type="var">x2</span>, ∀ <span class="id" type="var">x</span>,<br/>
+<span class="id" type="var">a</span> × <span class="id" type="var">x</span> ^ 2 + <span class="id" type="var">b</span> × <span class="id" type="var">x</span> + <span class="id" type="var">c</span> =  <span class="id" type="var">a</span> × (<span class="id" type="var">x</span> + <span class="id" type="var">x1</span>) × (<span class="id" type="var">x</span> + <span class="id" type="var">x2</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpol_2_real_delta_eq_neg</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">delta</span>, ((<span class="id" type="var">delta</span> = <span class="id" type="var">b</span>^2 - 4*a × <span class="id" type="var">c</span>) →<br/>
+<span class="id" type="var">delta</span> &lt; 0 → <span class="id" type="var">a</span> ≠ 0 →<br/>
+¬ (∃ <span class="id" type="var">x1</span>, ∃ <span class="id" type="var">x2</span>, ∀ <span class="id" type="var">x</span>,  <br/>
+<span class="id" type="var">a</span> × <span class="id" type="var">x</span> ^ 2 + <span class="id" type="var">b</span> × <span class="id" type="var">x</span> + <span class="id" type="var">c</span> =  <span class="id" type="var">a</span> × (<span class="id" type="var">x</span> + <span class="id" type="var">x1</span>) × (<span class="id" type="var">x</span> + <span class="id" type="var">x2</span>)))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cfpol_root</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">delta</span>, ((<span class="id" type="var">delta</span> = <span class="id" type="var">b</span>^2 - 4*a × <span class="id" type="var">c</span>) →<br/>
+<span class="id" type="var">delta</span> ≥ 0 → <span class="id" type="var">a</span> ≠ 0 → ∃ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> × <span class="id" type="var">x</span> ^ 2 + <span class="id" type="var">b</span> × <span class="id" type="var">x</span> + <span class="id" type="var">c</span> = 0)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpol_pos</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">delta</span>, (<span class="id" type="var">delta</span> = <span class="id" type="var">b</span>^2 - 4*a × <span class="id" type="var">c</span>)%R →<br/>
+&nbsp;<span class="id" type="var">a</span> ≠ 0%R →<br/>
+(∀ <span class="id" type="var">x</span>, 0 ≠ <span class="id" type="var">a</span>*x*x+b*x+c)%R → <span class="id" type="var">delta</span> &lt; 0%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Pos_poly_del</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> : <span class="id" type="var">R</span>,<br/>
+<span class="id" type="var">a</span> ≠ 0%R → <span class="id" type="var">a</span> &gt; 0%R → (∀ <span class="id" type="var">x</span>, 0 ≤ <span class="id" type="var">a</span>*x*x+b*x+c) → <span class="id" type="var">b</span>^2 - 4*a*c ≤0.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpolar</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cexp</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ast_fun_pos</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">r</span>, (<span class="id" type="var">n</span> &gt; 0)%nat → <span class="id" type="var">r</span> &gt; 0 → (<span class="id" type="var">r</span> + 1) ^ <span class="id" type="var">n</span> - <span class="id" type="var">r</span> &gt; 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h2 class="section">Every positive real has a n root</h2>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exist_root_n_pos</span> : ∀ <span class="id" type="var">r</span> <span class="id" type="var">n</span>, <span class="id" type="var">r</span> ≥ 0 → (<span class="id" type="var">n</span> &gt; 0)%nat → {<span class="id" type="var">root</span> | <span class="id" type="var">root</span> ^ <span class="id" type="var">n</span> = <span class="id" type="var">r</span>}%R.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h2 class="section">Every complex has a n root</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exist_root_n</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">z</span>, (<span class="id" type="var">n</span> &gt; 0)%nat → {<span class="id" type="var">root</span> | <span class="id" type="var">root</span> ^ <span class="id" type="var">n</span> = <span class="id" type="var">z</span>}.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

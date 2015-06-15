@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Canalysis_def</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Canalysis_def</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Cmet</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cderiv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">f</span> : <span class="id" type="var">C</span> → <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">plus_fct</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">f1</span> <span class="id" type="var">x</span> + <span class="id" type="var">f2</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">opp_fct</span> <span class="id" type="var">f</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := - <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">mult_fct</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">f1</span> <span class="id" type="var">x</span> × <span class="id" type="var">f2</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">mult_real_fct</span> (<span class="id" type="var">a</span>:C) <span class="id" type="var">f</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">a</span> × <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">minus_fct</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">f1</span> <span class="id" type="var">x</span> - <span class="id" type="var">f2</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">div_fct</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">f1</span> <span class="id" type="var">x</span> / <span class="id" type="var">f2</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">div_real_fct</span> (<span class="id" type="var">a</span>:C) <span class="id" type="var">f</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">a</span> / <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">comp</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">f1</span> (<span class="id" type="var">f2</span> <span class="id" type="var">x</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">inv_fct</span> <span class="id" type="var">f</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := / <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">constant</span> <span class="id" type="var">f</span> : <span class="id" type="keyword">Prop</span> := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">f</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Cfun_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">F</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "+" := <span class="id" type="var">plus_fct</span> : <span class="id" type="var">Cfun_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "- x" := (<span class="id" type="var">opp_fct</span> <span class="id" type="var">x</span>) : <span class="id" type="var">Cfun_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "×" := <span class="id" type="var">mult_fct</span> : <span class="id" type="var">Cfun_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "-" := <span class="id" type="var">minus_fct</span> : <span class="id" type="var">Cfun_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "/" := <span class="id" type="var">div_fct</span> : <span class="id" type="var">Cfun_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <span class="id" type="keyword">Local</span> "f1 'o' f2" := (<span class="id" type="var">comp</span> <span class="id" type="var">f1</span> <span class="id" type="var">f2</span>) (<span class="id" type="tactic">at</span> <span class="id" type="var">level</span> 20, <span class="id" type="var">right</span> <span class="id" type="var">associativity</span>) : <span class="id" type="var">Cfun_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "/ x" := (<span class="id" type="var">inv_fct</span> <span class="id" type="var">x</span>) : <span class="id" type="var">Cfun_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">fct_cte</span> (<span class="id" type="var">a</span> <span class="id" type="var">x</span>:C) : <span class="id" type="var">C</span> := <span class="id" type="var">a</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">id</span> (<span class="id" type="var">x</span>:C) := <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">no_cond</span> (<span class="id" type="var">x</span>:C) : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">True</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">constant_D_eq</span> <span class="id" type="var">f</span> (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">c</span>:C) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span>:C, <span class="id" type="var">D</span> <span class="id" type="var">x</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">c</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Definition of continuity as a limit</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">z</span>:C) : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">continue_in</span> <span class="id" type="var">f</span> <span class="id" type="var">no_cond</span> <span class="id" type="var">z</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">continuity</span> <span class="id" type="var">f</span> : <span class="id" type="keyword">Prop</span> := ∀ <span class="id" type="var">x</span>:C, <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">continuity_along_axis_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">v</span> <span class="id" type="var">x</span> := ∀ <span class="id" type="var">eps</span>:R, <span class="id" type="var">eps</span> &gt; 0 →<br/>
+&nbsp;∃ <span class="id" type="var">delta</span>:posreal, ∀ <span class="id" type="var">h</span>:R, <span class="id" type="var">Rabs</span> <span class="id" type="var">h</span> &lt; <span class="id" type="var">delta</span> →<br/>
+&nbsp;<span class="id" type="var">dist</span> <span class="id" type="var">C_met</span> (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span> × <span class="id" type="var">v</span>)) (<span class="id" type="var">f</span> <span class="id" type="var">x</span>) &lt; <span class="id" type="var">eps</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Derivative's definition using Landau's kernel</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> : <span class="id" type="keyword">Prop</span> := ∀ <span class="id" type="var">eps</span>:R, 0 &lt; <span class="id" type="var">eps</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">delta</span> : <span class="id" type="var">posreal</span>, ∀ <span class="id" type="var">h</span>, <span class="id" type="var">h</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">h</span> &lt; <span class="id" type="var">delta</span> → <span class="id" type="var">Cnorm</span> ((<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">h</span> - <span class="id" type="var">l</span>) &lt; <span class="id" type="var">eps</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> := { <span class="id" type="var">l</span> | <span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> }.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derivable</span> <span class="id" type="var">f</span> := ∀ <span class="id" type="var">x</span>, <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">pr</span>:derivable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span>) := <span class="id" type="var">proj1_sig</span> <span class="id" type="var">pr</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derive</span> <span class="id" type="var">f</span> (<span class="id" type="var">pr</span>:derivable <span class="id" type="var">f</span>) <span class="id" type="var">x</span> := <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">pr</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Differentiability</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">v</span> ≠ 0 → ∀ <span class="id" type="var">eps</span>:R, 0 &lt; <span class="id" type="var">eps</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">delta</span>:posreal, ∀ <span class="id" type="var">h</span>:R, <span class="id" type="var">h</span> ≠ 0%R →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rabs</span> <span class="id" type="var">h</span> &lt; <span class="id" type="var">delta</span> → <span class="id" type="var">Cnorm</span> ((<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span>*v) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / (<span class="id" type="var">h</span>*v) - <span class="id" type="var">l</span>) &lt; <span class="id" type="var">eps</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">differentiable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">differentiable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> := { <span class="id" type="var">l</span> | <span class="id" type="var">differentiable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span> }.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">differentiable</span> <span class="id" type="var">f</span> <span class="id" type="var">v</span> := ∀ <span class="id" type="var">x</span>, <span class="id" type="var">differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">fully_differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> := ∀ <span class="id" type="var">v</span>, <span class="id" type="var">differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">fully_differentiable</span> <span class="id" type="var">f</span> := ∀ <span class="id" type="var">v</span>, <span class="id" type="var">differentiable</span> <span class="id" type="var">f</span> <span class="id" type="var">v</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">differential_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> (<span class="id" type="var">pr</span>:differentiable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>) := <span class="id" type="var">proj1_sig</span> <span class="id" type="var">pr</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">differential</span> <span class="id" type="var">f</span> <span class="id" type="var">v</span> (<span class="id" type="var">pr</span>:differentiable <span class="id" type="var">f</span> <span class="id" type="var">v</span>) <span class="id" type="var">x</span> := <span class="id" type="var">differential_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> (<span class="id" type="var">pr</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

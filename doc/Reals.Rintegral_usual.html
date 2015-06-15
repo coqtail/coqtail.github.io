@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rintegral_usual</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rintegral_usual</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Some usual integrals 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rintegral</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_inv</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;0 &lt; <span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">Rint</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ /x) <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">ln</span> <span class="id" type="var">b</span> - <span class="id" type="var">ln</span> <span class="id" type="var">a</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_inv</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_exp</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">exp</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">exp</span> <span class="id" type="var">b</span> - <span class="id" type="var">exp</span> <span class="id" type="var">a</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_exp</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_pow_pos</span> <span class="id" type="var">n</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">y</span> : <span class="id" type="var">R</span> ⇒ <span class="id" type="var">INR</span> <span class="id" type="var">n</span> × <span class="id" type="var">y</span> ^ (<span class="id" type="var">pred</span> <span class="id" type="var">n</span>)) <span class="id" type="var">a</span> <span class="id" type="var">b</span> ((<span class="id" type="var">b</span> ^ <span class="id" type="var">n</span> - <span class="id" type="var">a</span> ^ <span class="id" type="var">n</span>)).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_pow_pos</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_cos</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">cos</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">sin</span> <span class="id" type="var">b</span> - <span class="id" type="var">sin</span> <span class="id" type="var">a</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_cos</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_sin</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">sin</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">cos</span> <span class="id" type="var">a</span> - <span class="id" type="var">cos</span> <span class="id" type="var">b</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_sin</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_sqrt_inv</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : 0 &lt; <span class="id" type="var">a</span> → 0 &lt; <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ /(sqrt <span class="id" type="var">x</span>)) <span class="id" type="var">a</span> <span class="id" type="var">b</span> (2 *( <span class="id" type="var">sqrt</span> <span class="id" type="var">b</span> - <span class="id" type="var">sqrt</span> <span class="id" type="var">a</span>)).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_sqrt_inv</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

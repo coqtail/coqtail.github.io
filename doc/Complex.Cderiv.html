@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cderiv</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cderiv</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cmet</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ctacfield</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cnorm</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Classical_Prop</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Classical_Pred_Type</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">D_x</span> (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">y</span> <span class="id" type="var">x</span>:C) : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">D</span> <span class="id" type="var">x</span> ∧ <span class="id" type="var">y</span> ≠ <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">continue_in</span> (<span class="id" type="var">f</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">z</span>:C) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> (<span class="id" type="var">D_x</span> <span class="id" type="var">D</span> <span class="id" type="var">z</span>) (<span class="id" type="var">f</span> <span class="id" type="var">z</span>) <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">D_in</span> (<span class="id" type="var">f</span> <span class="id" type="var">d</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x0</span>:C) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ (<span class="id" type="var">f</span> <span class="id" type="var">x</span> - <span class="id" type="var">f</span> <span class="id" type="var">x0</span>) / (<span class="id" type="var">x</span> - <span class="id" type="var">x0</span>)) (<span class="id" type="var">D_x</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span>) (<span class="id" type="var">d</span> <span class="id" type="var">x0</span>) <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cont_deriv</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">d</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">z</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">d</span> <span class="id" type="var">D</span> <span class="id" type="var">z</span> → <span class="id" type="var">continue_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dmult</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">df</span> <span class="id" type="var">dg</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">z</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">D</span> <span class="id" type="var">z</span> → <span class="id" type="var">D_in</span> <span class="id" type="var">g</span> <span class="id" type="var">dg</span> <span class="id" type="var">D</span> <span class="id" type="var">z</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">z</span> × <span class="id" type="var">g</span> <span class="id" type="var">z</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span>:C ⇒ <span class="id" type="var">df</span> <span class="id" type="var">z</span> × <span class="id" type="var">g</span> <span class="id" type="var">z</span> + <span class="id" type="var">f</span> <span class="id" type="var">z</span> × <span class="id" type="var">dg</span> <span class="id" type="var">z</span>) <span class="id" type="var">D</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dconst</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">y</span> <span class="id" type="var">x0</span>:C), <span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">y</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ 0) <span class="id" type="var">D</span> <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dx</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x0</span>:C), <span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">x</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ 1) <span class="id" type="var">D</span> <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dadd</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">df</span> <span class="id" type="var">dg</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">g</span> <span class="id" type="var">dg</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> + <span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">df</span> <span class="id" type="var">x</span> + <span class="id" type="var">dg</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dmult_const</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">f</span> <span class="id" type="var">df</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x0</span> <span class="id" type="var">a</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span> → <span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">a</span> × <span class="id" type="var">f</span> <span class="id" type="var">x</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">a</span> × <span class="id" type="var">df</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dopp</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">f</span> <span class="id" type="var">df</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span> → <span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ - <span class="id" type="var">df</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dminus</span> : ∀ (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">df</span> <span class="id" type="var">dg</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">g</span> <span class="id" type="var">dg</span> <span class="id" type="var">D</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> - <span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">df</span> <span class="id" type="var">x</span> - <span class="id" type="var">dg</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dcomp</span> : ∀ (<span class="id" type="var">Df</span> <span class="id" type="var">Dg</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">df</span> <span class="id" type="var">dg</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">Df</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">g</span> <span class="id" type="var">dg</span> <span class="id" type="var">Dg</span> (<span class="id" type="var">f</span> <span class="id" type="var">x0</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">x</span>)) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">df</span> <span class="id" type="var">x</span> × <span class="id" type="var">dg</span> (<span class="id" type="var">f</span> <span class="id" type="var">x</span>)) (<span class="id" type="var">Dgf</span> <span class="id" type="var">Df</span> <span class="id" type="var">Dg</span> <span class="id" type="var">f</span>) <span class="id" type="var">x0</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cbase</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cbase</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Cdefinitions</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Complex to real lemmas.</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cproj_right</span> : ∀ <span class="id" type="var">z1</span> : <span class="id" type="var">C</span>, (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span>, <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span>) = <span class="id" type="var">z1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Ceq</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> = <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span> ∧ <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> = <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span> ↔ <span class="id" type="var">z1</span> = <span class="id" type="var">z2</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Simple tactics using the projections 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">CusingR_simpl</span> :=<br/>
+<span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">Ceq</span> ; <span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">split</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">CusingR_rec</span> := <span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">id</span>:C |- <span class="id" type="var">_</span> ⇒ <span class="id" type="tactic">destruct</span> <span class="id" type="var">id</span> ; <span class="id" type="tactic">try</span> <span class="id" type="var">CusingR_rec</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">CusingR</span> := <span class="id" type="tactic">intros</span>; <span class="id" type="tactic">try</span> <span class="id" type="var">CusingR_rec</span> ; <span class="id" type="tactic">apply</span> (<span class="id" type="var">proj1</span> (<span class="id" type="var">Ceq</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>)) ; <span class="id" type="tactic">split</span> ; <span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">real</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">CusingR_f</span> := <span class="id" type="var">CusingR</span> ; <span class="id" type="var">field</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Field Lemmas.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C0_neq_R0_neq</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">z</span> ≠ 0 ↔ (<span class="id" type="var">Cre</span> <span class="id" type="var">z</span> ≠ 0%R ∨ <span class="id" type="var">Cim</span> <span class="id" type="var">z</span> ≠ 0%R).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">C0_neq_R0_neq</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">HintC0_neq_R0_neq</span> : ∀ <span class="id" type="var">z</span>, (<span class="id" type="var">Cre</span> <span class="id" type="var">z</span> ≠ 0%R ∨ <span class="id" type="var">Cim</span> <span class="id" type="var">z</span> ≠ 0%R) → <span class="id" type="var">z</span> ≠ 0.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">HintC0_neq_R0_neq</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C0_norm_R0</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">z</span> = 0 ↔ <span class="id" type="var">Cnorm_sqr</span> <span class="id" type="var">z</span> = 0%R.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">C0_norm_R0</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">HC0_norm_R0</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cnorm_sqr</span> <span class="id" type="var">z</span> = 0%R → <span class="id" type="var">z</span> = 0.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">HC0_norm_R0</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Cre / Cim compatibility with simple operators 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_simpl</span> : ∀ (<span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>), <span class="id" type="var">Cre</span> (<span class="id" type="var">a</span> +i <span class="id" type="var">b</span>) = <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_simpl</span> : ∀ (<span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>), <span class="id" type="var">Cim</span> (<span class="id" type="var">a</span> +i <span class="id" type="var">b</span>) = <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_opp_compat</span> : ∀ <span class="id" type="var">z</span>, (- <span class="id" type="var">Cre</span> <span class="id" type="var">z</span> = <span class="id" type="var">Cre</span> (-z))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_opp_compat</span> : ∀ <span class="id" type="var">z</span>, (- <span class="id" type="var">Cim</span> <span class="id" type="var">z</span> = <span class="id" type="var">Cim</span> (-z))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_add_compat</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span> = <span class="id" type="var">Cre</span> (<span class="id" type="var">z1</span> + <span class="id" type="var">z2</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_add_compat</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, (<span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span> = <span class="id" type="var">Cim</span> (<span class="id" type="var">z1</span> + <span class="id" type="var">z2</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_minus_compat</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, (<span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> - <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span> = <span class="id" type="var">Cre</span> (<span class="id" type="var">z1</span> - <span class="id" type="var">z2</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_minus_compat</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, (<span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> - <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span> = <span class="id" type="var">Cim</span> (<span class="id" type="var">z1</span> - <span class="id" type="var">z2</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_scal_compat</span> : ∀ <span class="id" type="var">z</span> <span class="id" type="var">l</span>, (<span class="id" type="var">Cre</span> (<span class="id" type="var">l</span> `× <span class="id" type="var">z</span>) = <span class="id" type="var">l</span> × <span class="id" type="var">Cre</span> <span class="id" type="var">z</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_scal_compat</span> : ∀ <span class="id" type="var">z</span> <span class="id" type="var">l</span>, (<span class="id" type="var">Cim</span> (<span class="id" type="var">l</span> `× <span class="id" type="var">z</span>) = <span class="id" type="var">l</span> × <span class="id" type="var">Cim</span> <span class="id" type="var">z</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_eq_compat</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, <span class="id" type="var">z1</span> = <span class="id" type="var">z2</span> → <span class="id" type="var">Cre</span> <span class="id" type="var">z1</span> = <span class="id" type="var">Cre</span> <span class="id" type="var">z2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_eq_compat</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, <span class="id" type="var">z1</span> = <span class="id" type="var">z2</span> → <span class="id" type="var">Cim</span> <span class="id" type="var">z1</span> = <span class="id" type="var">Cim</span> <span class="id" type="var">z2</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+ Addition. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_comm</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z1</span> + <span class="id" type="var">z2</span> = <span class="id" type="var">z2</span> + <span class="id" type="var">z1</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cadd_comm</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_assoc</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> : <span class="id" type="var">C</span>, <span class="id" type="var">a</span> + <span class="id" type="var">b</span> + <span class="id" type="var">c</span> = <span class="id" type="var">a</span> + (<span class="id" type="var">b</span> + <span class="id" type="var">c</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cadd_assoc</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_0_l</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, 0 + <span class="id" type="var">z</span> = <span class="id" type="var">z</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cadd_0_l</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_0_r</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z</span> + 0 = <span class="id" type="var">z</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cadd_0_r</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_opp_r</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z</span> + - <span class="id" type="var">z</span> = 0.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cadd_opp_r</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_opp_l</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, - <span class="id" type="var">z</span> + <span class="id" type="var">z</span> = 0.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cadd_opp_l</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Opposite 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Copp_invol</span> : ∀ <span class="id" type="var">z</span>, --z = <span class="id" type="var">z</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Copp_invol</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Minus 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Copp_add_distr</span> : ∀ <span class="id" type="var">z</span> <span class="id" type="var">z'</span>, - (<span class="id" type="var">z</span> + <span class="id" type="var">z'</span>) = -z - <span class="id" type="var">z'</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Copp_add_distr</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Copp_minus_distr</span> : ∀ <span class="id" type="var">z</span> <span class="id" type="var">z'</span>, - (<span class="id" type="var">z</span> - <span class="id" type="var">z'</span>) = - <span class="id" type="var">z</span> + <span class="id" type="var">z'</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Copp_minus_distr</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cminus_antisym</span> : ∀ <span class="id" type="var">z</span> <span class="id" type="var">z'</span>, (<span class="id" type="var">z</span> - <span class="id" type="var">z'</span>) = - (<span class="id" type="var">z'</span> - <span class="id" type="var">z</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cminus_antisym</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+ Multiplication. 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmult_comm</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z1</span> × <span class="id" type="var">z2</span> = <span class="id" type="var">z2</span> × <span class="id" type="var">z1</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cmult_comm</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmult_assoc</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> <span class="id" type="var">z3</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z1</span> × <span class="id" type="var">z2</span> × <span class="id" type="var">z3</span> = <span class="id" type="var">z1</span> × (<span class="id" type="var">z2</span> × <span class="id" type="var">z3</span>).<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cmult_assoc</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmult_1_l</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, 1 × <span class="id" type="var">z</span> = <span class="id" type="var">z</span> .<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cmult_1_l</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmult_1_r</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z</span> × 1= <span class="id" type="var">z</span> .<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cmult_1_r</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cinv_rew</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>, (<span class="id" type="var">a</span> +i <span class="id" type="var">b</span>) ≠ 0 → /(a +i <span class="id" type="var">b</span>) = (/ (<span class="id" type="var">a</span>^2 + <span class="id" type="var">b</span>^2)) `× (<span class="id" type="var">a</span> +i - <span class="id" type="var">b</span>)%R.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Division/Inverse 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cinv_l</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z</span> ≠ <span class="id" type="var">C0</span> → / <span class="id" type="var">z</span> × <span class="id" type="var">z</span> = 1.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cinv_l</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cinv_r</span> : ∀ <span class="id" type="var">z</span>:C, <span class="id" type="var">z</span> ≠ <span class="id" type="var">C0</span> → <span class="id" type="var">z</span> × /z = 1.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cinv_r</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Distributivity 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmult_add_distr_l</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> <span class="id" type="var">z3</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z1</span> × (<span class="id" type="var">z2</span> + <span class="id" type="var">z3</span>) = <span class="id" type="var">z1</span> × <span class="id" type="var">z2</span> + <span class="id" type="var">z1</span> × <span class="id" type="var">z3</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cmult_add_distr_l</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmult_add_distr_r</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> <span class="id" type="var">z3</span> : <span class="id" type="var">C</span>,  (<span class="id" type="var">z2</span> + <span class="id" type="var">z3</span>) × <span class="id" type="var">z1</span>= <span class="id" type="var">z2</span> × <span class="id" type="var">z1</span> + <span class="id" type="var">z3</span> × <span class="id" type="var">z1</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Cmult_add_distr_r</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+1 &lt;&gt; 0 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C1_neq_C0</span> : 1 ≠ 0.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">C1_neq_C0</span> : <span class="id" type="var">complex</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">R Vector Space Lemmas</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cscal_1</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, 1%R `× <span class="id" type="var">z</span> = <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cscal_distr_C_l</span> : ∀ <span class="id" type="var">x</span>, ∀ <span class="id" type="var">u</span> <span class="id" type="var">v</span>, <span class="id" type="var">x</span> `× (<span class="id" type="var">u</span> + <span class="id" type="var">v</span>) = <span class="id" type="var">x</span> `× <span class="id" type="var">u</span> + <span class="id" type="var">x</span> `× <span class="id" type="var">v</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cscal_distr_R_r</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">R</span>, ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, (<span class="id" type="var">x</span> + <span class="id" type="var">y</span>)%R `× <span class="id" type="var">z</span> = <span class="id" type="var">x</span> `× <span class="id" type="var">z</span> + <span class="id" type="var">y</span> `× <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cscal_assoc</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">R</span>, ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, (<span class="id" type="var">x</span> × <span class="id" type="var">y</span>)%R `× <span class="id" type="var">z</span> = <span class="id" type="var">x</span> `× (<span class="id" type="var">y</span> `× <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Crev_distr</span> : ∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, ∀ <span class="id" type="var">u</span> <span class="id" type="var">v</span> : <span class="id" type="var">C</span>, <span class="id" type="var">x</span> `× (<span class="id" type="var">u</span> + <span class="id" type="var">v</span>) = <span class="id" type="var">x</span> `× <span class="id" type="var">u</span> + <span class="id" type="var">x</span> `× <span class="id" type="var">v</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Other properties (Cconj)</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cadd_conj</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z</span> + <span class="id" type="var">Cconj</span> <span class="id" type="var">z</span> = (<span class="id" type="var">C1</span> + <span class="id" type="var">C1</span>) × (<span class="id" type="var">Cre</span> <span class="id" type="var">z</span> +i 0%R).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cminus_conj</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">z</span> - <span class="id" type="var">Cconj</span> <span class="id" type="var">z</span> = (<span class="id" type="var">C1</span> + <span class="id" type="var">C1</span>) × (0%R +i <span class="id" type="var">Cim</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cmul_conj</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, (<span class="id" type="var">Cconj</span> <span class="id" type="var">z1</span>) × <span class="id" type="var">z2</span> = <span class="id" type="var">Cconj</span> (<span class="id" type="var">z1</span> × (<span class="id" type="var">Cconj</span> <span class="id" type="var">z2</span>)).<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexist_rep_complex</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>, ∃ <span class="id" type="var">x</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cre</span> <span class="id" type="var">x</span> = <span class="id" type="var">a</span> ∧ <span class="id" type="var">Cim</span> <span class="id" type="var">x</span> = <span class="id" type="var">b</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

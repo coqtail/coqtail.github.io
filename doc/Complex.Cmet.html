@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cmet</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cmet</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rlimit</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Cbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ctacfield</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cnorm</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cfunctions</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definition of the distance in C 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> := <span class="id" type="var">Cnorm</span> (<span class="id" type="var">a</span> - <span class="id" type="var">b</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C_dist_pos</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> ≥ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C_dist_sym</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> = <span class="id" type="var">C_dist</span> <span class="id" type="var">b</span> <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C_dist_refl</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> = 0%R ↔ <span class="id" type="var">a</span> = <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C_dist_tri</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span>, <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> ≤ <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">c</span> + <span class="id" type="var">C_dist</span> <span class="id" type="var">c</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C_dist_plus</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">d</span>, <span class="id" type="var">C_dist</span> (<span class="id" type="var">a</span> + <span class="id" type="var">c</span>) (<span class="id" type="var">b</span> + <span class="id" type="var">d</span>) ≤ <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> + <span class="id" type="var">C_dist</span> <span class="id" type="var">c</span> <span class="id" type="var">d</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C_dist_eq</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">a</span> = <span class="id" type="var">b</span> → <span class="id" type="var">C_dist</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> = 0%R.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+C metric space 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C_met</span> : <span class="id" type="var">Metric_Space</span> :=<br/>
+&nbsp;<span class="id" type="var">Build_Metric_Space</span> <span class="id" type="var">C</span> <span class="id" type="var">C_dist</span> <span class="id" type="var">C_dist_pos</span> <span class="id" type="var">C_dist_sym</span> <span class="id" type="var">C_dist_refl</span> <span class="id" type="var">C_dist_tri</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">limit1_in</span> (<span class="id" type="var">f</span>:C-&gt;C) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">l</span> <span class="id" type="var">z</span>:C) : <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="var">limit_in</span> <span class="id" type="var">C_met</span> <span class="id" type="var">C_met</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">z</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Boule</span> (<span class="id" type="var">c</span> : <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">posreal</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>) := <span class="id" type="var">dist</span> <span class="id" type="var">C_met</span> <span class="id" type="var">c</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">CVN_r</span> (<span class="id" type="var">fn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">posreal</span>) := {<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span> &amp; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">l</span> : <span class="id" type="var">R</span> |<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Cnorm</span> (<span class="id" type="var">An</span> <span class="id" type="var">k</span>)) <span class="id" type="var">n</span>) <span class="id" type="var">l</span> ∧<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">y</span> : <span class="id" type="var">C</span>), <span class="id" type="var">Boule</span> 0 <span class="id" type="var">r</span> <span class="id" type="var">y</span> → <span class="id" type="var">Cnorm</span> (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">y</span>) ≤ <span class="id" type="var">Cnorm</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>))}}.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">D_x</span> (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">y</span> <span class="id" type="var">x</span>:C) : <span class="id" type="keyword">Prop</span> := <span class="id" type="var">D</span> <span class="id" type="var">x</span> ∧ <span class="id" type="var">y</span> ≠ <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Dgf</span> (<span class="id" type="var">Df</span> <span class="id" type="var">Dg</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">f</span>:C-&gt;C) (<span class="id" type="var">z</span>:C) := <span class="id" type="var">Df</span> <span class="id" type="var">z</span> ∧ <span class="id" type="var">Dg</span> (<span class="id" type="var">f</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">adhDa</span> (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">a</span>:C) : <span class="id" type="keyword">Prop</span> := ∀ <span class="id" type="var">alp</span>:R, <span class="id" type="var">alp</span> &gt; 0 →<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">x</span>, <span class="id" type="var">D</span> <span class="id" type="var">x</span> ∧ <span class="id" type="var">C_dist</span> <span class="id" type="var">x</span> <span class="id" type="var">a</span> &lt; <span class="id" type="var">alp</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility of limit with operators 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">single_limit</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">l'</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">adhDa</span> <span class="id" type="var">D</span> <span class="id" type="var">x</span> → <span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">x</span> → <span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l'</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l</span> = <span class="id" type="var">l'</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_plus</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">l</span> <span class="id" type="var">l'</span> <span class="id" type="var">z</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">z</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">g</span> <span class="id" type="var">D</span> <span class="id" type="var">l'</span> <span class="id" type="var">z</span> → <span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> + <span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> (<span class="id" type="var">l</span> + <span class="id" type="var">l'</span>) <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_opp</span> : ∀ (<span class="id" type="var">f</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">l</span> <span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">x0</span> → <span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> (- <span class="id" type="var">l</span>) <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_minus</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">l</span> <span class="id" type="var">l'</span> <span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">g</span> <span class="id" type="var">D</span> <span class="id" type="var">l'</span> <span class="id" type="var">x0</span> → <span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> - <span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> (<span class="id" type="var">l</span> - <span class="id" type="var">l'</span>) <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_free</span> : ∀ (<span class="id" type="var">f</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">x</span> <span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> (<span class="id" type="var">f</span> <span class="id" type="var">x</span>) <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_mul</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">D</span>:C → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">l</span> <span class="id" type="var">l'</span> <span class="id" type="var">x0</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">x0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">g</span> <span class="id" type="var">D</span> <span class="id" type="var">l'</span> <span class="id" type="var">x0</span> → <span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:C ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> × <span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> (<span class="id" type="var">l</span> × <span class="id" type="var">l'</span>) <span class="id" type="var">x0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_inv</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">z</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">D</span> <span class="id" type="var">l</span> <span class="id" type="var">z</span> → <span class="id" type="var">l</span> ≠ 0 → <span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ / <span class="id" type="var">f</span> <span class="id" type="var">x</span>) <span class="id" type="var">D</span> (/ <span class="id" type="var">l</span>) <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">limit_comp</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">Df</span> <span class="id" type="var">Dg</span> <span class="id" type="var">l</span> <span class="id" type="var">l'</span> <span class="id" type="var">z</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> <span class="id" type="var">f</span> <span class="id" type="var">Df</span> <span class="id" type="var">l</span> <span class="id" type="var">z</span> → <span class="id" type="var">limit1_in</span> <span class="id" type="var">g</span> <span class="id" type="var">Dg</span> <span class="id" type="var">l'</span> <span class="id" type="var">l</span> → <span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">z</span> ⇒ <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">z</span>)) (<span class="id" type="var">Dgf</span> <span class="id" type="var">Df</span> <span class="id" type="var">Dg</span> <span class="id" type="var">f</span>) <span class="id" type="var">l'</span> <span class="id" type="var">z</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

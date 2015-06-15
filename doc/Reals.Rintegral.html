@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rintegral</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rintegral</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Real riemannian integrals</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RiemannInt</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RIneq</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">R_sqr</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRfunctions</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Definition of the integral of f between a and b using Riemann_integrable</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">I</span> := ∃ <span class="id" type="var">pr</span> : <span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">RiemannInt</span> <span class="id" type="var">pr</span> = <span class="id" type="var">I</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Common results on integrals</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rint_facts</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The integral from a to b is the opposite of the integral from b to a 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_reverse</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>  <span class="id" type="var">x</span> ↔ <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">b</span> <span class="id" type="var">a</span> (-x).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Riemann_integrable_eq_compat</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rmin</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">Rmax</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> → <span class="id" type="var">g</span> <span class="id" type="var">x</span> = <span class="id" type="var">f</span> <span class="id" type="var">x</span>) → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_eq_compat</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> :<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rmin</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">Rmax</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> → <span class="id" type="var">g</span> <span class="id" type="var">x</span> = <span class="id" type="var">f</span> <span class="id" type="var">x</span>) → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_RiemannInt_link</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">pr</span> : <span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>) : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">RiemannInt</span> <span class="id" type="var">pr</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Continuous functions are integrable</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_continuity</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">x</span>, <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h1 class="section">Chasles relation on integrals</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_Chasles</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> :  <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">y</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">c</span> (<span class="id" type="var">x</span>+y).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_singleton</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">a</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_constant</span> <span class="id" type="var">c</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">Rint</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">c</span>) <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">c</span>*(b-a)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The value of the integral is unique 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_uniqueness</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> = <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_subinterval</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> <span class="id" type="var">x</span> : (<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> ≤ <span class="id" type="var">c</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">c</span>  <span class="id" type="var">x</span> → ∃ <span class="id" type="var">y</span>, <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> ∧ <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> (<span class="id" type="var">x</span>-y).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rint_facts</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h1 class="section">Compatibility of integrals with operations</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rint_operations</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_plus</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">f</span> + <span class="id" type="var">g</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">x</span> + <span class="id" type="var">y</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_minus</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">f</span> - <span class="id" type="var">g</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">x</span> - <span class="id" type="var">y</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_opp</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> ↔ <span class="id" type="var">Rint</span> (- <span class="id" type="var">f</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> (- <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_scalar_mult_compat_l</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">C</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">C</span> × <span class="id" type="var">f</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">C</span>*x).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_scalar_mult_compat_r</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">C</span> : <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">f</span> × <span class="id" type="var">fct_cte</span> <span class="id" type="var">C</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">x</span> × <span class="id" type="var">C</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rint_operations</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_reverse</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_RiemannInt_link</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_Chasles</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_constant</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_plus</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_minus</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_opp</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_scalar_mult_compat_l</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_scalar_mult_compat_r</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_uniqueness</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">Rint_reverse</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">RiemannInt_P6</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">RiemannInt_P7</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">RiemannInt_P10</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">RiemannInt_P14</span> : <span class="id" type="var">Rint</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">RiemannInt_P16</span> : <span class="id" type="var">Rint</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rint_props</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab7"></a><h1 class="section">Inequalities involving integrals</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_le_compat</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → (∀ <span class="id" type="var">u</span>, <span class="id" type="var">a</span> &lt; <span class="id" type="var">u</span> &lt; <span class="id" type="var">b</span> → <span class="id" type="var">f</span> <span class="id" type="var">u</span> ≤ <span class="id" type="var">g</span> <span class="id" type="var">u</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> →  <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A positive function has positive growing integral 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_pos</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → (∀ <span class="id" type="var">u</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">u</span> ≤ <span class="id" type="var">b</span> → 0 ≤ <span class="id" type="var">f</span> <span class="id" type="var">u</span>) → <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → 0 ≤ <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Inequality between integral of the absolute value and 
+ absolute value of the integral 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_abs_le_int</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">y</span>, <span class="id" type="var">Rint</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">u</span> ⇒ <span class="id" type="var">Rabs</span> (<span class="id" type="var">f</span> <span class="id" type="var">u</span>)) <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> ∧ <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A non always null, non negative, continuous function on a non trivial segment has positive integral 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_continuous_gt_0</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">u</span> <span class="id" type="var">X</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> &lt; <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">u</span> ≤ <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → 0 ≤ <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">f</span> <span class="id" type="var">u</span> ≠ 0 → <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">X</span> → 0 &lt; <span class="id" type="var">X</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A non negative function with null integral in a non trivial segment is null on it 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_continuous_pos_eq_0</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> &lt; <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → 0 ≤ <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> 0 → (∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = 0).<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Cauchy-Schwarz's theorem for integrals 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_Cauchy_Schwarz</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="var">f</span> × <span class="id" type="var">f</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">g</span> × <span class="id" type="var">g</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">y</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">f</span> × <span class="id" type="var">g</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">z</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">z</span>^2 ≤ <span class="id" type="var">x</span> × <span class="id" type="var">y</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Fundamental theorem of real analysis 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_derive</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">d</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">f</span> <span class="id" type="var">b</span> - <span class="id" type="var">f</span> <span class="id" type="var">a</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_derive2</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span> :<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rmin</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">Rmax</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">d</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rmin</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">Rmax</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">f</span> <span class="id" type="var">b</span> - <span class="id" type="var">f</span> <span class="id" type="var">a</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Integration by parts 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_parts</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">f'</span> <span class="id" type="var">g'</span> <span class="id" type="var">Ifg'</span> <span class="id" type="var">If'g</span> :<br/>
+<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">f'</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> (<span class="id" type="var">g'</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f'</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">g'</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="var">f</span> × <span class="id" type="var">g'</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">Ifg'</span> → <span class="id" type="var">Rint</span> (<span class="id" type="var">f'</span> × <span class="id" type="var">g</span>)%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">If'g</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Ifg'</span> = <span class="id" type="var">f</span> <span class="id" type="var">b</span> × <span class="id" type="var">g</span> <span class="id" type="var">b</span> - <span class="id" type="var">f</span> <span class="id" type="var">a</span> × <span class="id" type="var">g</span> <span class="id" type="var">a</span> - <span class="id" type="var">If'g</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Variable change theorem 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_substitution</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">g'</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">I</span>:<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → (∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">g</span> <span class="id" type="var">a</span> ≤ <span class="id" type="var">g</span> <span class="id" type="var">x</span> ≤ <span class="id" type="var">g</span> <span class="id" type="var">b</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">g</span> <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">g</span> <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> (<span class="id" type="var">g'</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">g'</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) × <span class="id" type="var">g'</span> <span class="id" type="var">x</span>) <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">I</span> →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">a</span>) (<span class="id" type="var">g</span> <span class="id" type="var">b</span>) <span class="id" type="var">I</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rint_props</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

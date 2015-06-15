@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rmarkov</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rmarkov</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Definitions</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">f</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">bool</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">fp</span> (<span class="id" type="var">b</span> : <span class="id" type="var">bool</span>) <span class="id" type="var">n</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">b</span> <span class="id" type="keyword">then</span> <span class="id" type="var">pow</span> (/ 2) (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">else</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+| <span class="id" type="var">O</span> ⇒ 0<br/>
+| <span class="id" type="var">S</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> + <span class="id" type="var">fp</span> (<span class="id" type="var">f</span> <span class="id" type="var">n</span>) <span class="id" type="var">n</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rlt_0_inv_2</span> : 0 &lt; / 2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rle_0_inv_2</span> : 0 ≤ / 2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_pos</span> : ∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">Bn</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_growing</span> : ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">Bn</span> <span class="id" type="var">n</span>) ≤ (<span class="id" type="var">Bn</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_growing_trans</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">N</span>, (<span class="id" type="var">Bn</span> <span class="id" type="var">n</span>) ≤ (<span class="id" type="var">Bn</span> (<span class="id" type="var">N</span> + <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_dist</span> : ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">Bn</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) - <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> ≤ (/ 2) ^ (<span class="id" type="var">S</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_dist_trans</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">N</span>, <span class="id" type="var">Bn</span> (<span class="id" type="var">N</span> + <span class="id" type="var">n</span>) - <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> ≤ (/ 2) ^ <span class="id" type="var">n</span> × (1 - (/ 2) ^ <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_maj</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> ≤ 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Let</span> <span class="id" type="var">E</span> <span class="id" type="var">r</span> := ∃ <span class="id" type="var">n</span>, <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> = <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_lub</span> : { <span class="id" type="var">l</span> | <span class="id" type="var">is_lub</span> <span class="id" type="var">E</span> <span class="id" type="var">l</span> }.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">l</span> := <span class="id" type="var">proj1_sig</span> <span class="id" type="var">Bn_lub</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Hlub</span> := <span class="id" type="var">proj2_sig</span> <span class="id" type="var">Bn_lub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">l_maj</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">l_lub</span> : ∀ <span class="id" type="var">M</span>, (∀ <span class="id" type="var">n</span>, <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">M</span>) → <span class="id" type="var">l</span> ≤ <span class="id" type="var">M</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rabs_le_maj</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span> <span class="id" type="var">d</span>, <span class="id" type="var">Rabs</span> (<span class="id" type="var">r1</span> - <span class="id" type="var">r2</span>) ≤ <span class="id" type="var">d</span> → <span class="id" type="var">r1</span> ≤ <span class="id" type="var">r2</span> + <span class="id" type="var">d</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_l_dist</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">l</span> - <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> ≤ (/2) ^ <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">l_partial</span> : ∀ <span class="id" type="var">N</span>, (∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">false</span>) → <span class="id" type="var">l</span> ≤ (/2) ^ <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">l_is_zero</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hl</span> : <span class="id" type="var">l</span> = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">l_R0</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">false</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">l_is_zero</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">f_is_false</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hf</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">false</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">f_false</span> : <span class="id" type="var">l</span> = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">f_is_false</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">l_not_zero</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hl</span> : <span class="id" type="var">l</span> ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Hl_lt_0</span> : <span class="id" type="var">l</span> &gt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">l_not_R0_partial</span> : ∃ <span class="id" type="var">N</span>, ~(forall <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">false</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">l_not_R0</span> : ∃ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> ≠ <span class="id" type="var">false</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">l_not_zero</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Definitions</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Markov</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">P_dec</span> : ∀ <span class="id" type="var">n</span>, {<span class="id" type="var">P</span> <span class="id" type="var">n</span>} + {¬ <span class="id" type="var">P</span> <span class="id" type="var">n</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Let</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> := <span class="id" type="keyword">if</span> (<span class="id" type="var">P_dec</span> <span class="id" type="var">n</span>) <span class="id" type="keyword">then</span> <span class="id" type="var">false</span> <span class="id" type="keyword">else</span> <span class="id" type="var">true</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Heq1</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> ≠ <span class="id" type="var">false</span> → ¬ <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Heq2</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">false</span> → <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">R_markov</span> : ¬ (∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>) → ∃ <span class="id" type="var">n</span>, ¬ <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">R_sequence_dec</span> : {∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>} + {¬ ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Markov</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

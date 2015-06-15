@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rsequence_usual_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rsequence_usual_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_base_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_cv_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_rel_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Convergence of usual sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence of polynomials. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_poly_cv</span> : ∀ <span class="id" type="var">d</span>, (<span class="id" type="var">d</span> &gt; 0)%nat → <span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Rseq_poly</span> <span class="id" type="var">d</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence of power sequences. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_pow_eq_1_cv</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Rseq_pow</span> 1) 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_pow_lt_1_cv</span> : ∀ <span class="id" type="var">r</span>, 0 ≤ <span class="id" type="var">r</span> &lt; 1 → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r</span>) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_pow_gt_1_cv</span> : ∀ <span class="id" type="var">r</span>, <span class="id" type="var">r</span> &gt; 1 → <span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence of factorial. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_fact_cv</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Rseq_fact</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Growth comparison.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_poly_little_O</span> : ∀ <span class="id" type="var">d1</span> <span class="id" type="var">d2</span>, (<span class="id" type="var">d1</span> &lt; <span class="id" type="var">d2</span>)%nat → (<span class="id" type="var">Rseq_poly</span> <span class="id" type="var">d1</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_poly</span> <span class="id" type="var">d2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_inv_poly_little_O</span> : ∀ <span class="id" type="var">d1</span> <span class="id" type="var">d2</span>, (<span class="id" type="var">d1</span> &lt; <span class="id" type="var">d2</span>)%nat → (<span class="id" type="var">Rseq_inv_poly</span> <span class="id" type="var">d2</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_inv_poly</span> <span class="id" type="var">d1</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_pow_little_O</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, (0 ≤ <span class="id" type="var">r1</span> &lt; <span class="id" type="var">r2</span>) → (<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r1</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_poly_pow_gt_1_little_O</span> : ∀ <span class="id" type="var">d</span> <span class="id" type="var">r</span>, <span class="id" type="var">r</span> &gt; 1 → (<span class="id" type="var">Rseq_poly</span> <span class="id" type="var">d</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_inv_poly_pow_lt_1_little_O</span> : ∀ <span class="id" type="var">d</span> <span class="id" type="var">r</span>, 0 &lt; <span class="id" type="var">r</span> &lt; 1 → (<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_inv_poly</span> <span class="id" type="var">d</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_pow_fact_little_O</span> : ∀ <span class="id" type="var">r</span>, 0 ≤ <span class="id" type="var">r</span> → (<span class="id" type="var">Rseq_pow</span> <span class="id" type="var">r</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_fact</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_poly_fact_little_O</span> : ∀ <span class="id" type="var">d</span>, <span class="id" type="var">Rseq_poly</span> <span class="id" type="var">d</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Rseq_fact</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Things that don't have anything to do there...</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_ln_cv</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">ln</span> (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>)).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

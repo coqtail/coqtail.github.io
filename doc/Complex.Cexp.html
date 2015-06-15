@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cexp</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cexp</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_cv_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_usual_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRIneq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpser_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpser_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cseries</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cseries_facts</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Definition and manipulation of the general term of the power serie of the exponential</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">exp_seq</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) := / <span class="id" type="var">INC</span> (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exp_seq_neq</span> : ∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">exp_seq</span> <span class="id" type="var">n</span> ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cdiv_exp_seq_simpl</span> : ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">exp_seq</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) / (<span class="id" type="var">exp_seq</span> <span class="id" type="var">n</span>) = / <span class="id" type="var">INC</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Deriv_exp_seq_simpl</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">An_deriv</span> <span class="id" type="var">exp_seq</span> <span class="id" type="var">n</span> = <span class="id" type="var">exp_seq</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">This power serie has a radius of convergence that is infinite</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exp_infinite_cv_radius</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">exp_seq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cexp</span> (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) := <span class="id" type="var">sum</span>  <span class="id" type="var">_</span> <span class="id" type="var">exp_infinite_cv_radius</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Deriv_Cexp</span> (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) := <span class="id" type="var">sum_derive</span> <span class="id" type="var">_</span> <span class="id" type="var">exp_infinite_cv_radius</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">The exponential is its own derivative</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_eq_Deriv_Cexp</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cexp</span> <span class="id" type="var">z</span> = <span class="id" type="var">Deriv_Cexp</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_Cexp</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">Cexp</span> <span class="id" type="var">z</span> (<span class="id" type="var">Cexp</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h2 class="section">Euler's Formula</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_exp_compat</span> : ∀ <span class="id" type="var">a</span> : <span class="id" type="var">R</span>, <span class="id" type="var">Cexp</span> <span class="id" type="var">a</span> =  <span class="id" type="var">exp</span> <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_Cpow_2</span> : ∀ (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>), <span class="id" type="var">Cre</span> ((0 +i <span class="id" type="var">a</span>) ^ (2 × <span class="id" type="var">n</span>)) = ((-1) ^ <span class="id" type="var">n</span> × <span class="id" type="var">a</span> ^ (2*n))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_Cpow_2</span> : ∀ (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>), <span class="id" type="var">Cim</span> ((0 +i <span class="id" type="var">a</span>) ^ (2 × <span class="id" type="var">n</span>)) = <span class="id" type="var">R0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_Cpow_S2</span> : ∀ (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">p</span> : <span class="id" type="var">nat</span>), <span class="id" type="var">Cre</span> ((0 +i  <span class="id" type="var">a</span>) ^ <span class="id" type="var">S</span> (2 × <span class="id" type="var">p</span>)) = <span class="id" type="var">R0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_Cpow_S2</span> : ∀ (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>), <span class="id" type="var">Cim</span> ((0 +i <span class="id" type="var">a</span>) ^ (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>))) = ((-1) ^ <span class="id" type="var">n</span> × <span class="id" type="var">a</span> ^ <span class="id" type="var">S</span> (2*n))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">n_modulo_2</span> : ∀ <span class="id" type="var">n</span>:nat, {<span class="id" type="var">p</span> | (<span class="id" type="var">n</span> = 2 × <span class="id" type="var">p</span>)%nat} + {<span class="id" type="var">p</span> | <span class="id" type="var">n</span> = <span class="id" type="var">S</span> (2 × <span class="id" type="var">p</span>)}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_trigo_compat</span> : ∀ <span class="id" type="var">a</span>, <span class="id" type="var">Cexp</span> (0 +i <span class="id" type="var">a</span>) = <span class="id" type="var">cos</span> <span class="id" type="var">a</span> +i <span class="id" type="var">sin</span> <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_abs_cv</span> : ∀ <span class="id" type="var">z</span>, {<span class="id" type="var">l</span> | <span class="id" type="var">Cser_abs_cv</span> (<span class="id" type="var">gt_Pser</span> <span class="id" type="var">exp_seq</span> <span class="id" type="var">z</span>) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">binomial_diag</span> <span class="id" type="var">n</span> : <span class="id" type="var">Binomial.C</span> <span class="id" type="var">n</span> <span class="id" type="var">n</span> = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">binomial_zero</span> <span class="id" type="var">n</span> : <span class="id" type="var">Binomial.C</span> <span class="id" type="var">n</span> 0 = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">binomial_sum</span> (<span class="id" type="var">x</span> <span class="id" type="var">y</span>:C) <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;(<span class="id" type="var">x</span> + <span class="id" type="var">y</span>) ^ <span class="id" type="var">n</span> = <span class="id" type="var">sum_f_C0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">p</span> ⇒ <span class="id" type="var">IRC</span> (<span class="id" type="var">Binomial.C</span> <span class="id" type="var">n</span> <span class="id" type="var">p</span>) × <span class="id" type="var">x</span> ^ <span class="id" type="var">p</span> × <span class="id" type="var">y</span> ^ (<span class="id" type="var">n</span> - <span class="id" type="var">p</span>)) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_add</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">Cexp</span> (<span class="id" type="var">a</span> + <span class="id" type="var">b</span>) = (<span class="id" type="var">Cexp</span> <span class="id" type="var">a</span> × <span class="id" type="var">Cexp</span> <span class="id" type="var">b</span>)%C.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_0</span> : <span class="id" type="var">Cexp</span> <span class="id" type="var">C0</span> = <span class="id" type="var">C1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cexp_mult</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">n</span>, <span class="id" type="var">Cexp</span> (<span class="id" type="var">INC</span> <span class="id" type="var">n</span> × <span class="id" type="var">a</span>) = (<span class="id" type="var">Cexp</span> <span class="id" type="var">a</span>) ^ <span class="id" type="var">n</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

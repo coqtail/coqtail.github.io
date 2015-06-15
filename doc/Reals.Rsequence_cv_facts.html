@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rsequence_cv_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rsequence_cv_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_base_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Convergence compatibility.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_bound</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → ∃ <span class="id" type="var">M</span>, 0 &lt; <span class="id" type="var">M</span> ∧ <span class="id" type="var">Rseq_bound</span> <span class="id" type="var">Un</span> <span class="id" type="var">M</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_constant_cv</span> <span class="id" type="var">r</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Rseq_constant</span> <span class="id" type="var">r</span>) <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_plus_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> + <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_opp_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rseq_cv</span> (- <span class="id" type="var">Un</span>) (- <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_mult_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> × <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_inv_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">lu</span> ≠ 0 → <span class="id" type="var">Rseq_cv</span> (/ <span class="id" type="var">Un</span>) (/ <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_minus_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> - <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_div_compat</span> : <br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> → <span class="id" type="var">lv</span> ≠ 0 → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Un</span> / <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> / <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_continuity_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">f</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">f</span> <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_abs_compat</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> (|Un|) (<span class="id" type="var">Rabs</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_cv</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Infinite convergence compatibility.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_cv_infty</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_infty_plus_compat</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_plus_pos_infty_r</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_plus_pos_infty_l</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Vn</span> + <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_pos_infty_mult</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_neg_infty_mult</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_neg_infty_mult</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_pos_infty_mult</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Vn</span> × <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_plus_neg_infty_r</span> <span class="id" type="var">l</span>: <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_plus_neg_infty_l</span> <span class="id" type="var">l</span>: <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Vn</span> + <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_minus_neg_infty</span> <span class="id" type="var">l</span>: <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_minus_pos_infty</span> <span class="id" type="var">l</span>: <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_minus_neg_infty</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_minus_pos_infty</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_pos_mult_pos_infty_r</span> <span class="id" type="var">l</span>: <br/>
+&nbsp;&nbsp;0 &lt; <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_neg_mult_pos_infty_r</span> <span class="id" type="var">l</span>: <br/>
+&nbsp;&nbsp;<span class="id" type="var">l</span> &lt; 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_pos_mult_neg_infty_r</span> <span class="id" type="var">l</span>:<br/>
+&nbsp;&nbsp;0 &lt; <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_neg_mult_neg_infty_r</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">l</span> &lt; 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_pos_mult_pos_infty_l</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;0 &lt; <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Vn</span> × <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_neg_mult_pos_infty_l</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">l</span> &lt; 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Vn</span> × <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_pos_mult_neg_infty_l</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;0 &lt; <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Vn</span> × <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_finite_neg_mult_neg_infty_l</span> <span class="id" type="var">l</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">l</span> &lt; 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="var">Vn</span> × <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_infty_plus_compat</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_infty_opp_compat</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> (- <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_infty_opp_compat</span> : <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> (- <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_infty_inv_compat</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv</span> (/ <span class="id" type="var">Un</span>) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_infty_div_compat</span> <span class="id" type="var">l</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Vn</span> / <span class="id" type="var">Un</span>) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_infty_inv_compat</span> : <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv</span> (/ <span class="id" type="var">Un</span>) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_infty_div_compat</span> <span class="id" type="var">l</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Vn</span> / <span class="id" type="var">Un</span>) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_0_inv_compat</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> 0 → <span class="id" type="var">Rseq_neq_0</span> <span class="id" type="var">Un</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (|/ <span class="id" type="var">Un</span>|).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_abs_pos_infty</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> (|Un|).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_abs_neg_infty</span> : <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> (|Un|).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_cv_infty</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_cv_others</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Uniqueness of limit.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_unique</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu1</span> <span class="id" type="var">lu2</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu1</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu2</span> → <span class="id" type="var">lu1</span> = <span class="id" type="var">lu2</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Sandwich theorem.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_sandwich_theorem</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>) → (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Wn</span> <span class="id" type="var">l</span>) → (∀ <span class="id" type="var">n</span>, <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">Wn</span> <span class="id" type="var">n</span>) → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h1 class="section">Limit of non negative terms</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_positive_limit</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">An</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">An</span> <span class="id" type="var">a</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ≤ <span class="id" type="var">a</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h1 class="section">Compatibility of Rle with the limit</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_limit_comparison</span> : ∀ (<span class="id" type="var">An</span> <span class="id" type="var">Bn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, <span class="id" type="var">An</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">Bn</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">An</span> <span class="id" type="var">a</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Bn</span> <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_cv_others</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

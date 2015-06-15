@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rsequence_rel_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rsequence_rel_facts</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Setoid</span> <span class="id" type="var">Morphisms</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_base_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_cv_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Big-O, little-O and equivalence relations.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Big-O is reflexive and transitive. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_refl</span> : ∀ <span class="id" type="var">Un</span>, <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_trans</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <span class="id" type="var">Rseq_big_O_PreOrder</span> : <span class="id" type="var">PreOrder</span> <span class="id" type="var">Rseq_big_O</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Little-O is transitive. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_trans</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <span class="id" type="var">Rseq_little_O_Transitive</span> : <span class="id" type="var">Transitive</span> <span class="id" type="var">Rseq_little_O</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Equivalence is an equivalence relation. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_refl</span> : ∀ <span class="id" type="var">Un</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_sym</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Vn</span> ~ <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_trans</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Vn</span> ~ <span class="id" type="var">Wn</span> → <span class="id" type="var">Un</span> ~ <span class="id" type="var">Wn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <span class="id" type="var">Rseq_equiv_Equivalence</span> : <span class="id" type="var">Equivalence</span> <span class="id" type="var">Rseq_equiv</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Big-O contains little-O and equivalence. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_big_O_incl</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_big_O_incl</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility of relations. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_little_O_trans</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_big_O_trans</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_big_O_compat_l</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_big_O_compat_r</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Wn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Un</span>) → <span class="id" type="var">Wn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_little_O_compat_l</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_little_O_compat_r</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Wn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Un</span>) → <span class="id" type="var">Wn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Big-O and common operations.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_big_O_compat</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">r</span> : <span class="id" type="var">R</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Scalar compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_Rmult_compat_l</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → (<span class="id" type="var">r</span> × <span class="id" type="var">Un</span>) = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_Rmult_compat_r</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">r</span> ≠ 0 → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">r</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Additive compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_plus_compat_l</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>) → (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>) = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Multiplicative compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_opp_compat_l</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → - <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_opp_compat_r</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(- <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_mult_compat</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Xn</span>) → (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>) = <span class="id" type="var">O</span>(<span class="id" type="var">Wn</span> × <span class="id" type="var">Xn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_big_O_compat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Little-O and common operations.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_little_O_compat</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">r</span> : <span class="id" type="var">R</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Scalar compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_Rmult_compat_l</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → (<span class="id" type="var">r</span> × <span class="id" type="var">Un</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_Rmult_compat_r</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">r</span> ≠ 0 → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">r</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Additive compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_plus_compat_l</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>) → (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Multiplicative compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_opp_compat_l</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → - <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_opp_compat_r</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(- <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_mult_compat</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span>) → <span class="id" type="var">Vn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Xn</span>) → (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Wn</span> × <span class="id" type="var">Xn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Inverse contravariance. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_inv_contravar</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Rseq_neq_0</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_neq_0</span> <span class="id" type="var">Vn</span> → (/ <span class="id" type="var">Vn</span>) = <span class="id" type="var">o</span>(/ <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_little_O_compat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Equivalence and common operations.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_equiv_compat</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span> <span class="id" type="var">En</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">r</span> : <span class="id" type="var">R</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Scalar compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_Rmult_compat</span> : <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → (<span class="id" type="var">r</span> × <span class="id" type="var">Un</span>) ~ (<span class="id" type="var">r</span> × <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Multiplicative compatibility. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_opp_compat</span> : <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → (- <span class="id" type="var">Un</span>) ~ (- <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_mult_compat</span> : <span class="id" type="var">Un</span> ~ <span class="id" type="var">Wn</span> → <span class="id" type="var">Vn</span> ~ <span class="id" type="var">Xn</span> → (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>) ~ (<span class="id" type="var">Wn</span> × <span class="id" type="var">Xn</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Addition and little-O. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_plus_little_O_compat_l</span> : <span class="id" type="var">Un</span> ~ <span class="id" type="var">Wn</span> → <span class="id" type="var">En</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Un</span>) → (<span class="id" type="var">Un</span> + <span class="id" type="var">En</span>) ~ <span class="id" type="var">Wn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_equiv_compat</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h1 class="section">Convergence and little-O.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_little_O_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">l</span> : <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Ho</span> : <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_cv_pos_infty</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> (|Vn|).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_little_O_cv</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h1 class="section">Divergence and little-O.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_little_O_pos_infty</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">l</span> : <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_little_O_cv_pos_infty</span> : (<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>) → (<span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_little_O_pos_infty</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab7"></a><h1 class="section">Convergence and equivalence.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_equiv_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <span class="id" type="var">Rseq_equiv_cv_compat</span> : <span class="id" type="var">Morphism</span> (<span class="id" type="var">Rseq_equiv</span> ==&gt; @<span class="id" type="var">eq</span> <span class="id" type="var">R</span> ==&gt; <span class="id" type="var">iff</span>) <span class="id" type="var">Rseq_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">l</span> : <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Heq</span> : <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_cv_pos_infty_compat</span> : <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_cv_neg_infty_compat</span> : <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_cv_div</span> : (∀ <span class="id" type="var">n</span>, <span class="id" type="var">Vn</span> <span class="id" type="var">n</span> ≠ 0) → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">Un</span> / <span class="id" type="var">Vn</span>) 1.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_equiv_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_cv_constant</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ (<span class="id" type="var">Rseq_constant</span> <span class="id" type="var">l</span>) → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_equiv_constant</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">l</span> ≠ 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Un</span> ~ (<span class="id" type="var">Rseq_constant</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_1</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : (∀ <span class="id" type="var">n</span>, <span class="id" type="var">Vn</span> <span class="id" type="var">n</span> ≠ 0) → (<span class="id" type="var">Rseq_div</span> <span class="id" type="var">Un</span>  <span class="id" type="var">Vn</span>) ~ 1 → <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_inv_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <br/>
+&nbsp;&nbsp;{<span class="id" type="var">m</span> | ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≥ <span class="id" type="var">m</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≠ 0} → <br/>
+&nbsp;&nbsp;{<span class="id" type="var">m</span> | ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≥ <span class="id" type="var">m</span>)%nat → <span class="id" type="var">Vn</span> <span class="id" type="var">n</span> ≠ 0} → <br/>
+&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → (<span class="id" type="var">Rseq_inv</span> <span class="id" type="var">Un</span>) ~ (<span class="id" type="var">Rseq_inv</span> <span class="id" type="var">Vn</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

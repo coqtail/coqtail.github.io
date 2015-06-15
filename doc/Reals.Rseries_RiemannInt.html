@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rseries_RiemannInt</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rseries_RiemannInt</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Properties involving series and integrals 
+</div>
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RiemannInt</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_subsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rintegral</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseries_RiemannInt</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Local</span> <span class="id" type="keyword">Coercion</span> <span class="id" type="var">INR</span> : <span class="id" type="var">nat</span> &gt;-&gt; <span class="id" type="var">R</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Telescoping_series</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">n</span>, <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">a</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>) - <span class="id" type="var">a</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span> = <span class="id" type="var">a</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) - <span class="id" type="var">a</span> <span class="id" type="var">O</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Telescoping_series_opp</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">n</span>, <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">a</span> <span class="id" type="var">i</span> - <span class="id" type="var">a</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>)) <span class="id" type="var">n</span> = <span class="id" type="var">a</span> <span class="id" type="var">O</span> - <span class="id" type="var">a</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Generalized Chasles relation</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_generalized_Chasles</span> <span class="id" type="var">f</span> <span class="id" type="var">An</span> : <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) (<span class="id" type="var">An</span> <span class="id" type="var">n</span>)) → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">Rint</span> <span class="id" type="var">f</span> 0 (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">RiemannInt_integrable_eq_compat</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>, (∀ <span class="id" type="var">x</span>, <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">g</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> → <span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">RiemannInt_integrable_minus</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R → <span class="id" type="var">R</span>) (<span class="id" type="var">a</span> <span class="id" type="var">b</span>:R)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prf</span>:Riemann_integrable <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prg</span>:Riemann_integrable <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>), (<span class="id" type="var">Riemann_integrable</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> - <span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">a</span> <span class="id" type="var">b</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">RiemannInt_minus</span> :<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R → <span class="id" type="var">R</span>) (<span class="id" type="var">a</span> <span class="id" type="var">b</span>:R)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prf</span>:Riemann_integrable <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prg</span>:Riemann_integrable <span class="id" type="var">g</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">prfg</span>:Riemann_integrable (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span>:R ⇒ <span class="id" type="var">f</span> <span class="id" type="var">x</span> - <span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">a</span> <span class="id" type="var">b</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">a</span>&lt;=b → <span class="id" type="var">RiemannInt</span> <span class="id" type="var">prfg</span> = <span class="id" type="var">RiemannInt</span> <span class="id" type="var">prf</span> - <span class="id" type="var">RiemannInt</span> <span class="id" type="var">prg</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_RiemannInt_link</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hcont</span> : ∀ <span class="id" type="var">x</span>, 0 ≤ <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hpos</span> : ∀ <span class="id" type="var">x</span>, 0 ≤ <span class="id" type="var">x</span> → 0 ≤ <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hdec</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">R</span>, 0 ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">y</span> ≤ <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Riemann_integrable_f_n_Sn</span>  (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) : <span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">f</span> (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) (<span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_RiemannInt_link_general_term_integrable</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Riemann_integrable</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">fct_cte</span> (<span class="id" type="var">f</span> (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>)) <span class="id" type="var">x</span> - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) (<span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_RiemannInt_link_general_term_bound</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) : <br/>
+&nbsp;&nbsp;<span class="id" type="var">RiemannInt</span> (<span class="id" type="var">Rser_RiemannInt_link_general_term_integrable</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">f</span> (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) - <span class="id" type="var">f</span> (<span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Link between series and integral</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_RiemannInt_link</span> : { <span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) - <span class="id" type="var">RiemannInt</span> (<span class="id" type="var">Riemann_integrable_f_n_Sn</span> <span class="id" type="var">n</span>) ) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_RiemannInt_cv_pos_infty</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">pr</span> : ∀ (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>), <span class="id" type="var">Riemann_integrable</span> <span class="id" type="var">f</span> 0 (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv_pos_infty</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">RiemannInt</span> (<span class="id" type="var">pr</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>))) ~ (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">RiemannInt</span> (<span class="id" type="var">pr</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_RiemannInt_link</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Applications</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">ln1</span> := <span class="id" type="var">comp</span> <span class="id" type="var">ln</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">x</span>+1).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rint_inv1</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;-1 &lt; <span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">Rint</span> (/(id + <span class="id" type="var">fct_cte</span> 1))%F <span class="id" type="var">a</span> <span class="id" type="var">b</span> (<span class="id" type="var">ln</span> (<span class="id" type="var">b</span> + 1) - <span class="id" type="var">ln</span> (<span class="id" type="var">a</span> + 1)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Equivalent of the harmonic series 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">harmonic_series_equiv</span> : (<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ / (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))) ~ (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">ln</span> (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Applications</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseries_RiemannInt</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

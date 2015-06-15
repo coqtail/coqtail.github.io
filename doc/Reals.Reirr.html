@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Reirr</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Reirr</h1>
+
+<div class="code">
+<span class="id" type="keyword">Section</span> <span class="id" type="var">eirr</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_subsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rtrigo</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rtrigo_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_tactics</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">e</span> := <span class="id" type="var">exp</span> 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">partial_e</span> <span class="id" type="var">n</span> := <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ /INR (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>)) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_integer_INR_div</span> : ∀ <span class="id" type="var">n</span>, {<span class="id" type="var">m</span> | <br/>
+<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> : <span class="id" type="var">nat</span> ⇒ / <span class="id" type="var">INR</span> (<span class="id" type="var">fact</span> <span class="id" type="var">i</span>) × <span class="id" type="var">INR</span> (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>)) <span class="id" type="var">n</span> = <span class="id" type="var">INR</span> <span class="id" type="var">m</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">integer_exp_minus_sum</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">nat</span>, <br/>
+<span class="id" type="var">b</span> ≠ 0%nat → <span class="id" type="var">e</span> = <span class="id" type="var">INR</span> <span class="id" type="var">a</span> / <span class="id" type="var">INR</span> <span class="id" type="var">b</span> →<br/>
+{<span class="id" type="var">n</span> | <span class="id" type="var">INR</span> (<span class="id" type="var">fact</span> <span class="id" type="var">b</span>) × (<span class="id" type="var">e</span> - <span class="id" type="var">partial_e</span> <span class="id" type="var">b</span>) = <span class="id" type="var">IZR</span> <span class="id" type="var">n</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_max</span> : ∀ <span class="id" type="var">b</span> <span class="id" type="var">N</span> <span class="id" type="var">f</span>, <br/>
+(∀ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> &gt; 0) → (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">f</span> <span class="id" type="var">b</span> &lt; <br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">f</span> (<span class="id" type="var">max</span> <span class="id" type="var">N</span> (<span class="id" type="var">S</span> <span class="id" type="var">b</span>))).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">inv_INR_fact_pos</span> : ∀ <span class="id" type="var">n</span>, (/INR (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>)) &gt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rminus_lt_plus</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span>, <span class="id" type="var">a</span> - <span class="id" type="var">b</span> &lt; <span class="id" type="var">c</span> → <span class="id" type="var">a</span> &lt; <span class="id" type="var">b</span> + <span class="id" type="var">c</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rplus_lt_minus</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span>, <span class="id" type="var">a</span> &lt; <span class="id" type="var">b</span> + <span class="id" type="var">c</span> → <span class="id" type="var">a</span> - <span class="id" type="var">b</span> &lt; <span class="id" type="var">c</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_max1</span> : ∀ <span class="id" type="var">N</span> <span class="id" type="var">b</span> <span class="id" type="var">f</span>, <br/>
+(∀ <span class="id" type="var">n</span>, <span class="id" type="var">f</span> <span class="id" type="var">n</span> ≥ 0) →<br/>
+<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">f</span> (<span class="id" type="var">max</span> <span class="id" type="var">N</span> (<span class="id" type="var">S</span> <span class="id" type="var">b</span>)) ≥<br/>
+<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">f</span> (<span class="id" type="var">S</span> <span class="id" type="var">b</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">minus_exp_sum_pos</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">nat</span>, <br/>
+<span class="id" type="var">b</span> ≠ 0%nat →<br/>
+<span class="id" type="var">INR</span> (<span class="id" type="var">fact</span> <span class="id" type="var">b</span>) × (<span class="id" type="var">e</span> - <span class="id" type="var">partial_e</span> <span class="id" type="var">b</span>) &gt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">geometric_sum</span> : ∀ (<span class="id" type="var">k</span>:R),<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rabs</span> <span class="id" type="var">k</span> &lt; 1 → <span class="id" type="var">infinite_sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span>:nat ⇒ <span class="id" type="var">k</span> ^ <span class="id" type="var">i</span>) (1 / (1 - <span class="id" type="var">k</span>)).<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exp_remain_sum</span> : ∀ <span class="id" type="var">n</span>, <br/>
+<span class="id" type="var">n</span> ≠ 0%nat → <span class="id" type="var">INR</span> (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>) × (<span class="id" type="var">e</span> - <span class="id" type="var">partial_e</span> <span class="id" type="var">n</span>) &lt; 1 / <span class="id" type="var">INR</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">inv_inf_1</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> ≠ 0%nat → /INR <span class="id" type="var">x</span> ≤ 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">minus_exp_sum_one</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">nat</span>, <br/>
+<span class="id" type="var">b</span> ≠ 0%nat → <span class="id" type="var">e</span> = <span class="id" type="var">INR</span> <span class="id" type="var">a</span> / <span class="id" type="var">INR</span> <span class="id" type="var">b</span> →<br/>
+<span class="id" type="var">INR</span> (<span class="id" type="var">fact</span> <span class="id" type="var">b</span>) × (<span class="id" type="var">e</span> - <span class="id" type="var">partial_e</span> <span class="id" type="var">b</span>) &lt; 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">integer_0_1</span> : ∀ <span class="id" type="var">x</span>, 0 &lt; <span class="id" type="var">IZR</span> <span class="id" type="var">x</span> &lt; 1 → <span class="id" type="var">False</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">eirr</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, <span class="id" type="var">b</span> ≠ 0%nat → <span class="id" type="var">e</span> = (<span class="id" type="var">INR</span> <span class="id" type="var">a</span>) / (<span class="id" type="var">INR</span> <span class="id" type="var">b</span>) → <span class="id" type="var">False</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">eirr</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

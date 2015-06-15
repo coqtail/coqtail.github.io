@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cpolar</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cpolar</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rtrigo</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">AltSeries</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ratan</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpow_plus</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Complex</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h2 class="section">Every complex number has polar coordinate</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">polar1</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cre</span> <span class="id" type="var">z</span> ≠ 0%R → { <span class="id" type="var">r</span> : <span class="id" type="var">R</span> &amp; { <span class="id" type="var">theta</span> : <span class="id" type="var">R</span> | (<span class="id" type="var">r</span> × <span class="id" type="var">cos</span> (<span class="id" type="var">theta</span>) +i <span class="id" type="var">r</span> × <span class="id" type="var">sin</span> (<span class="id" type="var">theta</span>)) = <span class="id" type="var">z</span>}}%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">polar2</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cre</span> <span class="id" type="var">z</span> = 0%R → { <span class="id" type="var">r</span> : <span class="id" type="var">R</span> &amp; { <span class="id" type="var">theta</span> : <span class="id" type="var">R</span> | (<span class="id" type="var">r</span> × <span class="id" type="var">cos</span> (<span class="id" type="var">theta</span>) +i <span class="id" type="var">r</span> × <span class="id" type="var">sin</span> (<span class="id" type="var">theta</span>)) = <span class="id" type="var">z</span>}}%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">polar3</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, { <span class="id" type="var">r</span> : <span class="id" type="var">R</span> &amp; { <span class="id" type="var">theta</span> : <span class="id" type="var">R</span> | (<span class="id" type="var">r</span> × <span class="id" type="var">cos</span> (<span class="id" type="var">theta</span>) +i <span class="id" type="var">r</span> × <span class="id" type="var">sin</span> (<span class="id" type="var">theta</span>)) = <span class="id" type="var">z</span>}}%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exists_pi_mpi</span> : ∀ <span class="id" type="var">x</span>, {<span class="id" type="var">k</span> | 0 &lt; <span class="id" type="var">IZR</span> (<span class="id" type="var">k</span>) × 2 × <span class="id" type="var">PI</span> + <span class="id" type="var">x</span> ≤ 2 × <span class="id" type="var">PI</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">polar</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, { <span class="id" type="var">r</span> : <span class="id" type="var">R</span> &amp; <br/>
+{ <span class="id" type="var">theta</span> : <span class="id" type="var">R</span> |<br/>
+&nbsp;<span class="id" type="var">r</span> ≥ 0 ∧ 0 &lt; <span class="id" type="var">theta</span> ≤ 2 × <span class="id" type="var">PI</span> ∧ (<span class="id" type="var">r</span> × <span class="id" type="var">cos</span> (<span class="id" type="var">theta</span>) +i <span class="id" type="var">r</span> × <span class="id" type="var">sin</span> (<span class="id" type="var">theta</span>)) = <span class="id" type="var">z</span>}}%R.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

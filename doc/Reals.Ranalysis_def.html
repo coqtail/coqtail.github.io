@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Ranalysis_def</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Ranalysis_def</h1>
+
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis1</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRIneq</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis2</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rtopology</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Local</span> <span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Basic notions</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">open_interval</span> (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>:R) := <span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">interval</span> (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>:R) := <span class="id" type="var">lb</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">ub</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">middle</span> (<span class="id" type="var">x</span>:R) (<span class="id" type="var">y</span>:R) : <span class="id" type="var">R</span> := (<span class="id" type="var">x</span>+y)/2.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">continuity_open_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">continuity_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derivable_open_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">derivable_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">injective_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ (<span class="id" type="var">x</span> <span class="id" type="var">y</span>:R),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">f</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> = <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">surjective_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">y</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> → ∃ <span class="id" type="var">x</span>:R, <span class="id" type="var">y</span> = <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">injective</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) := ∀ (<span class="id" type="var">x</span> <span class="id" type="var">y</span>:R), <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">f</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> = <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">surjective</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) := ∀ <span class="id" type="var">y</span>:R, ∃ <span class="id" type="var">x</span>:R, <span class="id" type="var">y</span> = <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bijective</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) := <span class="id" type="var">injective</span> <span class="id" type="var">f</span> ∧ <span class="id" type="var">surjective</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">strictly_increasing_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">f</span> <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">strictly_decreasing_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">y</span> &lt; <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">strictly_monotonous_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> : <span class="id" type="var">R</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>} + {<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">increasing_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> ≤ <span class="id" type="var">f</span> <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">decreasing_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">y</span> ≤ <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">monotonous_interval</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> : <span class="id" type="var">R</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>} + {<span class="id" type="var">decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">strictly_increasing</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">f</span> <span class="id" type="var">y</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">strictly_decreasing</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) := ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">y</span> &lt; <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">strictly_monotonous</span> (<span class="id" type="var">f</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">strictly_increasing</span> <span class="id" type="var">f</span>} + {<span class="id" type="var">strictly_decreasing</span> <span class="id" type="var">f</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">reciprocal_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → (<span class="id" type="var">comp</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>) <span class="id" type="var">x</span> = <span class="id" type="var">id</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">reciprocal_open_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) := ∀ <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → (<span class="id" type="var">comp</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>) <span class="id" type="var">x</span> = <span class="id" type="var">id</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">reciprocal</span> (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R → <span class="id" type="var">R</span>) := ∀ <span class="id" type="var">x</span>, (<span class="id" type="var">comp</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>) <span class="id" type="var">x</span> = <span class="id" type="var">id</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Manipulation 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_identity</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">x</span> = <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_comm</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> = <span class="id" type="var">middle</span> <span class="id" type="var">y</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_is_in_the_middle</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_interval</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_lt_lt_pos</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, 0 &lt; <span class="id" type="var">x</span> → 0 &lt; <span class="id" type="var">y</span> → 0 &lt; <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_le_lt_pos</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, 0 ≤ <span class="id" type="var">x</span> → 0 &lt; <span class="id" type="var">y</span> → 0 &lt; <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_lt_le_pos</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, 0 &lt; <span class="id" type="var">x</span> → 0 ≤ <span class="id" type="var">y</span> → 0 &lt; <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_lt_lt_neg</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &lt; 0 → <span class="id" type="var">y</span> &lt; 0 → <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_le_lt_neg</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> ≤ 0 → <span class="id" type="var">y</span> &lt; 0 → <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">middle_lt_le_neg</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &lt; 0 → <span class="id" type="var">y</span> ≤ 0 → <span class="id" type="var">middle</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">interval_l</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>, <span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">lb</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">interval_r</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>, <span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">open_interval_interval</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">interval_opp_compat</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> (-ub) (-lb) (-x).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">open_interval_opp_compat</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> (-ub) (-lb) (-x).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_strictly_monotonous_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_strictly_monotonous_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_increasing_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_decreasing_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_monotonous_monotonous_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_monotonous_injective_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">injective_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_Rmin_simpl</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) = <span class="id" type="var">f</span> <span class="id" type="var">lb</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_Rmax_simpl</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) = <span class="id" type="var">f</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_Rmin_simpl</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) = <span class="id" type="var">f</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_Rmax_simpl</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) = <span class="id" type="var">f</span> <span class="id" type="var">lb</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_continuous_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">continuity_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_open_interval_opp_rev</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> (-f)%F <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_open_interval_opp_rev2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">f</span>(-x)) (-ub) (-lb) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_strictly_decreasing_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_decreasing_interval</span> (-f)%F <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_strictly_decreasing_interval2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">f</span>(-x)) (-ub) (-lb).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_strictly_increasing_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_increasing_interval</span> (-f)%F <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_strictly_increasing_interval2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <span class="id" type="var">strictly_increasing_interval</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">f</span>(-x)) (-ub) (-lb).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_reciprocal_interval_compat</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_reciprocal_interval_comm</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_reciprocal_interval_comm2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_decreasing_reciprocal_interval_comm</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_monotonous_reciprocal_interval_comm</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">reciprocal_opp_compat_interval</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> =&gt;f(-x)) (-g)%F <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">reciprocal_opp_compat_interval2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> (-f)%F (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">g</span> (-x)) (-ub) (-lb).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_interval_image</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">b</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> → <span class="id" type="var">increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strictly_increasing_open_interval_image</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">b</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> → <span class="id" type="var">increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pr_nu_var2_interv</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">pr1</span> : <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">pr2</span> : <span class="id" type="var">derivable_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">h</span> : <span class="id" type="var">R</span>, <span class="id" type="var">lb</span> &lt; <span class="id" type="var">h</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">f</span> <span class="id" type="var">h</span> = <span class="id" type="var">g</span> <span class="id" type="var">h</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">pr1</span> = <span class="id" type="var">derive_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> <span class="id" type="var">pr2</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

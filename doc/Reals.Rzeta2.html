@@ -1,0 +1,856 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rzeta2</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rzeta2</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_subsequence</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">plus_1_S</span> : ∀ <span class="id" type="var">a</span>, <span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">a</span>) = 1 + (<span class="id" type="var">INR</span> <span class="id" type="var">a</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Convergence of the 1/n² series</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Rseq_square_inv</span> <span class="id" type="var">n</span> := / (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) ^ 2.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Rseq_square_inv_s</span> <span class="id" type="var">n</span> := / (<span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) ^ 2.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Splitting series in odd and even terms</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">odds</span> <span class="id" type="var">Un</span> : <span class="id" type="var">Rseq</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>)).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">evens</span> <span class="id" type="var">Un</span> : <span class="id" type="var">Rseq</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">mult</span> 2 <span class="id" type="var">n</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence of splitting 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_pair_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">mult</span> 2 <span class="id" type="var">n</span>) + <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> (<span class="id" type="var">mult</span> 2 <span class="id" type="var">n</span>))) <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Finite sum splitting 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_odd_even_split</span> : ∀ <span class="id" type="var">an</span> <span class="id" type="var">n</span>, <span class="id" type="var">sum_f_R0</span> (<span class="id" type="var">odds</span> <span class="id" type="var">an</span>) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">an</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>)) - <span class="id" type="var">sum_f_R0</span> (<span class="id" type="var">evens</span> <span class="id" type="var">an</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substracting odd terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">remove_odds</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>} →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="var">evens</span> <span class="id" type="var">Un</span>) <span class="id" type="var">l</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Un</span> - (<span class="id" type="var">odds</span> <span class="id" type="var">Un</span>)) <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substracting even terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">remove_evens</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>} →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="var">odds</span> <span class="id" type="var">Un</span>) <span class="id" type="var">l</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">evens</span> <span class="id" type="var">Un</span>) <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Introduction of pi</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">antg</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ (- 1)^n / (2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">antg_neg</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ (- 1)^n / (- 2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Sum_antg</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">antg</span> (<span class="id" type="var">PI</span> / 4).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">antg_shift_neg_compat</span> : <span class="id" type="var">Rseq_shift</span> <span class="id" type="var">antg_neg</span> == <span class="id" type="var">antg</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Sum_antg_neg</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">antg_neg</span> (<span class="id" type="var">PI</span> / 4 + 1).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bntg</span> <span class="id" type="var">n</span> := / (2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1) ^ 2.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bntg_neg</span> <span class="id" type="var">n</span> := / (- 2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1) ^ 2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bntg_pos</span> : ∀ <span class="id" type="var">n</span>, 0 &lt; <span class="id" type="var">bntg</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">odd_not_zero</span> : ∀ <span class="id" type="var">n</span>, 2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1 ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">neg_odd_not_zero</span> : ∀ <span class="id" type="var">n</span>, 2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) - 1 ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bntg_neg_simpl</span> : ∀ <span class="id" type="var">n</span>, <br/>
+&nbsp;&nbsp;1 / (- 2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1) ^ 2 = 1 / (2 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) - 1) ^ 2.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">pi_tg2</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) := 2 / ((4 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 1) × (4 × (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>) + 3)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pi_tg2_corresp</span> : ∀ <span class="id" type="var">n</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">pi_tg2</span> <span class="id" type="var">n</span> = <span class="id" type="var">tg_alt</span> <span class="id" type="var">PI_tg</span> (2 × <span class="id" type="var">n</span>) + <span class="id" type="var">tg_alt</span> <span class="id" type="var">PI_tg</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pi_tg2_cv</span> : { <span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">pi_tg2</span> <span class="id" type="var">l</span> }.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_bntg</span> : {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">bntg</span> <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Sums indexed by relative integers (from -N to N)</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">ZArith</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">bisum</span> (<span class="id" type="var">f</span> : <span class="id" type="var">Z</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">N</span> : <span class="id" type="var">nat</span>) := <span class="id" type="keyword">match</span> <span class="id" type="var">N</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">O</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">Z0</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">n</span> ⇒ (<span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>) + <span class="id" type="var">f</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">N</span>) + <span class="id" type="var">f</span> (- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">N</span>)%Z<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+
+<ul>
+<li> 1 to a relative integer Z 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">pow1_P</span> <span class="id" type="var">p</span> := <span class="id" type="keyword">match</span> <span class="id" type="var">p</span> <span class="id" type="keyword">with</span> <span class="id" type="var">xO</span> <span class="id" type="var">_</span> ⇒ 1 | <span class="id" type="var">_</span> ⇒ -1 <span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">pow1</span> <span class="id" type="var">z</span> := <span class="id" type="keyword">match</span> <span class="id" type="var">z</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">Z0</span> ⇒ 1<br/>
+&nbsp;&nbsp;| <span class="id" type="var">Zpos</span> <span class="id" type="var">n</span> | <span class="id" type="var">Zneg</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">pow1_P</span> <span class="id" type="var">n</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_P_ind</span> <span class="id" type="var">p</span> : <span class="id" type="var">pow1_P</span> (<span class="id" type="var">Psucc</span> (<span class="id" type="var">Psucc</span> <span class="id" type="var">p</span>)) = <span class="id" type="var">pow1_P</span> <span class="id" type="var">p</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">nat_ind2</span> : ∀ (<span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>), <br/>
+&nbsp;&nbsp;<span class="id" type="var">P</span> <span class="id" type="var">O</span> → <span class="id" type="var">P</span> (<span class="id" type="var">S</span> <span class="id" type="var">O</span>) → (∀ <span class="id" type="var">m</span>, <span class="id" type="var">P</span> <span class="id" type="var">m</span> → <span class="id" type="var">P</span> (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> <span class="id" type="var">m</span>))) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_nat</span> <span class="id" type="var">n</span> : <span class="id" type="var">pow1</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>) = (- 1) ^ <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_nat_neg</span> <span class="id" type="var">n</span> : <span class="id" type="var">pow1</span> (- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>) = (- 1) ^ <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_squared</span> <span class="id" type="var">z</span> : (<span class="id" type="var">pow1</span> <span class="id" type="var">z</span>) ^ 2 = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_Rabs</span> <span class="id" type="var">z</span> : <span class="id" type="var">Rabs</span> (<span class="id" type="var">pow1</span> <span class="id" type="var">z</span>) = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_P_plus</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">pow1_P</span> (<span class="id" type="var">a</span> + <span class="id" type="var">b</span>) = <span class="id" type="var">pow1_P</span> <span class="id" type="var">a</span> × <span class="id" type="var">pow1_P</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_succ</span> <span class="id" type="var">z</span> : <span class="id" type="var">pow1</span> (<span class="id" type="var">Zsucc</span> <span class="id" type="var">z</span>) = - <span class="id" type="var">pow1</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow1_plus_nat</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">pow1</span> (<span class="id" type="var">a</span> + <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">b</span>) = (<span class="id" type="var">pow1</span> <span class="id" type="var">a</span>) × (-1) ^ <span class="id" type="var">b</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Operations on bisums 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">zr</span> (<span class="id" type="var">op</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">f</span> : <span class="id" type="var">Z</span> → <span class="id" type="var">R</span>) <span class="id" type="var">z</span> := <span class="id" type="var">op</span> (<span class="id" type="var">f</span> <span class="id" type="var">z</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">zr2</span> (<span class="id" type="var">op</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">Z</span> → <span class="id" type="var">R</span>) <span class="id" type="var">z</span> := <span class="id" type="var">op</span> (<span class="id" type="var">f</span> <span class="id" type="var">z</span>) (<span class="id" type="var">g</span> <span class="id" type="var">z</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">zr22</span> (<span class="id" type="var">op</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">Z</span> → <span class="id" type="var">Z</span> → <span class="id" type="var">R</span>) <span class="id" type="var">x</span> <span class="id" type="var">y</span> := <span class="id" type="var">op</span> (<span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>) (<span class="id" type="var">g</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_eq_compat</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> : (∀ <span class="id" type="var">z</span>, <span class="id" type="var">f</span> <span class="id" type="var">z</span> = <span class="id" type="var">g</span> <span class="id" type="var">z</span>) → <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_plus</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>, <span class="id" type="var">bisum</span> (<span class="id" type="var">zr2</span> <span class="id" type="var">Rplus</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>) <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> + <span class="id" type="var">bisum</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_minus</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>, <span class="id" type="var">bisum</span> (<span class="id" type="var">zr2</span> <span class="id" type="var">Rminus</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>) <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> - <span class="id" type="var">bisum</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_scal_mult</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">n</span>, <span class="id" type="var">bisum</span> (<span class="id" type="var">zr</span> (<span class="id" type="var">Rmult</span> <span class="id" type="var">a</span>) <span class="id" type="var">f</span>) <span class="id" type="var">n</span> = <span class="id" type="var">a</span> × (<span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_mult</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>, (<span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>) × (<span class="id" type="var">bisum</span> <span class="id" type="var">g</span> <span class="id" type="var">m</span>) = <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">i</span> × <span class="id" type="var">g</span> <span class="id" type="var">j</span>) <span class="id" type="var">m</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reversing terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_reverse</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> : <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">f</span> (- <span class="id" type="var">i</span>)%Z) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Rewriting a bisum as sums 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_bisum</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> : <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) =<br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">i</span>)) (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) + <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">f</span> (- <span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>))%Z) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h1 class="section">Introducing pi to bisums</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">anz</span> <span class="id" type="var">z</span> := (<span class="id" type="var">pow1</span> <span class="id" type="var">z</span>) / (2 × (<span class="id" type="var">IZR</span> <span class="id" type="var">z</span>) + 1).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bnz</span> <span class="id" type="var">z</span> := / (2 × (<span class="id" type="var">IZR</span> <span class="id" type="var">z</span>) + 1) ^ 2.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">An</span> := <span class="id" type="var">bisum</span> <span class="id" type="var">anz</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Bn</span> := <span class="id" type="var">bisum</span> <span class="id" type="var">bnz</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">anz_antg</span> <span class="id" type="var">n</span> : <span class="id" type="var">antg</span> <span class="id" type="var">n</span> = <span class="id" type="var">anz</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">anz_antg_neg</span> <span class="id" type="var">n</span> : <span class="id" type="var">antg_neg</span> <span class="id" type="var">n</span> = <span class="id" type="var">anz</span> (- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_anz_antg</span> : (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">antg</span> + (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">antg_neg</span> - 1))%Rseq == <span class="id" type="var">bisum</span> <span class="id" type="var">anz</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">An_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">An</span> (<span class="id" type="var">PI</span> / 2).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">An_squared_cv</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">An</span> × <span class="id" type="var">An</span>) (<span class="id" type="var">PI</span> ^ 2 / 4).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h1 class="section">Double sums</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bisumsum</span> <span class="id" type="var">f</span> <span class="id" type="var">N</span> := <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ (<span class="id" type="var">bisum</span> (<span class="id" type="var">f</span> <span class="id" type="var">i</span>) <span class="id" type="var">N</span>)) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Double sum minus its diagonal 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bisum_strip</span> <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">N</span> := <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">N</span> - (<span class="id" type="var">f</span> <span class="id" type="var">j</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bisumsum_strip_diag</span> <span class="id" type="var">f</span> <span class="id" type="var">N</span> := <span class="id" type="var">bisumsum</span> <span class="id" type="var">f</span> <span class="id" type="var">N</span> - <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ (<span class="id" type="var">f</span> <span class="id" type="var">i</span> <span class="id" type="var">i</span>)) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Double sum in which its diagonal terms are null 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bisum_strip'</span> <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">N</span> := <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> <span class="id" type="keyword">then</span> 0 <span class="id" type="keyword">else</span> <span class="id" type="var">f</span> <span class="id" type="var">i</span>) <span class="id" type="var">N</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">f</span> <span class="id" type="var">N</span> := <span class="id" type="var">bisumsum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> <span class="id" type="keyword">then</span> 0 <span class="id" type="keyword">else</span> <span class="id" type="var">f</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span>) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Weak extensional equality 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_eq_compat</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> : (∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> = <span class="id" type="var">g</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisumsum</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Bounded extensional equality 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_eq_compat_bounded</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> : (∀ <span class="id" type="var">z</span>, ((-Z_of_nat <span class="id" type="var">n</span>) ≤ <span class="id" type="var">z</span> ≤ <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>)%Z → <span class="id" type="var">f</span> <span class="id" type="var">z</span> = <span class="id" type="var">g</span> <span class="id" type="var">z</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Double sum distributivity 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_square</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> : <span class="id" type="var">bisumsum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">i</span> × <span class="id" type="var">f</span> <span class="id" type="var">j</span>) <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> × <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Inequalities 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Psucc_lt</span> <span class="id" type="var">p</span> : (<span class="id" type="var">Zpos</span> <span class="id" type="var">p</span> &lt; <span class="id" type="var">Zpos</span> (<span class="id" type="var">Psucc</span> <span class="id" type="var">p</span>))%Z.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Psucc_lt_neg</span> <span class="id" type="var">p</span> : (<span class="id" type="var">Zneg</span> (<span class="id" type="var">Psucc</span> <span class="id" type="var">p</span>) &lt; <span class="id" type="var">Zneg</span> <span class="id" type="var">p</span>)%Z.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A special term outside the bounds can be ignored 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_not_in</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">j</span> <span class="id" type="var">n</span> : (<span class="id" type="var">j</span> &lt; (- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>) ∨ <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span> &lt; <span class="id" type="var">j</span>)%Z → <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> : <span class="id" type="var">Z</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> <span class="id" type="keyword">then</span> <span class="id" type="var">g</span> <span class="id" type="var">j</span> <span class="id" type="keyword">else</span> <span class="id" type="var">f</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A special term between the bounds can be extracted 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_in</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">j</span> <span class="id" type="var">n</span> : (- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">j</span> ≤ <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>)%Z → <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> : <span class="id" type="var">Z</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> <span class="id" type="keyword">then</span> <span class="id" type="var">g</span> <span class="id" type="var">j</span> <span class="id" type="keyword">else</span> <span class="id" type="var">f</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> - <span class="id" type="var">f</span> <span class="id" type="var">j</span> + <span class="id" type="var">g</span> <span class="id" type="var">j</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Stripping terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Zzero</span> : <span class="id" type="var">Z</span> → <span class="id" type="var">R</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> ⇒ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_strip_equiv</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> <span class="id" type="var">j</span> : ((- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">j</span> ≤ <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>)%Z → <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum_strip</span> <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisum_strip'</span> <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_strip_nothing</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> <span class="id" type="var">j</span> : ((- <span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) = <span class="id" type="var">j</span> ∨ <span class="id" type="var">j</span> = <span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))%Z → <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum_strip'</span> <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Steps of calculus in bisums 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_one_step</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> : <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) = <span class="id" type="var">bisum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> + <span class="id" type="var">f</span> (<span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) + <span class="id" type="var">f</span> (- <span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))%Z.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_one_step</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">bisum</span> (<span class="id" type="var">f</span> <span class="id" type="var">i</span>) (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) <span class="id" type="var">m</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">bisum</span> (<span class="id" type="var">f</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span>) <span class="id" type="var">m</span> + <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒        <span class="id" type="var">f</span> <span class="id" type="var">i</span> (<span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))    ) <span class="id" type="var">m</span> +<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒        <span class="id" type="var">f</span> <span class="id" type="var">i</span> (- <span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))%Z ) <span class="id" type="var">m</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Switching indices 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_eq_sym</span> <span class="id" type="var">f</span> <span class="id" type="var">z</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> : <span class="id" type="var">Z</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">i</span> <span class="id" type="var">z</span> <span class="id" type="keyword">then</span> 0 <span class="id" type="keyword">else</span> <span class="id" type="var">f</span> <span class="id" type="var">z</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">j</span> : <span class="id" type="var">Z</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">z</span> <span class="id" type="var">j</span> <span class="id" type="keyword">then</span> 0 <span class="id" type="keyword">else</span> <span class="id" type="var">f</span> <span class="id" type="var">z</span> <span class="id" type="var">j</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substracting the diagonal terms sum makes them null in the main double sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">strip_diag</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> : <span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisumsum_strip_diag</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab7"></a><h1 class="section">Rewriting double sums</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Switching indices in a double sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_switch_index</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> : <span class="id" type="var">bisumsum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span> = <span class="id" type="var">bisumsum</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Switching indices in a double sum (where diagonal terms are null) 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_strip_diag'_switch_index</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">j</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Adding double sums 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_strip_diag'_plus</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> + <span class="id" type="var">g</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span>) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> +<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Switching indices of only one term in a sum in a double sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_plus_switch</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> + <span class="id" type="var">g</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span>) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> + <span class="id" type="var">g</span> <span class="id" type="var">j</span> <span class="id" type="var">i</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Extensional equality but on the diagonal terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisumsum_strip_diag'_eq_but_diag_compat</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">i</span> <span class="id" type="var">j</span>, <span class="id" type="var">i</span> ≠ <span class="id" type="var">j</span> → <span class="id" type="var">f</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span> = <span class="id" type="var">g</span> <span class="id" type="var">i</span> <span class="id" type="var">j</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span> = <span class="id" type="var">bisumsum_strip_diag'</span> <span class="id" type="var">g</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Shifting a sequence (with an integer) 
+</div>
+<div class="code">
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">sum1</span> <span class="id" type="var">u</span> <span class="id" type="var">n</span> := <span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" type="var">O</span> ⇒ 0<br/>
+&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">n'</span> ⇒ (<span class="id" type="var">sum1</span> <span class="id" type="var">u</span> <span class="id" type="var">n'</span>) + <span class="id" type="var">u</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_f_R0_sum1</span> <span class="id" type="var">u</span> <span class="id" type="var">n</span> : <span class="id" type="var">sum1</span> <span class="id" type="var">u</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) = <br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">u</span> (<span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>))) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">shiftp</span> (<span class="id" type="var">u</span>:Z-&gt;R) (<span class="id" type="var">p</span>:nat) (<span class="id" type="var">i</span>:Z) := <span class="id" type="var">u</span> (<span class="id" type="var">i</span> + (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">p</span>))%Z.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_shifting_S</span> <span class="id" type="var">u</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="var">shiftp</span> <span class="id" type="var">u</span> (<span class="id" type="var">S</span> <span class="id" type="var">b</span>)) (<span class="id" type="var">S</span> <span class="id" type="var">a</span>) = <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="var">shiftp</span> <span class="id" type="var">u</span> <span class="id" type="var">b</span>) <span class="id" type="var">a</span> +<br/>
+&nbsp;&nbsp;<span class="id" type="var">u</span> (<span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> (<span class="id" type="var">a</span> + <span class="id" type="var">b</span>))) +<br/>
+&nbsp;&nbsp;<span class="id" type="var">u</span> (<span class="id" type="var">Z_of_nat</span> (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> (<span class="id" type="var">a</span> + <span class="id" type="var">b</span>))))<br/>
+.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_shifting</span> <span class="id" type="var">u</span> <span class="id" type="var">n</span> <span class="id" type="var">p</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> (<span class="id" type="var">shiftp</span> <span class="id" type="var">u</span> <span class="id" type="var">p</span>) (<span class="id" type="var">n</span> + <span class="id" type="var">p</span>) = <br/>
+&nbsp;&nbsp;<span class="id" type="var">bisum</span> <span class="id" type="var">u</span> <span class="id" type="var">n</span> + <span class="id" type="var">sum1</span> (<span class="id" type="var">shiftp</span> <span class="id" type="var">u</span> <span class="id" type="var">n</span>) (2 × <span class="id" type="var">p</span>)<br/>
+.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab8"></a><h1 class="section">Rewriting An * An - Bn</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span> := 2 × <span class="id" type="var">x</span> + 1.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">d'</span> <span class="id" type="var">z</span> := <span class="id" type="var">d</span> (<span class="id" type="var">IZR</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">splitmn</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">m</span>, <span class="id" type="var">d</span> <span class="id" type="var">n</span> ≠ 0 → <span class="id" type="var">d</span> <span class="id" type="var">m</span> ≠ 0 → <span class="id" type="var">m</span> ≠ <span class="id" type="var">n</span> → <br/>
+&nbsp;&nbsp;/ ((<span class="id" type="var">d</span> <span class="id" type="var">n</span>) × (<span class="id" type="var">d</span> <span class="id" type="var">m</span>)) = / (2 × (<span class="id" type="var">m</span> - <span class="id" type="var">n</span>)) × (/ (<span class="id" type="var">d</span> <span class="id" type="var">n</span>) - / (<span class="id" type="var">d</span> <span class="id" type="var">m</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">d_not_null</span> <span class="id" type="var">z</span> : <span class="id" type="var">d'</span> <span class="id" type="var">z</span> ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">calc1</span> <span class="id" type="var">N</span> : (<span class="id" type="var">An</span> <span class="id" type="var">N</span>) × (<span class="id" type="var">An</span> <span class="id" type="var">N</span>) - <span class="id" type="var">Bn</span> <span class="id" type="var">N</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">bisumsum_strip_diag'</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">pow1</span> <span class="id" type="var">m</span> × <span class="id" type="var">pow1</span> <span class="id" type="var">n</span>) × / (2 × (<span class="id" type="var">IZR</span> (<span class="id" type="var">m</span> - <span class="id" type="var">n</span>))) × (/ (<span class="id" type="var">d'</span> <span class="id" type="var">n</span>) - / (<span class="id" type="var">d'</span> <span class="id" type="var">m</span>))<br/>
+&nbsp;&nbsp;) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">calc2</span> <span class="id" type="var">N</span> : (<span class="id" type="var">An</span> <span class="id" type="var">N</span>) × (<span class="id" type="var">An</span> <span class="id" type="var">N</span>) - <span class="id" type="var">Bn</span> <span class="id" type="var">N</span> = <span class="id" type="var">bisumsum_strip_diag'</span>  (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">pow1</span> <span class="id" type="var">m</span> × <span class="id" type="var">pow1</span> <span class="id" type="var">n</span>) × / ((<span class="id" type="var">IZR</span> (<span class="id" type="var">m</span> - <span class="id" type="var">n</span>)) × (<span class="id" type="var">d'</span> <span class="id" type="var">n</span>))<br/>
+&nbsp;&nbsp;) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">cn</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span> := <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">m</span> ⇒ <span class="id" type="keyword">if</span> <span class="id" type="var">Z_eq_dec</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> <span class="id" type="keyword">then</span> 0 <span class="id" type="keyword">else</span> <span class="id" type="var">pow1</span> <span class="id" type="var">m</span> / (<span class="id" type="var">IZR</span> (<span class="id" type="var">m</span> - <span class="id" type="var">n</span>))) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">calc3</span> <span class="id" type="var">N</span> : (<span class="id" type="var">An</span> <span class="id" type="var">N</span>) × (<span class="id" type="var">An</span> <span class="id" type="var">N</span>) - <span class="id" type="var">Bn</span> <span class="id" type="var">N</span> = <span class="id" type="var">bisum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">pow1</span> <span class="id" type="var">n</span> / (<span class="id" type="var">d'</span> <span class="id" type="var">n</span>) × (<span class="id" type="var">cn</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span>)) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cn_odd</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span> : <span class="id" type="var">cn</span> (- <span class="id" type="var">n</span>)%Z <span class="id" type="var">N</span> = - (<span class="id" type="var">cn</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cn_zero_zero</span> <span class="id" type="var">N</span> : <span class="id" type="var">cn</span> 0 <span class="id" type="var">N</span> = 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab9"></a><h1 class="section">Bounding</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cn_pos</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span> : (<span class="id" type="var">S</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat →<br/>
+&nbsp;&nbsp;<span class="id" type="var">cn</span> (<span class="id" type="var">Zpos</span> (<span class="id" type="var">P_of_succ_nat</span> <span class="id" type="var">n</span>)) <span class="id" type="var">N</span> = <br/>
+&nbsp;&nbsp;(<span class="id" type="var">pow</span> (-1) (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))) × <br/>
+&nbsp;&nbsp;(<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">j</span> ⇒ <span class="id" type="var">pow</span> (-1) (<span class="id" type="var">j</span> + <span class="id" type="var">N</span> - <span class="id" type="var">n</span>) × / (<span class="id" type="var">INR</span> (<span class="id" type="var">j</span> + <span class="id" type="var">N</span> - <span class="id" type="var">n</span>)))) (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>))<br/>
+.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">alt_bounding</span> : <br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">u</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">Un_decreasing</span> <span class="id" type="var">u</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">u</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="var">tg_alt</span> <span class="id" type="var">u</span>) <span class="id" type="var">n</span> ≤ <span class="id" type="var">u</span> <span class="id" type="var">O</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cn_maj</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span> : (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Rabs</span> (<span class="id" type="var">cn</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>) <span class="id" type="var">N</span>) ≤ / (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - <span class="id" type="var">n</span> + 1)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">abound_eq</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span> : (<span class="id" type="var">O</span> ≤ <span class="id" type="var">n</span>)%nat → (<span class="id" type="var">S</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat →<br/>
+&nbsp;&nbsp;/ (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - <span class="id" type="var">n</span>)) × (/ (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 1)) + / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 3))) =<br/>
+&nbsp;&nbsp;/ (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 1)) × (2 / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 1)) + / (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - <span class="id" type="var">n</span>))) +<br/>
+&nbsp;&nbsp;/ (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 3)) × (2 / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 3)) + / (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - <span class="id" type="var">n</span>))).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">abound</span> <span class="id" type="var">N</span> := <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ / (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) + 1)) × <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(/ (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 1)) + / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 3)))<br/>
+&nbsp;&nbsp;) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bound1</span> <span class="id" type="var">N</span> :=  / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 1)) × <br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;2 / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 1)) + / (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) + 1))<br/>
+&nbsp;&nbsp;) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bound2</span> <span class="id" type="var">N</span> :=  / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 3)) × <br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;2 / (<span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 3)) + / (<span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) + 1))<br/>
+&nbsp;&nbsp;) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bound1'</span> <span class="id" type="var">N</span> :=  / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 1) × <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒  2 / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 1)) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bound2'</span> <span class="id" type="var">N</span> :=  / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 3) × <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒  2 / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">n</span> + 3)) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bound1c</span> <span class="id" type="var">N</span> :=  / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 1) × <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ / <span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) + 1)) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">bound2c</span> <span class="id" type="var">N</span> :=  / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + 3) × <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ / <span class="id" type="var">INR</span> (<span class="id" type="var">N</span> - (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) + 1)) (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">An_squared_Bn_maj</span> <span class="id" type="var">N</span> : (1 ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Rabs</span> (<span class="id" type="var">An</span> <span class="id" type="var">N</span> × <span class="id" type="var">An</span> <span class="id" type="var">N</span> - <span class="id" type="var">Bn</span> <span class="id" type="var">N</span>) ≤ <span class="id" type="var">abound</span> <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound_eq</span> <span class="id" type="var">N</span> : <span class="id" type="var">abound</span> (<span class="id" type="var">S</span> <span class="id" type="var">N</span>) = <span class="id" type="var">bound1</span> (<span class="id" type="var">S</span> <span class="id" type="var">N</span>) + <span class="id" type="var">bound2</span> (<span class="id" type="var">S</span> <span class="id" type="var">N</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence of the bounds 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">inverse_mean</span> <span class="id" type="var">n</span> := <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ / <span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>)) <span class="id" type="var">n</span> / <span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">inverse_cv_0</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ / <span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>)) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">inverse_mean_cv_0</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">inverse_mean</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_0_pos_maj_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : (∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) → (∀ <span class="id" type="var">n</span>, <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">half_mean_0</span> <span class="id" type="var">Un</span> <span class="id" type="var">k</span> <span class="id" type="var">m</span> : 0 ≤ <span class="id" type="var">k</span> → (1 ≤ <span class="id" type="var">m</span>)%nat → (∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) → (∀ <span class="id" type="var">n</span>, <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">k</span> / <span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">N</span> ⇒ / <span class="id" type="var">INR</span> (2 × <span class="id" type="var">N</span> + <span class="id" type="var">m</span>) × <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> (<span class="id" type="var">pred</span> <span class="id" type="var">N</span>)) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound1'_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">bound1'</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound2'_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">bound2'</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rsum_switch_index</span> <span class="id" type="var">Un</span> <span class="id" type="var">N</span> : <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">N</span> - <span class="id" type="var">n</span>)%nat) <span class="id" type="var">N</span> = <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound1c_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">bound1c</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound2c_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">bound2c</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound1_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">bound1</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bound2_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">bound2</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">abound_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">abound</span> 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Final result about sums 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">An_squared_Bn_cv</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="var">An</span> × <span class="id" type="var">An</span> - <span class="id" type="var">Bn</span>) 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab10"></a><h1 class="section">Bn converges to pi²/4</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Bn_cv</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Bn</span> (<span class="id" type="var">PI</span> ^ 2 / 4).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab11"></a><h1 class="section">Linking sums on nat and sums on Z</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bnz_bntg</span> <span class="id" type="var">n</span> : <span class="id" type="var">bntg</span> <span class="id" type="var">n</span> = <span class="id" type="var">bnz</span> (<span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bnz_bntg_neg</span> <span class="id" type="var">n</span> : <span class="id" type="var">bntg_neg</span> <span class="id" type="var">n</span> = <span class="id" type="var">bnz</span> (- <span class="id" type="var">Z_of_nat</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bisum_bnz_bntg</span> : (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">bntg</span> + (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">bntg_neg</span> - 1))%Rseq == <span class="id" type="var">bisum</span> <span class="id" type="var">bnz</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">sumbntg</span> := <span class="id" type="keyword">let</span> (<span class="id" type="var">l</span>, <span class="id" type="var">_</span>) := <span class="id" type="var">Rser_cv_bntg</span> <span class="id" type="keyword">in</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Sum_bntg</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">bntg</span> <span class="id" type="var">sumbntg</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">bntg_shift_neg_compat</span> : <span class="id" type="var">Rseq_shift</span> <span class="id" type="var">bntg_neg</span> == <span class="id" type="var">bntg</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Sum_bntg_neg</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">bntg_neg</span> (<span class="id" type="var">sumbntg</span> + 1).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Sum_bnz</span> : <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Bn</span> (2 × <span class="id" type="var">sumbntg</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sumbntg_val</span> : <span class="id" type="var">sumbntg</span> = <span class="id" type="var">PI</span> ^ 2 / 8.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">odd_zeta</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">bntg</span> (<span class="id" type="var">PI</span> ^ 2 / 8).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab12"></a><h1 class="section">Linking even terms of the 1/n² series to the series itself</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">odd_zeta_evens</span> : <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">evens</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Rseq_square_inv</span>)) (<span class="id" type="var">PI</span> ^ 2 / 8).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">zeta2</span> := <span class="id" type="keyword">let</span> (<span class="id" type="var">l</span>, <span class="id" type="var">_</span>) := <span class="id" type="var">Rser_cv_square_inv</span> <span class="id" type="keyword">in</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">zeta2_half</span> : <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">odds</span> (<span class="id" type="var">Rseq_shift</span> (<span class="id" type="var">Rseq_square_inv</span>))) (<span class="id" type="var">zeta2</span> / 4).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Final result with free variables 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">zeta2_val</span> : <span class="id" type="var">zeta2</span> = <span class="id" type="var">PI</span> ^ 2 / 6.<br/>
+
+<br/>
+<span class="id" type="keyword">Coercion</span> <span class="id" type="var">INR</span> : <span class="id" type="var">nat</span> &gt;-&gt; <span class="id" type="var">R</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab13"></a><h1 class="section">Final theorem</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">zeta2_pi_2_6</span> : <span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ 1 / (<span class="id" type="var">n</span> + 1) ^ 2) (<span class="id" type="var">PI</span> ^ 2 / 6).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

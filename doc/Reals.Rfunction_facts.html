@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rfunction_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rfunction_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rfunction_def</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rfun_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility of extensional equality 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Ltac</span> <span class="id" type="var">extensional_reflexivity</span> <span class="id" type="var">H</span> <span class="id" type="var">Heq</span> :=<br/>
+<span class="id" type="keyword">let</span> <span class="id" type="var">swap</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span> :=<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">clear</span> <span class="id" type="var">H1</span>;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">H1</span> := <span class="id" type="var">H2</span>);<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">clear</span> <span class="id" type="var">H2</span><br/>
+<span class="id" type="keyword">in</span><br/>
+<span class="id" type="keyword">let</span> <span class="id" type="var">rec</span> <span class="id" type="var">refl_aux</span> <span class="id" type="var">H</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">goal</span> <span class="id" type="keyword">with</span><br/>
+| |- ∀ <span class="id" type="var">x</span>, <span class="id" type="var">_</span> ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">x</span> := <span class="id" type="tactic">fresh</span> "x" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">nH</span> := <span class="id" type="tactic">fresh</span> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span>;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">nH</span> := <span class="id" type="var">H</span> <span class="id" type="var">x</span>);<br/>
+&nbsp;&nbsp;<span class="id" type="var">swap</span> <span class="id" type="var">H</span> <span class="id" type="var">nH</span>;<br/>
+&nbsp;&nbsp;<span class="id" type="var">refl_aux</span> <span class="id" type="var">H</span><br/>
+| |- ∃ <span class="id" type="var">x</span>, <span class="id" type="var">_</span> ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">x</span> := <span class="id" type="tactic">fresh</span> "x" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">x</span> <span class="id" type="var">H</span>];<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">x</span>;<br/>
+&nbsp;&nbsp;<span class="id" type="var">refl_aux</span> <span class="id" type="var">H</span><br/>
+| |- ?P ∧ ?Q ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hl</span> := <span class="id" type="tactic">fresh</span> "H" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hr</span> := <span class="id" type="tactic">fresh</span> "H" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">Hl</span> <span class="id" type="var">Hr</span>];<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">split</span>; [<span class="id" type="var">refl_aux</span> <span class="id" type="var">Hl</span>|refl_aux <span class="id" type="var">Hr</span>]<br/>
+| |- ?P ∨ ?Q ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hl</span> := <span class="id" type="tactic">fresh</span> "H" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> <span class="id" type="var">Hr</span> := <span class="id" type="tactic">fresh</span> "H" <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">Hl</span>|Hr];<br/>
+&nbsp;&nbsp;[<span class="id" type="var">refl_aux</span> <span class="id" type="var">Hl</span>|refl_aux <span class="id" type="var">Hr</span>]<br/>
+| <span class="id" type="var">_</span> ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">repeat</span> (<span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">Heq</span>); <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span><br/>
+<span class="id" type="keyword">end</span> <span class="id" type="keyword">in</span><br/>
+<span class="id" type="tactic">compute</span> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span> |- ×; <span class="id" type="var">refl_aux</span> <span class="id" type="var">H</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rfun_eq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Heq</span> : <span class="id" type="var">f</span> == <span class="id" type="var">g</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rfun_continuity_pt_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rfun_continuity_eq_compat</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">f</span> → <span class="id" type="var">continuity</span> <span class="id" type="var">g</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rfun_eq</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

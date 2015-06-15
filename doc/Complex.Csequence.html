@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Csequence</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Csequence</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Cbase</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Cseq_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">Cseq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Cseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq</span> := <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>.<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">z</span> : <span class="id" type="var">C</span>.<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> : <span class="id" type="var">Cseq</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Morphism of functions on C to sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_constant</span> <span class="id" type="var">z</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Coercion</span> <span class="id" type="var">Cseq_constant</span> : <span class="id" type="var">C</span> &gt;-&gt; <span class="id" type="var">Funclass</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_add</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> := <span class="id" type="var">An</span> <span class="id" type="var">n</span> + <span class="id" type="var">Bn</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_mult</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> := <span class="id" type="var">An</span> <span class="id" type="var">n</span> × <span class="id" type="var">Bn</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_opp</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span> := <span class="id" type="var">Copp</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_inv</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span> := <span class="id" type="var">Cinv</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "+" := <span class="id" type="var">Cseq_add</span> : <span class="id" type="var">Cseq_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "×" := <span class="id" type="var">Cseq_mult</span> : <span class="id" type="var">Cseq_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "- u" := (<span class="id" type="var">Cseq_opp</span> <span class="id" type="var">u</span>) : <span class="id" type="var">Cseq_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "/ u" := (<span class="id" type="var">Cseq_inv</span> <span class="id" type="var">u</span>) : <span class="id" type="var">Cseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_minus</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> := <span class="id" type="var">An</span> <span class="id" type="var">n</span> - <span class="id" type="var">Bn</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_div</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> := <span class="id" type="var">An</span> <span class="id" type="var">n</span> / <span class="id" type="var">Bn</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "-" := <span class="id" type="var">Cseq_minus</span> : <span class="id" type="var">Cseq_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "/" := <span class="id" type="var">Cseq_div</span> : <span class="id" type="var">Cseq_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Various properties.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_eventually</span> (<span class="id" type="var">P</span> : <span class="id" type="var">Cseq</span> → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">Un</span> : <span class="id" type="var">Cseq</span>) :=<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">N</span>, <span class="id" type="var">P</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">N</span> + <span class="id" type="var">n</span>)%nat).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_eventually2</span> (<span class="id" type="var">P</span> : <span class="id" type="var">Cseq</span> → <span class="id" type="var">Cseq</span> → <span class="id" type="keyword">Prop</span>) (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">Cseq</span>) :=<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">N</span>, <span class="id" type="var">P</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">N</span> + <span class="id" type="var">n</span>)%nat) (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Vn</span> (<span class="id" type="var">N</span> + <span class="id" type="var">n</span>)%nat).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_neq_0</span> <span class="id" type="var">Un</span> := ∀ <span class="id" type="var">n</span>, <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_bound</span> (<span class="id" type="var">Un</span>:Cseq) (<span class="id" type="var">M</span>:R) := ∀ <span class="id" type="var">n</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">M</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Convergence of sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> := ∀ <span class="id" type="var">eps</span>, <span class="id" type="var">eps</span> &gt; 0 → ∃ <span class="id" type="var">N</span>,<br/>
+&nbsp;(∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≥ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span> - <span class="id" type="var">l</span>) &lt; <span class="id" type="var">eps</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cauchy_crit</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) := ∀ <span class="id" type="var">eps</span> : <span class="id" type="var">R</span>,<br/>
+&nbsp;<span class="id" type="var">eps</span> &gt; 0 → ∃ <span class="id" type="var">N</span> : <span class="id" type="var">nat</span>, ∀ <span class="id" type="var">n</span> (<span class="id" type="var">m</span> : <span class="id" type="var">nat</span>),<br/>
+&nbsp;(<span class="id" type="var">n</span> ≥ <span class="id" type="var">N</span>)%nat → (<span class="id" type="var">m</span> ≥ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span> - <span class="id" type="var">Un</span> <span class="id" type="var">m</span>) &lt; <span class="id" type="var">eps</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

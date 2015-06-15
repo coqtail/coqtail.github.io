@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Wallis</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Wallis</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rintegral</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rintegral_usual</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rintegral_tactic</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_subsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rpser_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RTaylor</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_tactics</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Wallis</span>.<br/>
+<span class="id" type="keyword">Local</span> <span class="id" type="keyword">Coercion</span> <span class="id" type="var">INR</span> : <span class="id" type="var">nat</span> &gt;-&gt; <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">sin_n</span> <span class="id" type="var">n</span> := <span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">pow</span> (<span class="id" type="var">sin</span> <span class="id" type="var">x</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">integrable_sin_n</span> <span class="id" type="var">n</span> : <span class="id" type="var">Riemann_integrable</span> (<span class="id" type="var">comp</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">pow</span> <span class="id" type="var">x</span> <span class="id" type="var">n</span>) <span class="id" type="var">sin</span>) 0 (<span class="id" type="var">PI</span>/2).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">W_even</span> <span class="id" type="var">n</span> := ((<span class="id" type="var">PI</span>/2)*(fact (2 × <span class="id" type="var">n</span>))/(2 ^ (2 × <span class="id" type="var">n</span>) × (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>) ^2 )).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span> := ((2^(2*n) × (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>) ^2)/(fact (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>)))).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_0</span> : <span class="id" type="var">Rint</span> (<span class="id" type="var">sin_n</span> 0)  0 (<span class="id" type="var">PI</span>/2) (<span class="id" type="var">PI</span>/2).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_1</span> : <span class="id" type="var">Rint</span> (<span class="id" type="var">sin_n</span> 1)  0 (<span class="id" type="var">PI</span>/2) 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Recurrence formula 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_formula</span> <span class="id" type="var">Wn</span> <span class="id" type="var">n</span>: <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="var">sin_n</span> <span class="id" type="var">n</span>) 0 (<span class="id" type="var">PI</span>/2) <span class="id" type="var">Wn</span>→ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rint</span> (<span class="id" type="var">sin_n</span> (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))) 0 (<span class="id" type="var">PI</span>/2) (<span class="id" type="var">Wn</span> × (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)/(S (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_even</span> <span class="id" type="var">n</span> : <span class="id" type="var">Rint</span> (<span class="id" type="var">sin_n</span> (2 × <span class="id" type="var">n</span>)) 0 (<span class="id" type="var">PI</span>/2) (<span class="id" type="var">W_even</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_odd</span> <span class="id" type="var">n</span> : <span class="id" type="var">Rint</span> (<span class="id" type="var">sin_n</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>))) 0 (<span class="id" type="var">PI</span>/2) ((2^(2*n) × (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>) ^2)/(fact (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>)))).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_odd_le_even</span> <span class="id" type="var">n</span> : <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">W_even</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_even_le_odd</span> <span class="id" type="var">n</span> : <span class="id" type="var">W_even</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_maj</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) : (2*n/ (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>))) × (<span class="id" type="var">W_even</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">W_even_pos</span> : ∀ <span class="id" type="var">n</span>, 0 &lt; <span class="id" type="var">W_even</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_bound</span> : ∀ (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>),  2*n / (<span class="id" type="var">S</span>(2 × <span class="id" type="var">n</span>)) ≤ <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span> / <span class="id" type="var">W_even</span> <span class="id" type="var">n</span> ≤ 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_quotient_lim1</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span> / <span class="id" type="var">W_even</span> <span class="id" type="var">n</span>) 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_quotient</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">n</span>, <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span> / <span class="id" type="var">W_even</span> <span class="id" type="var">n</span> = (2×2 ^ (4*n) × (<span class="id" type="var">fact</span> <span class="id" type="var">n</span>) ^ 4)/(PI*fact (2 × <span class="id" type="var">n</span>) × <span class="id" type="var">fact</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>))).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_eq_compat1</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;{<span class="id" type="var">m</span> | ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≥ <span class="id" type="var">m</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">n</span> = <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>} →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sqrt_id</span> : ∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, (<span class="id" type="var">INR</span> <span class="id" type="var">n</span> ≠ 0)%R → <span class="id" type="var">sqrt</span> (2 × <span class="id" type="var">n</span>) / (2 × <span class="id" type="var">n</span>) = /sqrt (2 × <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_eq</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <br/>
+&nbsp;&nbsp;{<span class="id" type="var">m</span> | ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≥ <span class="id" type="var">m</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">n</span> = <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>} → <span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">DL_sqrt_1</span> : ∀ <span class="id" type="var">Un</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> 0 → (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sqrt</span> (1 + <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) - 1) = <span class="id" type="var">o</span>(1).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_inv_INR</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ /INR (<span class="id" type="var">n</span> + 1)) 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rinv_plus</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">c</span> : <span class="id" type="var">R</span>, <span class="id" type="var">c</span> ≠ 0 → (<span class="id" type="var">a</span> + <span class="id" type="var">b</span>) / <span class="id" type="var">c</span> = <span class="id" type="var">a</span> / <span class="id" type="var">c</span> + (<span class="id" type="var">b</span> / <span class="id" type="var">c</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rinv_eq_1</span> : ∀ <span class="id" type="var">a</span>, <span class="id" type="var">a</span> ≠ 0 → <span class="id" type="var">a</span> / <span class="id" type="var">a</span> = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">pow_exp_ln</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">n</span>, 0 &lt; <span class="id" type="var">x</span> → <span class="id" type="var">x</span> ^ <span class="id" type="var">n</span> = <span class="id" type="var">exp</span> (<span class="id" type="var">n</span> × <span class="id" type="var">ln</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_ln</span> : ∀ <span class="id" type="var">Un</span>, <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> 0 → (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">ln</span> (1 + <span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) ~ <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_inv_INR_0_1</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ - / (2 × <span class="id" type="var">INR</span> <span class="id" type="var">n</span> + 1))%R 0%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_continuity</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> <span class="id" type="var">f</span>, <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">l</span> → <br/>
+&nbsp;&nbsp;<span class="id" type="var">f</span> <span class="id" type="var">l</span> ≠ 0 → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) ~ (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">Vn</span> <span class="id" type="var">n</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Wallis_quotient_lim2</span> <span class="id" type="var">l</span> : <br/>
+<span class="id" type="var">l</span> ≠ 0 →<br/>
+&nbsp;&nbsp;(<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">fact</span> <span class="id" type="var">n</span>) ~ (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ (<span class="id" type="var">n</span> /(exp 1)) ^ <span class="id" type="var">n</span> × <span class="id" type="var">sqrt</span> <span class="id" type="var">n</span> × <span class="id" type="var">l</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">W_odd</span> <span class="id" type="var">n</span> / <span class="id" type="var">W_even</span> <span class="id" type="var">n</span>) (<span class="id" type="var">l</span>^2/(2*PI)).<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Wallis</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

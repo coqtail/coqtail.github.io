@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cnorm</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cnorm</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Cbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpow</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Cnorm comparisons to zero</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_0</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> = 0%R → <span class="id" type="var">z</span> = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_pos</span> : ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>, 0%R ≤ <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_pos_lt</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">z</span> ≠ 0 → 0 &lt; <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_C0</span> : <span class="id" type="var">Cnorm</span> 0 = 0%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_Cre_simpl</span> : ∀ (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>), <span class="id" type="var">Cnorm</span> (<span class="id" type="var">a</span>, <span class="id" type="var">R0</span>) = <span class="id" type="var">Rabs</span> <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_Cim_simpl</span> : ∀ (<span class="id" type="var">a</span> : <span class="id" type="var">R</span>), <span class="id" type="var">Cnorm</span> (<span class="id" type="var">R0</span>, <span class="id" type="var">a</span>) = <span class="id" type="var">Rabs</span> <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_comm</span> : ∀ (<span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>), <span class="id" type="var">Cnorm</span> (<span class="id" type="var">a</span>, <span class="id" type="var">b</span>) = <span class="id" type="var">Cnorm</span> (<span class="id" type="var">b</span>, <span class="id" type="var">a</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_gt_not_eq</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &gt; 0 → <span class="id" type="var">z</span> ≠ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_no_R0</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">z</span> ≠ 0 → <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> ≠ 0%R.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Properties of simple operators</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_IRC_Rabs</span> : ∀ <span class="id" type="var">x</span>:R, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">IRC</span> <span class="id" type="var">x</span>) = <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_invol</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>) = <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_C1</span> : <span class="id" type="var">Cnorm</span> 1 = 1%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_conj_compat</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Cconj</span> <span class="id" type="var">z</span>) = <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_opp</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cnorm</span> (-z) = <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_minus_sym</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> - <span class="id" type="var">z2</span>) = <span class="id" type="var">Cnorm</span> (<span class="id" type="var">z2</span> - <span class="id" type="var">z1</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_mult</span> : ∀ <span class="id" type="var">lambda</span> : <span class="id" type="var">R</span>, ∀ <span class="id" type="var">z</span> : <span class="id" type="var">C</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> (<span class="id" type="var">lambda</span> `× <span class="id" type="var">z</span>) = ((<span class="id" type="var">Rabs</span> <span class="id" type="var">lambda</span>) × (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_Cmult</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> × <span class="id" type="var">z2</span>) = (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z1</span> × <span class="id" type="var">Cnorm</span> <span class="id" type="var">z2</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_pow</span> : ∀ <span class="id" type="var">z</span> <span class="id" type="var">n</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">z</span> ^ <span class="id" type="var">n</span>) = ((<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>) ^ <span class="id" type="var">n</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rabs_Cnorm</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Rabs</span> (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>) = <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_inv</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">z</span> ≠ 0 → <span class="id" type="var">Cnorm</span> (/z) = (/(Cnorm <span class="id" type="var">z</span>))%R.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Triangle Inequality</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_triang</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> + <span class="id" type="var">z2</span>) ≤ (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z1</span> + <span class="id" type="var">Cnorm</span> <span class="id" type="var">z2</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_triang_rev</span> : ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Rabs</span> (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z1</span>- <span class="id" type="var">Cnorm</span> <span class="id" type="var">z2</span>) ≤ (<span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> - <span class="id" type="var">z2</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_triang_rev_l</span> :  ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">z1</span>- <span class="id" type="var">Cnorm</span> <span class="id" type="var">z2</span> ≤ (<span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> - <span class="id" type="var">z2</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_triang_rev_r</span> :  ∀ <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> : <span class="id" type="var">C</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">z2</span> - <span class="id" type="var">Cnorm</span> <span class="id" type="var">z1</span> ≤ (<span class="id" type="var">Cnorm</span> (<span class="id" type="var">z1</span> - <span class="id" type="var">z2</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Comparisons between Cnorm &amp; Cre/Cim 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cre_le_Cnorm</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Rabs</span> (<span class="id" type="var">Cre</span> <span class="id" type="var">z</span>) ≤ <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cim_le_Cnorm</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Rabs</span> (<span class="id" type="var">Cim</span> <span class="id" type="var">z</span>) ≤ <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cnorm_le_Cre_Cim</span> : ∀ <span class="id" type="var">z</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> ≤ <span class="id" type="var">Rabs</span> (<span class="id" type="var">Cre</span> <span class="id" type="var">z</span>) + <span class="id" type="var">Rabs</span> (<span class="id" type="var">Cim</span> <span class="id" type="var">z</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

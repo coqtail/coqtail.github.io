@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Arith.Nbinomial</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Arith.Nbinomial</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Arith</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Compare</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Nfinite_prod</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Ndiv</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">nat_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Definition of a binomial coefficient using Pascal relation</h1>
+
+</div>
+<div class="code">
+</div>
+
+<div class="doc">
+Simple definition 
+</div>
+<div class="code">
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">Nsimple_binomial</span> (<span class="id" type="var">n</span> <span class="id" type="var">k</span> : <span class="id" type="var">nat</span>) : <span class="id" type="var">nat</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+| 0 ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">k</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| 0 ⇒ 1<br/>
+&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">_</span> ⇒ 0<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+| <span class="id" type="var">S</span> <span class="id" type="var">n'</span> ⇒<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <span class="id" type="var">k</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| 0 ⇒ 1<br/>
+&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">k'</span> ⇒ (<span class="id" type="var">Nsimple_binomial</span> <span class="id" type="var">n'</span> <span class="id" type="var">k'</span>) + (<span class="id" type="var">Nsimple_binomial</span> <span class="id" type="var">n'</span> <span class="id" type="var">k</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Alternative definition 
+</div>
+<div class="code">
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Nbinomial</span> (<span class="id" type="var">n</span> <span class="id" type="var">k</span> : <span class="id" type="var">nat</span>) : <span class="id" type="var">nat</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">leb</span> <span class="id" type="var">k</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+| <span class="id" type="var">true</span> ⇒ <span class="id" type="var">Nsimple_binomial</span> <span class="id" type="var">n</span> <span class="id" type="var">k</span><br/>
+| <span class="id" type="var">false</span> ⇒ 0<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Properties of binomial coefficients</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+n choose k is zero if k is greater than n (simple version) 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nsimple_binomial_outside</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">n</span> &lt; <span class="id" type="var">m</span> → <span class="id" type="var">Nsimple_binomial</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> = 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+n choose k is zero if k is greater than n (alternative definition) 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nbinomial_outside</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">m</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">n</span> &lt; <span class="id" type="var">m</span> → <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> = 0.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Special values of binomial coefficients 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nbinomial_0</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> 0 = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nbinomial_diag</span> : ∀ <span class="id" type="var">n</span>, <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> <span class="id" type="var">n</span> = 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">Nbinomial_n_1</span> : ∀ <span class="id" type="var">n</span>, 1 ≤ <span class="id" type="var">n</span> → <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> 1 = <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Pascal relation and a generalization for alternative definition 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nbinomial_pascal'</span>: ∀ <span class="id" type="var">n</span> <span class="id" type="var">k</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">S</span> <span class="id" type="var">k</span> ≤ <span class="id" type="var">n</span> → <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> <span class="id" type="var">k</span> + <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> (<span class="id" type="var">S</span> <span class="id" type="var">k</span>) = <span class="id" type="var">Nbinomial</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) (<span class="id" type="var">S</span> <span class="id" type="var">k</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nbinomial_pascal</span>: ∀ <span class="id" type="var">n</span> <span class="id" type="var">k</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">k</span> ≤ <span class="id" type="var">n</span> → <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> <span class="id" type="var">k</span> + <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> (<span class="id" type="var">S</span> <span class="id" type="var">k</span>) = <span class="id" type="var">Nbinomial</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) (<span class="id" type="var">S</span> <span class="id" type="var">k</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Expression of binomial coefficients using factorial and partial factorial 
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">Nbinomial_factorial</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">k</span>, <br/>
+&nbsp;&nbsp;1 ≤ <span class="id" type="var">k</span> → <span class="id" type="var">k</span> ≤ <span class="id" type="var">n</span> → (<span class="id" type="var">fact</span> <span class="id" type="var">k</span>) × <span class="id" type="var">Nbinomial</span> <span class="id" type="var">n</span> <span class="id" type="var">k</span> = <span class="id" type="var">Nfinite_prod_0_n</span> (<span class="id" type="var">pred</span> <span class="id" type="var">k</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">n</span> - <span class="id" type="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Divisibility of binomial coefficients in prime case 
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">Nbinomial_div</span> : ∀ <span class="id" type="var">p</span> <span class="id" type="var">k</span>,<br/>
+&nbsp;&nbsp;0 &lt; <span class="id" type="var">k</span> &lt; <span class="id" type="var">p</span> → <span class="id" type="var">Nprime</span> <span class="id" type="var">p</span> → (<span class="id" type="var">p</span> | <span class="id" type="var">Nbinomial</span> <span class="id" type="var">p</span> <span class="id" type="var">k</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Ratan</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Ratan</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">PSeries_reg</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rtrigo</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">AltSeries</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">SeqProp</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis5</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RIVT</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_cv_facts</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Positivity of cosine</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cos_pos</span> : ∀ <span class="id" type="var">x</span>, -PI/2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">cos</span> <span class="id" type="var">x</span> &gt; 0.<br/>
+ 
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_tan</span> : ∀ <span class="id" type="var">x</span>, -PI/2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">tan</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_tan2</span> : ∀ (<span class="id" type="var">x</span>:R), ∀ (<span class="id" type="var">Pr1</span>:cos <span class="id" type="var">x</span> ≠ 0),<br/>
+&nbsp;∀ (<span class="id" type="var">Prtan</span>:derivable_pt <span class="id" type="var">tan</span> <span class="id" type="var">x</span>), <span class="id" type="var">derive_pt</span> <span class="id" type="var">tan</span> <span class="id" type="var">x</span> <span class="id" type="var">Prtan</span> = 1 + (<span class="id" type="var">tan</span> <span class="id" type="var">x</span>)^2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_tan</span> : ∀ (<span class="id" type="var">x</span>:R),<br/>
+&nbsp;∀ (<span class="id" type="var">Pr</span>:-PI/2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2),<br/>
+&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">tan</span> <span class="id" type="var">x</span> (<span class="id" type="var">derivable_pt_tan</span> <span class="id" type="var">x</span> <span class="id" type="var">Pr</span>) = 1 + (<span class="id" type="var">tan</span> <span class="id" type="var">x</span>)^2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_increasing_interv</span> :<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">a</span> <span class="id" type="var">b</span>:R) (<span class="id" type="var">f</span>:R → <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">a</span> &lt; <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∀ (<span class="id" type="var">pr</span>:forall <span class="id" type="var">x</span>, <span class="id" type="var">a</span> &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">t</span>:R, ∀ (<span class="id" type="var">t_encad</span> : <span class="id" type="var">a</span> &lt; <span class="id" type="var">t</span> &lt; <span class="id" type="var">b</span>), 0 &lt; <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">t</span> (<span class="id" type="var">pr</span> <span class="id" type="var">t</span> <span class="id" type="var">t_encad</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>:R, <span class="id" type="var">a</span> &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">b</span> → <span class="id" type="var">a</span> &lt; <span class="id" type="var">y</span> &lt; <span class="id" type="var">b</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">f</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_increasing</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-PI/2 &lt; <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 → -PI/2 &lt; <span class="id" type="var">y</span> → <span class="id" type="var">y</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">tan</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">tan</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_increasing2</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-PI/2 &lt; <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">y</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">tan</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">tan</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_is_inj</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, -PI/2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 → -PI/2 &lt; <span class="id" type="var">y</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">tan</span> <span class="id" type="var">x</span> = <span class="id" type="var">tan</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> = <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_interv_is_interv</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span>, <span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> → -PI/2 &lt; <span class="id" type="var">lb</span> → <span class="id" type="var">ub</span> &lt; <span class="id" type="var">PI</span>/2 →<br/>
+&nbsp;<span class="id" type="var">tan</span> <span class="id" type="var">lb</span> &lt; <span class="id" type="var">y</span> &lt; <span class="id" type="var">tan</span> <span class="id" type="var">ub</span> → {<span class="id" type="var">x</span> | <span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span> ∧ <span class="id" type="var">tan</span> <span class="id" type="var">x</span> = <span class="id" type="var">y</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exists_myatan</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span>, -PI/2 &lt; <span class="id" type="var">lb</span> → <span class="id" type="var">ub</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">tan</span> <span class="id" type="var">lb</span> ≤ <span class="id" type="var">y</span> ≤ <span class="id" type="var">tan</span> <span class="id" type="var">ub</span> → {<span class="id" type="var">x</span> | <span class="id" type="var">lb</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">ub</span> ∧  <span class="id" type="var">tan</span> <span class="id" type="var">x</span> = <span class="id" type="var">y</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">lim_cos</span> : <span class="id" type="var">limit1_in</span>  <span class="id" type="var">cos</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">True</span> ∧ <span class="id" type="var">PI</span>/2 ≠ <span class="id" type="var">x</span>) 0 (<span class="id" type="var">PI</span>/2).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">nat_ind2</span> : ∀ (<span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>), <br/>
+&nbsp;&nbsp;<span class="id" type="var">P</span> <span class="id" type="var">O</span> → <span class="id" type="var">P</span> (<span class="id" type="var">S</span> <span class="id" type="var">O</span>) → (∀ <span class="id" type="var">m</span>, <span class="id" type="var">P</span> <span class="id" type="var">m</span> → <span class="id" type="var">P</span> (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> <span class="id" type="var">m</span>))) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sin_first_order</span> <span class="id" type="var">x</span> : 0 ≤ <span class="id" type="var">x</span> → <span class="id" type="var">sin</span> <span class="id" type="var">x</span> ≤ <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sin_cv_0_right_sig</span> <span class="id" type="var">e</span> : <span class="id" type="var">e</span> &gt; 0 → {<span class="id" type="var">x</span> | 0 &lt; <span class="id" type="var">x</span> ∧ <span class="id" type="var">sin</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">e</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sin_cv_0_right_sig_local</span> <span class="id" type="var">e</span> <span class="id" type="var">a</span> : <span class="id" type="var">e</span> &gt; 0 → <span class="id" type="var">a</span> &gt; 0 → {<span class="id" type="var">x</span> | 0 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">a</span> ∧ <span class="id" type="var">sin</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">e</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cos_cv_0_left_sig_local</span> <span class="id" type="var">e</span> <span class="id" type="var">a</span> : <span class="id" type="var">e</span> &gt; 0 → <span class="id" type="var">a</span> &lt; <span class="id" type="var">PI</span> / 2 → {<span class="id" type="var">x</span> | <span class="id" type="var">a</span> &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span> / 2 ∧ <span class="id" type="var">cos</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">e</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_cv_pos_infty</span> : ∀ <span class="id" type="var">y</span>, {<span class="id" type="var">x</span> | - <span class="id" type="var">PI</span> / 2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 ∧ <span class="id" type="var">tan</span> <span class="id" type="var">x</span> &gt; <span class="id" type="var">y</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_cv_neg_infty</span> : ∀ <span class="id" type="var">y</span>, {<span class="id" type="var">x</span> | - <span class="id" type="var">PI</span> / 2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span> / 2 ∧ <span class="id" type="var">tan</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">inv_lt</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &gt; 0 → <span class="id" type="var">y</span> &gt; 0 → /x &lt; /y → <span class="id" type="var">x</span> &gt; <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rgt_Rinv</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> : <span class="id" type="var">R</span>, 0 &lt; <span class="id" type="var">x</span> → 0 &lt; <span class="id" type="var">y</span> → <span class="id" type="var">x</span> &gt; <span class="id" type="var">y</span> → / <span class="id" type="var">y</span> &gt; / <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sin_incr</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, -(PI/2) ≤ <span class="id" type="var">x</span> → -(PI/2) ≤ <span class="id" type="var">y</span> →<br/>
+<span class="id" type="var">x</span> ≤ <span class="id" type="var">PI</span>/2 → <span class="id" type="var">y</span> ≤ <span class="id" type="var">PI</span>/2 → <span class="id" type="var">sin</span> <span class="id" type="var">x</span> = <span class="id" type="var">sin</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> = <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_increasing3</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>:R,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-PI/2 &lt; <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 → -PI/2 &lt; <span class="id" type="var">y</span> → <span class="id" type="var">y</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">tan</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">tan</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">M_PI2_MPI_2_same</span> : ∀ <span class="id" type="var">x</span>, - (<span class="id" type="var">PI</span> / 2) &lt; <span class="id" type="var">x</span> ↔ - <span class="id" type="var">PI</span> / 2 &lt; <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_increasing_5</span> : ∀ <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span>, <br/>
+- <span class="id" type="var">PI</span>/2 &lt; <span class="id" type="var">lb</span> &lt; <span class="id" type="var">PI</span>/2 → - <span class="id" type="var">PI</span>/2 &lt; <span class="id" type="var">ub</span> &lt; <span class="id" type="var">PI</span>/2 →<br/>
+<span class="id" type="var">tan</span> <span class="id" type="var">lb</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">tan</span> <span class="id" type="var">ub</span> &gt; <span class="id" type="var">y</span> → <span class="id" type="var">ub</span> &gt; <span class="id" type="var">lb</span>.<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exists_arctan</span> : ∀ <span class="id" type="var">y</span> : <span class="id" type="var">R</span>, {<span class="id" type="var">x</span> : <span class="id" type="var">R</span>| -PI/2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 ∧ <span class="id" type="var">tan</span> <span class="id" type="var">x</span> = <span class="id" type="var">y</span> }.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">arctan</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tanarctan</span> : ∀ <span class="id" type="var">y</span>, <span class="id" type="var">tan</span> (<span class="id" type="var">arctan</span> <span class="id" type="var">y</span>) = <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctantan</span> : ∀ <span class="id" type="var">x</span>, -PI/2 &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2 → <span class="id" type="var">arctan</span> (<span class="id" type="var">tan</span> <span class="id" type="var">x</span>) = <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tanarctandev1</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">derivable_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">tan</span> (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span>)) <span class="id" type="var">x</span> →<br/>
+&nbsp;<span class="id" type="var">derivable_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">y</span>:R ⇒ <span class="id" type="var">y</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tanarctandev2</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">derivable_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">y</span>:R ⇒ <span class="id" type="var">y</span>) <span class="id" type="var">x</span> <br/>
+→ <span class="id" type="var">derivable_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">tan</span> (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span>)) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_lt_mPI2</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">arctan</span> <span class="id" type="var">x</span> &gt; -PI/2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_lt_PI2</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">arctan</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">PI</span>/2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_increasing</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span> → <span class="id" type="var">arctan</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">arctan</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_inj</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">arctan</span> <span class="id" type="var">x</span> = <span class="id" type="var">arctan</span> <span class="id" type="var">y</span> → <span class="id" type="var">x</span> = <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_open_interval_tan</span> : <span class="id" type="var">continuity_open_interval</span> <span class="id" type="var">tan</span> (-PI/2) (<span class="id" type="var">PI</span>/2).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_arctan</span> : ∀ <span class="id" type="var">b</span>, <span class="id" type="var">continuity_pt</span> <span class="id" type="var">arctan</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_increasing_le</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span> → <span class="id" type="var">arctan</span> <span class="id" type="var">x</span> ≤ <span class="id" type="var">arctan</span> <span class="id" type="var">y</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_arctan</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">derivable_pt</span> <span class="id" type="var">arctan</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_arctan</span> : ∀ (<span class="id" type="var">x</span>:R),  <br/>
+∀ (<span class="id" type="var">Pratan</span>:derivable_pt <span class="id" type="var">arctan</span> <span class="id" type="var">x</span>), <span class="id" type="var">derive_pt</span> <span class="id" type="var">arctan</span> <span class="id" type="var">x</span> <span class="id" type="var">Pratan</span> = 1/(1 + <span class="id" type="var">x</span>^2).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan0</span> : <span class="id" type="var">arctan</span> 0 = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctanPI4</span> : <span class="id" type="var">arctan</span> (1) = <span class="id" type="var">PI</span>/4.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_arctan</span> : <span class="id" type="var">derivable</span> <span class="id" type="var">arctan</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctancos</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">cos</span> (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span>) = 1/ (<span class="id" type="var">sqrt</span>( 1 + <span class="id" type="var">x</span>^2)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctansin</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">sin</span> (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span>) = <span class="id" type="var">x</span> / (<span class="id" type="var">sqrt</span> (1 + <span class="id" type="var">x</span> ^ 2)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_inv_PI2_1</span> : ∀ <span class="id" type="var">x0</span>, <span class="id" type="var">x0</span> &gt; 0 → <br/>
+∀ <span class="id" type="var">Pf</span> : <span class="id" type="var">derivable_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span> ⇒ (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span> + <span class="id" type="var">arctan</span> (/ <span class="id" type="var">id</span> <span class="id" type="var">x</span>))%R) <span class="id" type="var">x0</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span> ⇒ (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span> + <span class="id" type="var">arctan</span> (/ <span class="id" type="var">id</span> <span class="id" type="var">x</span>))%R) <span class="id" type="var">x0</span> <span class="id" type="var">Pf</span> = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">arctan_inv_mPI2_1</span> : ∀ <span class="id" type="var">x0</span>, <span class="id" type="var">x0</span> &lt; 0 → <br/>
+∀ <span class="id" type="var">Pf</span> : <span class="id" type="var">derivable_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span> ⇒ (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span> + <span class="id" type="var">arctan</span> (/ <span class="id" type="var">id</span> <span class="id" type="var">x</span>))%R) <span class="id" type="var">x0</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span> ⇒ (<span class="id" type="var">arctan</span> <span class="id" type="var">x</span> + <span class="id" type="var">arctan</span> (/ <span class="id" type="var">id</span> <span class="id" type="var">x</span>))%R) <span class="id" type="var">x0</span> <span class="id" type="var">Pf</span> = 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">exist_0_mPI</span> : ∀ <span class="id" type="var">x</span>, <br/>
+&nbsp;&nbsp;{<span class="id" type="var">k</span> : <span class="id" type="var">Z</span>| ∀ <span class="id" type="var">x1</span>, (<span class="id" type="var">x1</span> = <span class="id" type="var">IZR</span> <span class="id" type="var">k</span> × <span class="id" type="var">PI</span> - <span class="id" type="var">x</span>) → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;0 &lt; <span class="id" type="var">x1</span> ≤ <span class="id" type="var">PI</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cos2PI_period</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">k</span>, <span class="id" type="var">cos</span> <span class="id" type="var">x</span> = <span class="id" type="var">cos</span> (<span class="id" type="var">x</span> + 2 × <span class="id" type="var">IZR</span> ( <span class="id" type="var">k</span> ) × <span class="id" type="var">PI</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sin2PI_period</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">k</span>, <span class="id" type="var">sin</span> <span class="id" type="var">x</span> = <span class="id" type="var">sin</span> (<span class="id" type="var">x</span> + 2 × <span class="id" type="var">IZR</span> ( <span class="id" type="var">k</span> ) × <span class="id" type="var">PI</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">tan_period</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">cos</span> <span class="id" type="var">x</span> ≠ 0 → <span class="id" type="var">tan</span> <span class="id" type="var">x</span> = <span class="id" type="var">tan</span> (<span class="id" type="var">x</span> + <span class="id" type="var">PI</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Csequence_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Csequence_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyReals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_base_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Complex</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Cseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Cseq_partial</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> : <span class="id" type="var">Cseq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_partial_bound</span> : ∀ <span class="id" type="var">N</span>, ∃ <span class="id" type="var">M</span>, ∀ <span class="id" type="var">n</span>,<br/>
+&nbsp;&nbsp;(<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">M</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Cseq_partial</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Asymptotic properties.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Cseq_asymptotic</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_asymptotic</span> <span class="id" type="var">P</span> :=<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">Q</span> : <span class="id" type="var">Cseq</span> → <span class="id" type="keyword">Prop</span>) <span class="id" type="var">Un</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">Vn</span>, <span class="id" type="var">Q</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">P</span> <span class="id" type="var">Vn</span>) → <span class="id" type="var">Cseq_eventually</span> <span class="id" type="var">Q</span> <span class="id" type="var">Un</span> → <span class="id" type="var">P</span> <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cseq_asymptotic2</span> <span class="id" type="var">P</span> :=<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">Q</span> : <span class="id" type="var">Cseq</span> → <span class="id" type="var">Cseq</span> → <span class="id" type="keyword">Prop</span>) <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>, <span class="id" type="var">Q</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span> → <span class="id" type="var">P</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>) → <span class="id" type="var">Cseq_eventually2</span> <span class="id" type="var">Q</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">P</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence is asymptotic. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_asymptotic</span> : ∀ <span class="id" type="var">l</span>, <span class="id" type="var">Cseq_asymptotic</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">Un</span> ⇒ <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Cseq_asymptotic</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Convergence compatibilities</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Cseq_cv_R_to_C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> : <span class="id" type="var">Cseq</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">lu</span> : <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_Rseq_Rseq_equiv</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span><br/>
+&nbsp;↔ (<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Cre</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cre</span> <span class="id" type="var">lu</span>) ∧ <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Cim</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cim</span> <span class="id" type="var">lu</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cauchy_equiv</span> : <span class="id" type="var">Cauchy_crit</span> <span class="id" type="var">Un</span> ↔<br/>
+&nbsp;(<span class="id" type="var">Rseries.Cauchy_crit</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Cre</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) ∧ <span class="id" type="var">Rseries.Cauchy_crit</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Cim</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Cseq_cv_R_to_C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Cseq_cv_simpl</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">Cseq</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> : <span class="id" type="var">C</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hu</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hv</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_bound</span> : ∃ <span class="id" type="var">M</span>, 0 &lt; <span class="id" type="var">M</span> ∧ <span class="id" type="var">Cseq_bound</span> <span class="id" type="var">Un</span> <span class="id" type="var">M</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_eq_compat</span> <span class="id" type="var">l</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, <span class="id" type="var">Un</span> <span class="id" type="var">n</span> = <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) → <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cst_cv</span> (<span class="id" type="var">c</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">Cseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> ⇒ <span class="id" type="var">c</span>) <span class="id" type="var">c</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_cnorm_compat</span> : <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <span class="id" type="var">Cnorm</span> (<span class="id" type="var">Un</span> <span class="id" type="var">k</span>)) (<span class="id" type="var">Cnorm</span> <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_add_compat</span> : <span class="id" type="var">Cseq_cv</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> + <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_opp_compat</span> : <span class="id" type="var">Cseq_cv</span> (- <span class="id" type="var">Un</span>) (- <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Cseq_cv_simpl</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Cseq_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> : <span class="id" type="var">C</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hu</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hv</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_minus_compat</span> : <span class="id" type="var">Cseq_cv</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> - <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_mult_compat</span> : <span class="id" type="var">Cseq_cv</span> (<span class="id" type="var">Un</span> × <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> × <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_inv_compat</span> : <span class="id" type="var">lu</span> ≠ 0 → <span class="id" type="var">Cseq_cv</span> (/ <span class="id" type="var">Un</span>) (/ <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Cseq_cv</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility with Cre and Cim 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_re_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Cre</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cre</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_im_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Cim</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cim</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_re_im_compat</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Cre</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cre</span> <span class="id" type="var">l</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">Cim</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cim</span> <span class="id" type="var">l</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Limit uniquess 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_unique</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu1</span> <span class="id" type="var">lu2</span>, <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu1</span> → <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu2</span> → <span class="id" type="var">lu1</span> = <span class="id" type="var">lu2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Cseq_cv_bonus</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>.<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> : <span class="id" type="var">C</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hu</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hv</span> : <span class="id" type="var">Cseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_cv_div_compat</span> : <span class="id" type="var">lv</span> ≠ 0 → <span class="id" type="var">Cseq_cv</span> (<span class="id" type="var">Un</span> /Vn) (<span class="id" type="var">lu</span>/lv).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Cseq_cv_bonus</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

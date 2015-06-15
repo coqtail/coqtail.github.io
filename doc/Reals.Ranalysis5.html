@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Ranalysis5</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Ranalysis5</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rbase</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rfunctions</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RiemannInt</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">SeqProp</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRIneq</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RIVT</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Local</span> <span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The image of an interval by a continuous function is an interval 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_interval_image_interval</span> : ∀ (<span class="id" type="var">f</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">y</span>:R),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">x</span> | <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> ∧ <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">y</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Continuity of the reciprocal function</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_reciprocal_strictly_increasing_interval</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_reciprocal_strictly_decreasing_interval</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_decreasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_reciprocal_strictly_monotonous_interval</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> → <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">g</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_open_interval</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Derivability of the reciprocal function</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_reciprocal_interval</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_deriv</span> : <span class="id" type="var">derivable_interval</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">g</span> <span class="id" type="var">ub</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">x</span> (<span class="id" type="var">g_incr</span> : <span class="id" type="var">interval</span> (<span class="id" type="var">g</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">g</span> <span class="id" type="var">ub</span>) (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f_deriv</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">g_incr</span>) ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> (1 / <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f_deriv</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">g_incr</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_reciprocal_interval</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_deriv</span> : <span class="id" type="var">derivable_interval</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">g</span> <span class="id" type="var">ub</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">x</span> (<span class="id" type="var">g_incr</span> : <span class="id" type="var">interval</span> (<span class="id" type="var">g</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">g</span> <span class="id" type="var">ub</span>) (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">continuity_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f_deriv</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">g_incr</span>) ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_reciprocal_interval_rev</span> :forall (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_recip_interv</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">lb_lt_ub</span> : <span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span>) (<span class="id" type="var">x_encad</span> : <span class="id" type="var">open_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_eq_g</span> : <span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">g_wf</span> : ∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_incr</span> : <span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_derivable</span> : <span class="id" type="var">derivable_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">derivable_pt_reciprocal_interval_rev</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> <span class="id" type="var">lb_lt_ub</span> <span class="id" type="var">x_encad</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">f_eq_g</span> <span class="id" type="var">g_wf</span> <span class="id" type="var">f_incr</span> <span class="id" type="var">f_derivable</span>)  ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_reciprocal_interval2</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">x_in_I</span> : <span class="id" type="var">open_interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">x</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_recip_g</span> : <span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">g_ok</span> : ∀ <span class="id" type="var">x</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">Rmin</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) (<span class="id" type="var">Rmax</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>)) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_deriv</span> : <span class="id" type="var">derivable_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>), <span class="id" type="var">lb</span> &lt; <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_monotonous_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f_deriv</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) (<span class="id" type="var">g_ok</span> <span class="id" type="var">x</span> (<span class="id" type="var">open_interval_interval</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">x_in_I</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Value of the derivative of the reciprocal function</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_recip_interv_prelim0</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>:R)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Prf</span>:derivable_pt <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) (<span class="id" type="var">Prg</span>:derivable_pt <span class="id" type="var">g</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_open_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">Prf</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span> <span class="id" type="var">Prg</span> = 1 / (<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>) <span class="id" type="var">Prf</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_recip_interv_prelim1_0</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>:R), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> → <span class="id" type="var">open_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_recip_interv_prelim1_1</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R) (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>:R), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">lb</span> ≤ <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">open_interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">strictly_increasing_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">x</span> : <span class="id" type="var">R</span>, <span class="id" type="var">interval</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) <span class="id" type="var">x</span>  → <span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">reciprocal_interval</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> (<span class="id" type="var">f</span> <span class="id" type="var">lb</span>) (<span class="id" type="var">f</span> <span class="id" type="var">ub</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ub_lt_2_pos</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">ub</span> <span class="id" type="var">lb</span>, <span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span> → 0 &lt; (<span class="id" type="var">ub</span>-lb)/2.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">mkposreal_lb_ub</span> (<span class="id" type="var">x</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) (<span class="id" type="var">x_in_I</span> : <span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>) : <span class="id" type="var">posreal</span>.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Dfn_CVU_implies_Df_exists</span> : ∀ (<span class="id" type="var">fn</span> <span class="id" type="var">fn'</span>:nat → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">x</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) (<span class="id" type="var">x_in_I</span> : <span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ (<span class="id" type="var">x</span>:R) (<span class="id" type="var">n</span>:nat), <span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">fn</span> <span class="id" type="var">n</span>) <span class="id" type="var">x</span> (<span class="id" type="var">fn'</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ (<span class="id" type="var">x</span>:R), <span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">CVU</span> <span class="id" type="var">fn'</span> <span class="id" type="var">g</span> ((<span class="id" type="var">lb</span> + <span class="id" type="var">ub</span>)/2) (<span class="id" type="var">mkposreal_lb_ub</span> <span class="id" type="var">x</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x_in_I</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ (<span class="id" type="var">x</span>:R), <span class="id" type="var">open_interval</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

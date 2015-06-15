@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rsequence_base_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rsequence_base_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Morphisms</span> <span class="id" type="var">Setoid</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h2 class="section">Extensionnal equality.</h2>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Extensional equality is an equivalence relation.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_eq_refl</span> : ∀ <span class="id" type="var">Un</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_eq_sym</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">Vn</span> == <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_eq_trans</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">Vn</span> == <span class="id" type="var">Wn</span> → <span class="id" type="var">Un</span> == <span class="id" type="var">Wn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <span class="id" type="var">Rseq_eq_Equivalence</span> : <span class="id" type="var">Equivalence</span> <span class="id" type="var">Rseq_eq</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Compatibility of extensional equality with convergence.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_infty_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_pos_infty</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_infty_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Un</span> → <span class="id" type="var">Rseq_cv_neg_infty</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Compatibility of extensional equality with Laudau relations.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Wn</span> → <span class="id" type="var">Vn</span> == <span class="id" type="var">Xn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Wn</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Xn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Wn</span> → <span class="id" type="var">Vn</span> == <span class="id" type="var">Xn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">Wn</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Xn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_eq_compat</span> : <br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>, <span class="id" type="var">Un</span> == <span class="id" type="var">Wn</span> → <span class="id" type="var">Vn</span> == <span class="id" type="var">Xn</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Wn</span> ~ <span class="id" type="var">Xn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h2 class="section">Partial sequences.</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rseq_partial</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_partial_bound_max</span> : ∀ <span class="id" type="var">N</span>, ∃ <span class="id" type="var">M</span>, ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≤ <span class="id" type="var">M</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_partial_bound_min</span> : ∀ <span class="id" type="var">N</span>, ∃ <span class="id" type="var">m</span>, ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">m</span> ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_partial_bound</span> : ∀ <span class="id" type="var">N</span>, ∃ <span class="id" type="var">M</span>, ∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <span class="id" type="var">Rabs</span> (<span class="id" type="var">Un</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">M</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rseq_partial</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h2 class="section">Asymptotic properties.</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Rseq_asymptotic</span> <span class="id" type="var">P</span> :=<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">Q</span> : <span class="id" type="var">Rseq</span> → <span class="id" type="keyword">Prop</span>) <span class="id" type="var">Un</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">Vn</span>, <span class="id" type="var">Q</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">P</span> <span class="id" type="var">Vn</span>) → <span class="id" type="var">Rseq_eventually</span> <span class="id" type="var">Q</span> <span class="id" type="var">Un</span> → <span class="id" type="var">P</span> <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Rseq_asymptotic2</span> <span class="id" type="var">P</span> :=<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">Q</span> : <span class="id" type="var">Rseq</span> → <span class="id" type="var">Rseq</span> → <span class="id" type="keyword">Prop</span>) <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>, <span class="id" type="var">Q</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span> → <span class="id" type="var">P</span> <span class="id" type="var">Wn</span> <span class="id" type="var">Xn</span>) → <span class="id" type="var">Rseq_eventually2</span> <span class="id" type="var">Q</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">P</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab7"></a><h1 class="section">Convergence is asymptotic.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_asymptotic</span> : ∀ <span class="id" type="var">l</span>, <span class="id" type="var">Rseq_asymptotic</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">Un</span> ⇒ <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_asymptotic_eq_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∃ <span class="id" type="var">N</span>, ∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, (<span class="id" type="var">N</span> ≤ <span class="id" type="var">n</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">n</span> = <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_pos_infty_asymptotic</span> : <span class="id" type="var">Rseq_asymptotic</span> <span class="id" type="var">Rseq_cv_pos_infty</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_cv_neg_infty_asymptotic</span> : <span class="id" type="var">Rseq_asymptotic</span> <span class="id" type="var">Rseq_cv_neg_infty</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab8"></a><h1 class="section">Landau relations are asymptotic.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_big_O_asymptotic</span> : <span class="id" type="var">Rseq_asymptotic2</span> <span class="id" type="var">Rseq_big_O</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_little_O_asymptotic</span> : <span class="id" type="var">Rseq_asymptotic2</span> <span class="id" type="var">Rseq_little_O</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_equiv_asymptotic</span> : <span class="id" type="var">Rseq_asymptotic2</span> <span class="id" type="var">Rseq_equiv</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>mytheories.myReals.MyRfunctions</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library mytheories.myReals.MyRfunctions</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rfunctions</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Power 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rpow_mult_distr</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">n</span>, (<span class="id" type="var">x</span> × <span class="id" type="var">y</span>) ^ <span class="id" type="var">n</span> = <span class="id" type="var">x</span> ^ <span class="id" type="var">n</span> × <span class="id" type="var">y</span> ^ <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Distance 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">R_dist_ge_l</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">R_dist</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> ≤ <span class="id" type="var">z</span> → <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> ≤ <span class="id" type="var">Rabs</span> <span class="id" type="var">y</span> + <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">R_dist_gt_l</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">R_dist</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; <span class="id" type="var">z</span> → <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">Rabs</span> <span class="id" type="var">y</span> + <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">R_dist_ge_r</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">R_dist</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> ≤ <span class="id" type="var">z</span> → <span class="id" type="var">Rabs</span> <span class="id" type="var">y</span> - <span class="id" type="var">z</span> ≤ <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">R_dist_gt_r</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">R_dist</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; <span class="id" type="var">z</span> → <span class="id" type="var">Rabs</span> <span class="id" type="var">y</span> - <span class="id" type="var">z</span> &lt; <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span>.<br/>
+ 
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_pt_constant</span> <span class="id" type="var">c</span> <span class="id" type="var">x</span> : <span class="id" type="var">continuity_pt</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">c</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">continuity_constant</span> <span class="id" type="var">c</span> : <span class="id" type="var">continuity</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">c</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+C1 continuation of a C1 function on a segment 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rint_C1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C1_continuation</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span>:= <br/>
+<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span> ⇒ <br/>
+&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">Rlt_dec</span> <span class="id" type="var">x</span> <span class="id" type="var">a</span> <span class="id" type="keyword">then</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> × (<span class="id" type="var">x</span> - <span class="id" type="var">a</span>) + <span class="id" type="var">f</span> <span class="id" type="var">a</span> <br/>
+&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="keyword">if</span> <span class="id" type="var">Rle_dec</span> <span class="id" type="var">x</span> <span class="id" type="var">b</span> <span class="id" type="keyword">then</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="keyword">else</span> <span class="id" type="var">d</span> <span class="id" type="var">b</span> × (<span class="id" type="var">x</span> - <span class="id" type="var">b</span>) + <span class="id" type="var">f</span> <span class="id" type="var">b</span> .<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">C1_continuation_derive</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span> :=<br/>
+<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <span class="id" type="var">R</span> ⇒  <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">if</span> <span class="id" type="var">Rlt_dec</span> <span class="id" type="var">x</span> <span class="id" type="var">a</span> <span class="id" type="keyword">then</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <br/>
+&nbsp;&nbsp;<span class="id" type="keyword">else</span> <span class="id" type="keyword">if</span> <span class="id" type="var">Rle_dec</span> <span class="id" type="var">x</span> <span class="id" type="var">b</span> <span class="id" type="keyword">then</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="keyword">else</span> <span class="id" type="var">d</span> <span class="id" type="var">b</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C1_continuation_eq</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">C1_continuation</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span> = <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C1_continuation_derive_eq</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span> <span class="id" type="var">x</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">C1_continuation_derive</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span> = <span class="id" type="var">d</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">prolongement_C1_derivable</span> (<span class="id" type="var">f</span> <span class="id" type="var">d</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>) :<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">c</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">c</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">c</span> (<span class="id" type="var">d</span> <span class="id" type="var">c</span>)) →<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">derg</span>, ∀ <span class="id" type="var">x</span>, <span class="id" type="var">derive</span> (<span class="id" type="var">C1_continuation</span> <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">d</span>) <span class="id" type="var">derg</span> <span class="id" type="var">x</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">C1_continuation_derive</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C0_sticking_one_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">gl</span> <span class="id" type="var">gr</span> <span class="id" type="var">a</span> : <br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">gl</span> → <span class="id" type="var">continuity</span> <span class="id" type="var">gr</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> ≤ <span class="id" type="var">a</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gl</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gr</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C0_sticking_one_pt_strong</span> <span class="id" type="var">f</span> <span class="id" type="var">gl</span> <span class="id" type="var">gr</span> <span class="id" type="var">a</span> : <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> ≤ <span class="id" type="var">a</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">gl</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">gr</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> ≤ <span class="id" type="var">a</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gl</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gr</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C0_sticking_two_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">gl</span> <span class="id" type="var">gc</span> <span class="id" type="var">gr</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span>  →<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">gl</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">gc</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">gr</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> ≤ <span class="id" type="var">a</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gl</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">x</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gc</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">x</span>, <span class="id" type="var">b</span> ≤ <span class="id" type="var">x</span> → <span class="id" type="var">f</span> <span class="id" type="var">x</span> = <span class="id" type="var">gr</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">C1_continuation_derive_continuous</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> →<br/>
+(∀ <span class="id" type="var">c</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">c</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">d</span> <span class="id" type="var">c</span>) →<br/>
+&nbsp;&nbsp;<span class="id" type="var">continuity</span> (<span class="id" type="var">C1_continuation_derive</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span> <span class="id" type="var">b</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">prolongement_C1_C1</span> (<span class="id" type="var">f</span> <span class="id" type="var">d</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">a</span> <span class="id" type="var">b</span> : <span class="id" type="var">R</span>) :<br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> ≤ <span class="id" type="var">b</span> →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">c</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">c</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">c</span> (<span class="id" type="var">d</span> <span class="id" type="var">c</span>)) →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">c</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">c</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">d</span> <span class="id" type="var">c</span>) →<br/>
+&nbsp;&nbsp;∃ <span class="id" type="var">g</span> : <span class="id" type="var">C1_fun</span>,<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">c</span> : <span class="id" type="var">R</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">c</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">f</span> <span class="id" type="var">c</span> = <span class="id" type="var">g</span> <span class="id" type="var">c</span>) ∧ <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">c</span> : <span class="id" type="var">R</span>, <span class="id" type="var">a</span> ≤ <span class="id" type="var">c</span> ≤ <span class="id" type="var">b</span> → <span class="id" type="var">d</span> <span class="id" type="var">c</span> = <span class="id" type="var">derive</span> <span class="id" type="var">g</span> (<span class="id" type="var">diff0</span> <span class="id" type="var">g</span>) <span class="id" type="var">c</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rint_C1</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_plus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_mult</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_minus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_opp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_const</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_inv</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_div</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_comp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_sqrt</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_pt_constant</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_continuous_pt</span> : <span class="id" type="var">Rcont</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_plus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_mult</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_minus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_opp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_const</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_inv</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_div</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_constant</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">continuity_comp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_continuous</span> : <span class="id" type="var">Rcont</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_plus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_mult</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_minus</span>: <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_opp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_const</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_inv</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_div</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_comp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_sqrt</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_exp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_id</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_pow</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_cosh</span> : <span class="id" type="var">Rcont</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_plus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_mult</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_minus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_opp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_const</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_inv</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_div</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_comp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_continuous</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_cos</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_sin</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_exp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_id</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_id</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pow</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_cosh</span> : <span class="id" type="var">Rcont</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_sin</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_cos</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_sqrt</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_ln</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_exp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_plus</span>: <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_mult</span>: <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_minus</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_opp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_const</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_id</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_div</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_comp</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_pow</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_power</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_id</span> : <span class="id" type="var">Rcont</span>.<br/>
+<span class="id" type="keyword">Hint</span> <span class="id" type="keyword">Resolve</span> <span class="id" type="var">derivable_pt_lim_cosh</span> : <span class="id" type="var">Rcont</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

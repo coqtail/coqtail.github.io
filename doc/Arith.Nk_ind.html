@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Arith.Nk_ind</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Arith.Nk_ind</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Plus</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Le</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Compare</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">nat_scope</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Definition of kth-successor and generalized AND hypothesis</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">kth_S</span> (<span class="id" type="var">k</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">k</span>} : <span class="id" type="var">nat</span>:=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">k</span> <span class="id" type="keyword">with</span><br/>
+| 0 ⇒ <span class="id" type="var">S</span> <span class="id" type="var">n</span><br/>
+| <span class="id" type="var">S</span> <span class="id" type="var">k'</span> ⇒ <span class="id" type="var">S</span>(<span class="id" type="var">kth_S</span> <span class="id" type="var">k'</span> <span class="id" type="var">n</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">next_P_k</span> (<span class="id" type="var">k</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">delta</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">k</span>} : <span class="id" type="keyword">Prop</span>:=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">k</span> <span class="id" type="keyword">with</span><br/>
+| 0 ⇒ <span class="id" type="var">P</span> <span class="id" type="var">delta</span><br/>
+| <span class="id" type="var">S</span> <span class="id" type="var">k'</span> ⇒ <span class="id" type="var">P</span> (<span class="id" type="var">kth_S</span> <span class="id" type="var">delta</span> <span class="id" type="var">k'</span>) ∧ <span class="id" type="var">next_P_k</span> <span class="id" type="var">k'</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Properties of <span class="inlinecode"><span class="id" type="var">next_P_k</span></span> and <span class="inlinecode"><span class="id" type="var">kth_S</span></span></h1>
+
+</div>
+<div class="code">
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">next_P_k</span></span> upper weakening 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">next_P_k_strong</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">next_P_k</span> (<span class="id" type="var">S</span> <span class="id" type="var">k</span>) <span class="id" type="var">delta</span> <span class="id" type="var">P</span> → <span class="id" type="var">next_P_k</span> <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+commutativity of nested <span class="inlinecode"><span class="id" type="var">kth_S</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">kth_S_comm</span> : ∀ <span class="id" type="var">delta</span> <span class="id" type="var">gamma</span> <span class="id" type="var">n</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">kth_S</span> <span class="id" type="var">delta</span> (<span class="id" type="var">kth_S</span> <span class="id" type="var">gamma</span> <span class="id" type="var">n</span>) = <span class="id" type="var">kth_S</span> <span class="id" type="var">gamma</span> (<span class="id" type="var">kth_S</span> <span class="id" type="var">delta</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+special case of <span class="inlinecode"><span class="id" type="var">kth_S</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">kth_S_special</span> : ∀ <span class="id" type="var">k</span>, <span class="id" type="var">kth_S</span> <span class="id" type="var">k</span> 0 = <span class="id" type="var">S</span> <span class="id" type="var">k</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">next_P_k</span></span> to <span class="inlinecode"><span class="id" type="var">P</span></span> weakening 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">next_P_k_special</span>: ∀ <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">next_P_k</span> <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span> → <span class="id" type="var">P</span> <span class="id" type="var">delta</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+symmetry of <span class="inlinecode"><span class="id" type="var">kth_S</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">kth_S_sym</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">n</span>, <span class="id" type="var">kth_S</span> <span class="id" type="var">k</span> <span class="id" type="var">n</span> = <span class="id" type="var">kth_S</span> <span class="id" type="var">n</span> <span class="id" type="var">k</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+relation between <span class="inlinecode"><span class="id" type="var">kth_S</span></span> and <span class="inlinecode"><span class="id" type="var">plus</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">kth_S_plus</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">n</span>, <span class="id" type="var">kth_S</span> <span class="id" type="var">k</span> <span class="id" type="var">n</span> = <span class="id" type="var">n</span> + <span class="id" type="var">k</span> + 1.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+introduction of <span class="inlinecode"><span class="id" type="var">next_P_k</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">next_P_k_correct</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">delta</span>, ∀ <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">P</span> <span class="id" type="var">delta</span> → (∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> &lt; <span class="id" type="var">k</span> → <span class="id" type="var">P</span> (<span class="id" type="var">kth_S</span> <span class="id" type="var">delta</span> <span class="id" type="var">x</span>)) → <span class="id" type="var">next_P_k</span> <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+elimination of <span class="inlinecode"><span class="id" type="var">next_P_k</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">next_P_k_complete</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">next_P_k</span> <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span> → <span class="id" type="var">P</span> <span class="id" type="var">delta</span> ∧ (∀ <span class="id" type="var">x</span>, <span class="id" type="var">x</span> &lt; <span class="id" type="var">k</span> → <span class="id" type="var">P</span> (<span class="id" type="var">kth_S</span> <span class="id" type="var">delta</span> <span class="id" type="var">x</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" type="var">next_P_k</span></span> lower weakening 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">next_P_k_strong2</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">delta</span> <span class="id" type="var">P</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">next_P_k</span> (<span class="id" type="var">S</span> <span class="id" type="var">k</span>) <span class="id" type="var">delta</span> <span class="id" type="var">P</span> → <span class="id" type="var">next_P_k</span> <span class="id" type="var">k</span> (<span class="id" type="var">S</span> <span class="id" type="var">delta</span>) <span class="id" type="var">P</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Inductions on <span class="inlinecode"><span class="id" type="var">nat</span></span></h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Generalized n-step induction 
+</div>
+<div class="code">
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">nat_k_ind</span> : ∀ <span class="id" type="var">k</span> <span class="id" type="var">P</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">next_P_k</span> <span class="id" type="var">k</span> 0 <span class="id" type="var">P</span> → (∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span> → <span class="id" type="var">P</span>(<span class="id" type="var">kth_S</span> <span class="id" type="var">k</span> <span class="id" type="var">n</span>)) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Simple nat induction is a special case 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">nat_simple_ind</span> : ∀ <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>, <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">P</span> 0 → (∀ <span class="id" type="var">n</span>:nat, <span class="id" type="var">P</span> <span class="id" type="var">n</span> → <span class="id" type="var">P</span>(<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Double-step nat induction is a special case 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">nat_double_ind</span> : ∀ <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>, <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">P</span> 0 → <span class="id" type="var">P</span> 1 → (∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span> → <span class="id" type="var">P</span>(<span class="id" type="var">S</span>(<span class="id" type="var">S</span> <span class="id" type="var">n</span>))) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Triple-step nat induction is a special case 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">nat_triple_ind</span> : ∀ <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>, <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">P</span> 0 → <span class="id" type="var">P</span> 1 → <span class="id" type="var">P</span> 2→ (∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span> → <span class="id" type="var">P</span>(<span class="id" type="var">S</span> (<span class="id" type="var">S</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)))) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Strong induction on <span class="inlinecode"><span class="id" type="var">nat</span></span> 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">nat_strong_ind</span> : ∀ <span class="id" type="var">P</span> : <span class="id" type="var">nat</span> → <span class="id" type="keyword">Prop</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">P</span> 0 → (∀ <span class="id" type="var">n</span>, (∀ <span class="id" type="var">k</span>, <span class="id" type="var">k</span>&lt;=n → <span class="id" type="var">P</span> <span class="id" type="var">k</span>) → <span class="id" type="var">P</span>(<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) → ∀ <span class="id" type="var">n</span>, <span class="id" type="var">P</span> <span class="id" type="var">n</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

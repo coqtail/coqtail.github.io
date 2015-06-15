@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.RTaylor</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.RTaylor</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">MyReals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rpser_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rintegral</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_RiemannInt</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_subsequence</span>.<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h2 class="section">Taylor series of ln</h2>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Taylor series of ln (1 - x)</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">ln_minus</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Let</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+| 0 ⇒ 0<br/>
+| <span class="id" type="var">_</span> ⇒ - / (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_minus_cv_radius</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">Un</span> 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_minus_finite_cv_radius</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">Un</span> 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Let</span> <span class="id" type="var">sum</span> <span class="id" type="var">x</span> := <span class="id" type="var">weaksum_r</span> <span class="id" type="var">Un</span> 1 <span class="id" type="var">ln_minus_cv_radius</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_minus_taylor_sum</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> &lt; 1 → <span class="id" type="var">sum</span> <span class="id" type="var">x</span> = (<span class="id" type="var">ln</span> (1 - <span class="id" type="var">x</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_minus_taylor</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> &lt; 1 → <span class="id" type="var">Pser</span> <span class="id" type="var">Un</span> <span class="id" type="var">x</span> (<span class="id" type="var">ln</span> (1 - <span class="id" type="var">x</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">ln_minus</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Taylor series of ln (1 + x)</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">ln_plus</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Let</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+| 0 ⇒ 0 <br/>
+| <span class="id" type="var">_</span> ⇒ (- 1) ^ (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) / (<span class="id" type="var">INR</span> <span class="id" type="var">n</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_plus_cv_radius</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">Un</span> 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Let</span> <span class="id" type="var">sum</span> <span class="id" type="var">x</span> := <span class="id" type="var">weaksum_r</span> <span class="id" type="var">Un</span> 1 <span class="id" type="var">ln_plus_cv_radius</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_plus_taylor_sum</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> &lt; 1 → <span class="id" type="var">sum</span> <span class="id" type="var">x</span> = (<span class="id" type="var">ln</span> (1 + <span class="id" type="var">x</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">ln_plus_taylor</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rabs</span> <span class="id" type="var">x</span> &lt; 1 → <span class="id" type="var">Pser</span> <span class="id" type="var">Un</span> <span class="id" type="var">x</span> (<span class="id" type="var">ln</span> (1 + <span class="id" type="var">x</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">ln_plus</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

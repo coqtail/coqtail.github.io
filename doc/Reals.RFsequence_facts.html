@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.RFsequence_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.RFsequence_facts</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Properties of real functions sequences. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RFsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">RFseq_cvu_derivable</span> : ∀ (<span class="id" type="var">fn</span> <span class="id" type="var">fn'</span>:nat → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">f</span> <span class="id" type="var">g</span>:R-&gt;R)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">x</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>:R) (<span class="id" type="var">lb_lt_x</span>:lb &lt; <span class="id" type="var">x</span>) (<span class="id" type="var">x_lt_ub</span>:x &lt; <span class="id" type="var">ub</span>), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ (<span class="id" type="var">x</span>:R) (<span class="id" type="var">n</span>:nat), <span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">fn</span> <span class="id" type="var">n</span>) <span class="id" type="var">x</span> (<span class="id" type="var">fn'</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">RFseq_cv_interv</span> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">RFseq_cvu</span> <span class="id" type="var">fn'</span> <span class="id" type="var">g</span> ((<span class="id" type="var">lb</span> + <span class="id" type="var">ub</span>)/2) (<span class="id" type="var">mkposreal_lb_ub</span> <span class="id" type="var">x</span> <span class="id" type="var">lb</span> <span class="id" type="var">ub</span> <span class="id" type="var">lb_lt_x</span> <span class="id" type="var">x_lt_ub</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ (<span class="id" type="var">x</span>:R), <span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">g</span> <span class="id" type="var">x</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">g</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">SFL_interv</span> (<span class="id" type="var">fn</span>:nat → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">r</span>:posreal)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">cv</span>:forall <span class="id" type="var">x</span>:R, <span class="id" type="var">Boule</span> 0 <span class="id" type="var">r</span> <span class="id" type="var">x</span> → {<span class="id" type="var">l</span>:R | <span class="id" type="var">Un_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">N</span>:nat ⇒ <span class="id" type="var">SP</span> <span class="id" type="var">fn</span> <span class="id" type="var">N</span> <span class="id" type="var">x</span>) <span class="id" type="var">l</span> }) (<span class="id" type="var">y</span>:R) : <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">SFL_interv_right</span> : ∀ <span class="id" type="var">fn</span> <span class="id" type="var">r</span> <span class="id" type="var">cv</span> <span class="id" type="var">y</span>, <span class="id" type="var">Boule</span> 0 <span class="id" type="var">r</span> <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">N</span>:nat ⇒ <span class="id" type="var">SP</span> <span class="id" type="var">fn</span> <span class="id" type="var">N</span> <span class="id" type="var">y</span>) (<span class="id" type="var">SFL_interv</span> <span class="id" type="var">fn</span> <span class="id" type="var">r</span> <span class="id" type="var">cv</span> <span class="id" type="var">y</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+In a complete space, normal convergence implies uniform convergence 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">CVN_CVU_interv</span> : ∀ (<span class="id" type="var">fn</span>:nat → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">r</span>:posreal)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">cv</span>:forall <span class="id" type="var">x</span>:R, <span class="id" type="var">Boule</span> 0 <span class="id" type="var">r</span> <span class="id" type="var">x</span> → {<span class="id" type="var">l</span>:R | <span class="id" type="var">Un_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">N</span>:nat ⇒ <span class="id" type="var">SP</span> <span class="id" type="var">fn</span> <span class="id" type="var">N</span> <span class="id" type="var">x</span>) <span class="id" type="var">l</span> }),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">CVN_r</span> <span class="id" type="var">fn</span> <span class="id" type="var">r</span> → <span class="id" type="var">CVU</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span>:nat ⇒ <span class="id" type="var">SP</span> <span class="id" type="var">fn</span> <span class="id" type="var">n</span>) (<span class="id" type="var">SFL_interv</span> <span class="id" type="var">fn</span> <span class="id" type="var">r</span> <span class="id" type="var">cv</span>) 0 <span class="id" type="var">r</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

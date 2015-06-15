@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.Rseries_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.Rseries_facts</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Properties of real series 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Rsequence_subsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Fourier</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Max</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Finite facts 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_minus</span>: ∀ <span class="id" type="var">Un</span> <span class="id" type="var">n</span> <span class="id" type="var">n2</span>, <br/>
+- <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span> + <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> (<span class="id" type="var">n2</span> + <span class="id" type="var">n</span>)) =<br/>
+<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span> + <span class="id" type="var">k</span>)%nat) <span class="id" type="var">n2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">scal_sum_l</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">N</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">x</span> × <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">An</span> <span class="id" type="var">N</span> = <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">x</span> × <span class="id" type="var">An</span> <span class="id" type="var">i</span> ) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">scal_sum_r</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">N</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">An</span> <span class="id" type="var">N</span> × <span class="id" type="var">x</span> = <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">An</span> <span class="id" type="var">i</span> × <span class="id" type="var">x</span>) <span class="id" type="var">N</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_lt</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>, (∀ <span class="id" type="var">k</span>, <span class="id" type="var">Un</span> <span class="id" type="var">k</span> &lt; <span class="id" type="var">Vn</span> <span class="id" type="var">k</span>) →  <br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span> &lt; <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_pos_minus</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">n</span> <span class="id" type="var">k</span>, (<span class="id" type="var">n</span> ≥ <span class="id" type="var">k</span>)%nat →<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">i</span>, (<span class="id" type="var">i</span> &gt; <span class="id" type="var">k</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">i</span> ≥ 0) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span> - <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">k</span> ≥ 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_reorder_0</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">n</span> <span class="id" type="var">N</span>, (<span class="id" type="var">n</span> ≤ <span class="id" type="var">N</span>)%nat → <br/>
+&nbsp;&nbsp;<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k0</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">k0</span> - <span class="id" type="var">N</span>)%nat) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) × <span class="id" type="var">Un</span> <span class="id" type="var">O</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_opp_compat</span> <span class="id" type="var">Un</span> : <span class="id" type="var">sum_f_R0</span> (-Un) == - <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_minus_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">sum_f_R0</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>) == <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> - <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Uniqueness of the limit. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_unique</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu1</span> <span class="id" type="var">lu2</span>, <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu1</span> → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu2</span> → <span class="id" type="var">lu1</span> = <span class="id" type="var">lu2</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Properties about positive term series</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_pos_prop</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Un_pos</span> : ∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_pos_growing</span> : <span class="id" type="var">Rseq_growing</span> (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Positive term series convergence caracterization 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_pos_bound_cv</span> <span class="id" type="var">M</span>: <span class="id" type="var">Rser_bound_max</span> <span class="id" type="var">Un</span> <span class="id" type="var">M</span> → { <span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> }.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_pos_prop</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Properties using classical logic</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Classical_facts</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Un_pos</span> : ∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">NNPP</span> : ∀ <span class="id" type="var">p</span> : <span class="id" type="keyword">Prop</span>, ~ ~ <span class="id" type="var">p</span> → <span class="id" type="var">p</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">classic</span>: ∀ <span class="id" type="var">P</span> : <span class="id" type="keyword">Prop</span>, <span class="id" type="var">P</span> ∨ ~ <span class="id" type="var">P</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Positive series are either convergent or go to infinity 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_pos_cv_dec</span> : (∃ <span class="id" type="var">l</span>, <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>) ∨ (<span class="id" type="var">Rser_cv_pos_infty</span> <span class="id" type="var">Un</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Classical_facts</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">Extensionnal equality compatibility</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rsum_eq_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> == <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_eq_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> : <span class="id" type="var">Un</span> == <span class="id" type="var">Vn</span> → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Compatibility between convergence and common operations</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_operations</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_plus_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Un</span> + <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> + <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_opp_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rser_cv</span> (-Un) (-lu).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_minus_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Un</span> - <span class="id" type="var">Vn</span>) (<span class="id" type="var">lu</span> - <span class="id" type="var">lv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_scal_mult_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> (<span class="id" type="var">x</span>:R),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">x</span> × <span class="id" type="var">Un</span>) (<span class="id" type="var">x</span> × <span class="id" type="var">lu</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If a series converges absolutely, then it converges 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_abs_cv_cv</span> <span class="id" type="var">Un</span> : {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_abs_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>} → { <span class="id" type="var">lu</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_operations</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_partition</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If a gt-positive series converges on an extractor, then it converges 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_growing_subseq_compat</span> <span class="id" type="var">Un</span> :<br/>
+&nbsp;&nbsp;∀ (<span class="id" type="var">phi</span> : <span class="id" type="var">extractor</span>) <span class="id" type="var">l</span>, 0 ≤ <span class="id" type="var">Un</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> ((<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span>) ⋅ <span class="id" type="var">phi</span>)%Rseq <span class="id" type="var">l</span> → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If a gt-positive series converges on even integers, then it converges 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_growing_even_compat</span> <span class="id" type="var">Un</span> : ∀ <span class="id" type="var">l</span>, 0 ≤ <span class="id" type="var">Un</span> →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> (2*n))) <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Finite sum of even and odd terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_even_odd_split</span> : ∀ <span class="id" type="var">an</span> <span class="id" type="var">n</span>,<br/>
+&nbsp;&nbsp;((<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">an</span> (2 × <span class="id" type="var">i</span>)%nat) <span class="id" type="var">n</span>) + <br/>
+&nbsp;&nbsp;(<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">an</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">i</span>))) <span class="id" type="var">n</span>) =<br/>
+&nbsp;&nbsp;(<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">an</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">n</span>))))%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_even_odd_split_s</span> : ∀ <span class="id" type="var">an</span> <span class="id" type="var">n</span>,<br/>
+&nbsp;&nbsp;((<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">an</span> (2 × <span class="id" type="var">i</span>)%nat) (<span class="id" type="var">S</span> <span class="id" type="var">n</span>)) + <br/>
+&nbsp;&nbsp;(<span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">an</span> (<span class="id" type="var">S</span> (2 × <span class="id" type="var">i</span>))) <span class="id" type="var">n</span>) =<br/>
+&nbsp;&nbsp;(<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">an</span> (2 × (<span class="id" type="var">S</span> <span class="id" type="var">n</span>))))%R.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Sum of series of even and odd terms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_even_odd_split</span> : ∀ <span class="id" type="var">an</span> <span class="id" type="var">le</span> <span class="id" type="var">lo</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">an</span> (2*n)%nat) <span class="id" type="var">le</span> →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">an</span> (<span class="id" type="var">S</span>(2*n))%nat) <span class="id" type="var">lo</span> →<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">an</span> (<span class="id" type="var">le</span>+lo).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_partition</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h1 class="section">Convergence and comparisons between sequences</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_pos_comp</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_pos_maj_cv</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_le</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> →  {<span class="id" type="var">lv</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> } → {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Big-O and bound 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_big_O_maj</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">O</span> (<span class="id" type="var">Vn</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">K</span>, ∃ <span class="id" type="var">SN</span>, 0≤ <span class="id" type="var">K</span> ∧ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">sum_f_R0</span> (|Un|) <span class="id" type="var">n</span> ≤ <span class="id" type="var">K</span>× (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) + <span class="id" type="var">SN</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence and big-O 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_big_O_cv_weak</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → {<span class="id" type="var">lv</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>} → {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_big_O_cv</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → {<span class="id" type="var">lv</span> | <span class="id" type="var">Rser_abs_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>} → {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_abs_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Little-O and bound 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_little_O_maj</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) → <span class="id" type="var">Un</span> = <span class="id" type="var">o</span> (<span class="id" type="var">Vn</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">eps</span>, 0&lt; <span class="id" type="var">eps</span> → ∃ <span class="id" type="var">SN</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">sum_f_R0</span> (|Un|) <span class="id" type="var">n</span> ≤ <span class="id" type="var">eps</span>× (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) + <span class="id" type="var">SN</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence and little-O
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_little_O_cv</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → {<span class="id" type="var">lv</span> | <span class="id" type="var">Rser_abs_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>} → {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_abs_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Convergence and equivalence 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_equiv_cv</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → {<span class="id" type="var">lv</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>} → {<span class="id" type="var">lu</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+classical is needed? 
+</div>
+<div class="code">
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">NNPP</span> : ∀ <span class="id" type="var">p</span> : <span class="id" type="keyword">Prop</span>, ~ ~ <span class="id" type="var">p</span> → <span class="id" type="var">p</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">classic</span>: ∀ <span class="id" type="var">P</span> : <span class="id" type="keyword">Prop</span>, <span class="id" type="var">P</span> ∨ ~ <span class="id" type="var">P</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_equiv_cv_infty</span> (<span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → <span class="id" type="var">Rser_cv_pos_infty</span> <span class="id" type="var">Vn</span> → <span class="id" type="var">Rser_cv_pos_infty</span> <span class="id" type="var">Un</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_pos_comp</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h1 class="section">Summing Landau's relations when the series go to infinity</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_landau_infty</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Vn_pos</span> : (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>).<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Vn_infty</span> : <span class="id" type="var">Rser_cv_pos_infty</span> <span class="id" type="var">Vn</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_partial_big_O_compat</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>): <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_partial_little_O_compat</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>): <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_partial_equiv_compat</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>): <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span>) ~ (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Vn</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_landau_infty</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Properties of remainder 
+</div>
+<div class="code">
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_rem</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Remainder caracterization 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_cv</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">lu</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Hlu</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> )(<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>+ <span class="id" type="var">k</span>)%nat) (<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility between remainder and usual operations 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_plus_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">Hlv</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> + <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlv</span> == <span class="id" type="var">Rser_rem</span> (<span class="id" type="var">Un</span>+Vn) (<span class="id" type="var">lu</span>+lv) (<span class="id" type="var">Rser_cv_plus_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">Hlv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_opp_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> == <span class="id" type="var">Rser_rem</span> (-Un) (-lu) (<span class="id" type="var">Rser_cv_opp_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_minus_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">Hlv</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> - <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlv</span> == <span class="id" type="var">Rser_rem</span> (<span class="id" type="var">Un</span>-Vn) (<span class="id" type="var">lu</span>-lv) (<span class="id" type="var">Rser_cv_minus_compat</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">Hlv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_scal</span> : ∀ <span class="id" type="var">x</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">Rseq</span>) <span class="id" type="var">lu</span> <span class="id" type="var">n</span> (<span class="id" type="var">Vn</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">x</span> × <span class="id" type="var">Un</span> <span class="id" type="var">n</span> )%R)  <br/>
+&nbsp;&nbsp;(<span class="id" type="var">Hlu</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>) (<span class="id" type="var">Hlv</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> (<span class="id" type="var">x</span> × <span class="id" type="var">lu</span>)),<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">x</span> × <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">n</span> = <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> (<span class="id" type="var">x</span> × <span class="id" type="var">lu</span>) <span class="id" type="var">Hlv</span> <span class="id" type="var">n</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_rem</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab7"></a><h1 class="section">Summing Landau's relations when the series converge</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_landau_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span>→ <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Vn_pos</span> : (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>).<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> : <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hlv</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hlu</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_big_O_compat</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">O</span>(<span class="id" type="var">Vn</span>) → (<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span>) = <span class="id" type="var">O</span>(<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_little_O_compat</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> = <span class="id" type="var">o</span>(<span class="id" type="var">Vn</span>) → (<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span>) = <span class="id" type="var">o</span>(<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_landau_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <span class="id" type="var">Rser_equiv_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span>→ <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Vn_pos</span> : (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, 0 ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>).<br/>
+<span class="id" type="keyword">Variable</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> : <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hlv</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <span class="id" type="var">Hlu</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_equiv_compat</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Un</span> ~ <span class="id" type="var">Vn</span> → (<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span>) ~ (<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlv</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <span class="id" type="var">Rser_equiv_cv</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_zero</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rseq_cv</span> <span class="id" type="var">Un</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Local</span> <span class="id" type="keyword">Notation</span> <span class="id" type="var">sum</span> := <span class="id" type="var">sum_f_R0</span> (<span class="id" type="var">only</span> <span class="id" type="var">parsing</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rsum_shift</span> <span class="id" type="var">Un</span> : <span class="id" type="var">sum_f_R0</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Un</span>) == ((<span class="id" type="var">Rseq_shift</span> (<span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span>)) - (<span class="id" type="var">Un</span> <span class="id" type="var">O</span>))%Rseq.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Series convergence shifting compatibility 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_shift</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> → <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Un</span>) (<span class="id" type="var">l</span> - (<span class="id" type="var">Un</span> <span class="id" type="var">O</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_shift_rev</span> : ∀ (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Un</span>) <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> (<span class="id" type="var">l</span> + <span class="id" type="var">Un</span> 0%nat).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_shift_n</span> : ∀ <span class="id" type="var">n</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span> + <span class="id" type="var">k</span>)%nat) (<span class="id" type="var">l</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> (<span class="id" type="var">l</span> + <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_shift_n_rev</span> : ∀ <span class="id" type="var">n</span> (<span class="id" type="var">Un</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>) (<span class="id" type="var">l</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> (<span class="id" type="var">l</span> + <span class="id" type="var">sum_f_R0</span> <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) →<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span> + <span class="id" type="var">k</span>)%nat) (<span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_sig_shift_compat</span> <span class="id" type="var">Un</span> : {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>} → {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Un</span>) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_shift_reciprocal</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> : <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Un</span>) (<span class="id" type="var">l</span> - (<span class="id" type="var">Un</span> <span class="id" type="var">O</span>)) → <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_sig_shift_reciprocal_compat</span> <span class="id" type="var">Un</span> : {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> (<span class="id" type="var">Rseq_shift</span> <span class="id" type="var">Un</span>) <span class="id" type="var">l</span>} → {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_decomp</span> <span class="id" type="var">An</span> <span class="id" type="var">p</span> <span class="id" type="var">n</span> : <span class="id" type="var">sum</span> <span class="id" type="var">An</span> (<span class="id" type="var">S</span> (<span class="id" type="var">p</span> + <span class="id" type="var">n</span>)) = <span class="id" type="var">sum</span> <span class="id" type="var">An</span> <span class="id" type="var">p</span> + <span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">An</span> (<span class="id" type="var">plus</span> <span class="id" type="var">i</span> (<span class="id" type="var">S</span> <span class="id" type="var">p</span>))) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_reverse</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span> : <span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">An</span> (<span class="id" type="var">n</span> - <span class="id" type="var">i</span>)%nat) <span class="id" type="var">n</span> = <span class="id" type="var">sum</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab8"></a><h1 class="section">Cauchy Product</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cauchy_product_subproof_rearrangement1</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ (<span class="id" type="var">sum</span> <span class="id" type="var">Bn</span> <span class="id" type="var">i</span> × <span class="id" type="var">An</span> (<span class="id" type="var">n</span> - <span class="id" type="var">i</span>)%nat)%R) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ (<span class="id" type="var">An</span> (<span class="id" type="var">n</span> - <span class="id" type="var">i</span>)%nat × <span class="id" type="var">Bn</span> (<span class="id" type="var">k</span>)%nat)%R) <span class="id" type="var">i</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cauchy_product_subproof_rearrangement</span> <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">n</span> :<br/>
+&nbsp;&nbsp;<span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ (<span class="id" type="var">sum</span> <span class="id" type="var">Bn</span> <span class="id" type="var">i</span> × <span class="id" type="var">An</span> (<span class="id" type="var">n</span> - <span class="id" type="var">i</span>)%nat)%R) <span class="id" type="var">n</span> =<br/>
+&nbsp;&nbsp;<span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ <span class="id" type="var">sum</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ (<span class="id" type="var">An</span> <span class="id" type="var">k</span> × <span class="id" type="var">Bn</span> (<span class="id" type="var">i</span> - <span class="id" type="var">k</span>)%nat)%R) <span class="id" type="var">i</span>) <span class="id" type="var">n</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Mertens' theorem 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">cauchy_product</span> : ∀ <span class="id" type="var">An</span> <span class="id" type="var">Bn</span> <span class="id" type="var">la</span> <span class="id" type="var">lb</span> <span class="id" type="var">lna</span>,<br/>
+&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">An</span> <span class="id" type="var">la</span> → <br/>
+&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Bn</span> <span class="id" type="var">lb</span> → <br/>
+&nbsp;<span class="id" type="var">Rser_abs_cv</span> <span class="id" type="var">An</span> <span class="id" type="var">lna</span> →<br/>
+&nbsp;<span class="id" type="var">Rser_cv</span> ((<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span>:nat ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">p</span>:nat ⇒ <span class="id" type="var">An</span> <span class="id" type="var">p</span> × <span class="id" type="var">Bn</span> (<span class="id" type="var">k</span> - <span class="id" type="var">p</span>)%nat) <span class="id" type="var">k</span>)%R)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="var">la</span> × <span class="id" type="var">lb</span>)%R.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_pos_maj_cv_shift</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span>,<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, 0 ≤ <span class="id" type="var">Un</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">n</span>) → {<span class="id" type="var">lv</span> : <span class="id" type="var">R</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>} → {<span class="id" type="var">lu</span> : <span class="id" type="var">R</span> | <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>}.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_square_inv</span> : {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">i</span> ⇒ / <span class="id" type="var">INR</span> (<span class="id" type="var">S</span> <span class="id" type="var">i</span>) ^ 2) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_cv_inv_poly</span> <span class="id" type="var">d</span> : (2 ≤ <span class="id" type="var">d</span>)%nat → {<span class="id" type="var">l</span> | <span class="id" type="var">Rser_abs_cv</span> (<span class="id" type="var">Rseq_inv_poly</span> <span class="id" type="var">d</span>) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_Rser_rem_equiv</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> (<span class="id" type="var">H</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>) <span class="id" type="var">n</span>,<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">k</span>, (<span class="id" type="var">k</span> &gt; <span class="id" type="var">n</span>)%nat → <span class="id" type="var">Un</span> (<span class="id" type="var">k</span> - <span class="id" type="var">S</span> <span class="id" type="var">n</span>)%nat = <span class="id" type="var">Vn</span> <span class="id" type="var">k</span>) → <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">x</span> → <span class="id" type="var">x</span> = <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> <span class="id" type="var">H</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_pos</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">k</span> <span class="id" type="var">lu</span> (<span class="id" type="var">Hlu</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>) , <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">n</span>, (<span class="id" type="var">n</span> &gt; <span class="id" type="var">k</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">n</span> ≥ 0) →<br/>
+&nbsp;&nbsp;&nbsp;{<span class="id" type="var">n</span> | (<span class="id" type="var">n</span> &gt; <span class="id" type="var">k</span>)%nat ∧ <span class="id" type="var">Un</span> <span class="id" type="var">n</span> &gt; 0} →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">k</span> &gt; 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_rem_lt_le</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">lv</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) <span class="id" type="var">Vn</span> <br/>
+&nbsp;&nbsp;(<span class="id" type="var">Hlu</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span>) (<span class="id" type="var">Hlv</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span>),<br/>
+&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">k</span>, (<span class="id" type="var">k</span> &gt; <span class="id" type="var">n</span>)%nat → <span class="id" type="var">Un</span> <span class="id" type="var">k</span> ≤ <span class="id" type="var">Vn</span> <span class="id" type="var">k</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" type="var">k</span> | (<span class="id" type="var">k</span> &gt; <span class="id" type="var">n</span>)%nat ∧ <span class="id" type="var">Un</span> <span class="id" type="var">k</span> &lt; <span class="id" type="var">Vn</span> <span class="id" type="var">k</span>} →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_rem</span> <span class="id" type="var">Un</span> <span class="id" type="var">lu</span> <span class="id" type="var">Hlu</span> <span class="id" type="var">n</span> &lt; <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">lv</span> <span class="id" type="var">Hlv</span> <span class="id" type="var">n</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rser_Rser_rem_lt_le</span> : ∀ <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> (<span class="id" type="var">H</span> : <span class="id" type="var">Rser_cv</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span>) <span class="id" type="var">n</span>,<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">k</span>, (<span class="id" type="var">k</span> &gt; <span class="id" type="var">n</span>)%nat → <span class="id" type="var">Vn</span> <span class="id" type="var">k</span> ≤ <span class="id" type="var">Un</span> (<span class="id" type="var">k</span> - <span class="id" type="var">S</span> <span class="id" type="var">n</span>)%nat) →<br/>
+&nbsp;&nbsp;&nbsp;{<span class="id" type="var">k</span> | (<span class="id" type="var">k</span> &gt; <span class="id" type="var">n</span>)%nat ∧ <span class="id" type="var">Vn</span> <span class="id" type="var">k</span> &lt; <span class="id" type="var">Un</span> (<span class="id" type="var">k</span> - <span class="id" type="var">S</span> <span class="id" type="var">n</span>)%nat} →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rser_cv</span> <span class="id" type="var">Un</span> <span class="id" type="var">x</span> → <span class="id" type="var">Rser_rem</span> <span class="id" type="var">Vn</span> <span class="id" type="var">l</span> <span class="id" type="var">H</span> <span class="id" type="var">n</span> &lt; <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

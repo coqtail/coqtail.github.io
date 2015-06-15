@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Arith.Nfinite_sum</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Arith.Nfinite_sum</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Arith</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Nk_ind</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Ndiv</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">nat_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Definition of a finite sum on <span class="inlinecode"><span class="id" type="var">nat</span></span> with an index starting from 0</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <span class="id" type="var">Nfinite_sum_0_n</span> (<span class="id" type="var">n</span> : <span class="id" type="var">nat</span>) (<span class="id" type="var">f</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">nat</span>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">n</span>} : <span class="id" type="var">nat</span> :=<br/>
+<span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+| 0 ⇒ <span class="id" type="var">f</span> 0<br/>
+| <span class="id" type="var">S</span> <span class="id" type="var">n'</span> ⇒ (<span class="id" type="var">f</span> <span class="id" type="var">n</span>) + <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n'</span> <span class="id" type="var">f</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Properties of finite sum</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility with sum 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_plus_compat</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> + <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">g</span> = <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <span class="id" type="var">f</span> <span class="id" type="var">k</span> + <span class="id" type="var">g</span> <span class="id" type="var">k</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Distributivity of multiplication 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_mult_distrib</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">a</span> × <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> = <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <span class="id" type="var">a</span> × <span class="id" type="var">f</span> <span class="id" type="var">k</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility with equality (limited equality) 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_subtle_eq_compat</span> :<br/>
+&nbsp;&nbsp;∀ <span class="id" type="var">n</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>, (∀ <span class="id" type="var">k</span>, <span class="id" type="var">k</span> ≤ <span class="id" type="var">n</span> → <span class="id" type="var">f</span> <span class="id" type="var">k</span> = <span class="id" type="var">g</span> <span class="id" type="var">k</span>) → <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> = <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">g</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+compatibility with equality (unlimited equality) 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_eq_compat</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span>, <br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">k</span>, <span class="id" type="var">f</span> <span class="id" type="var">k</span> = <span class="id" type="var">g</span> <span class="id" type="var">k</span>) → <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> = <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">g</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+One term, lower splitting of finite sum 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_split_lower</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">f</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">Nfinite_sum_0_n</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) <span class="id" type="var">f</span> = <span class="id" type="var">f</span> 0 + <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">S</span> <span class="id" type="var">k</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+One term, upper splitting of finite sum 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_split_upper</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">f</span>,<br/>
+&nbsp;&nbsp;<span class="id" type="var">Nfinite_sum_0_n</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) <span class="id" type="var">f</span> = <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> + <span class="id" type="var">f</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+General splitting of finite sum 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_split</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">p</span> <span class="id" type="var">q</span> <span class="id" type="var">f</span>, <br/>
+&nbsp;&nbsp;<span class="id" type="var">p</span> + <span class="id" type="var">q</span> = <span class="id" type="var">n</span> → <span class="id" type="var">Nfinite_sum_0_n</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) <span class="id" type="var">f</span> = <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">p</span> <span class="id" type="var">f</span> + <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">q</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <span class="id" type="var">f</span> (<span class="id" type="var">kth_S</span> <span class="id" type="var">p</span> <span class="id" type="var">k</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Compatibility with division 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Nfinite_sum_div_compat</span> : ∀ <span class="id" type="var">n</span> <span class="id" type="var">f</span> <span class="id" type="var">p</span>,<br/>
+&nbsp;&nbsp;(∀ <span class="id" type="var">k</span>, <span class="id" type="var">k</span> ≤ <span class="id" type="var">n</span> → (<span class="id" type="var">p</span> | <span class="id" type="var">f</span> <span class="id" type="var">k</span>)) → (<span class="id" type="var">p</span> | <span class="id" type="var">Nfinite_sum_0_n</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

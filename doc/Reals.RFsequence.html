@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Reals.RFsequence</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Reals.RFsequence</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Common definitions of real functions sequences. 
+</div>
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Reals</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">RFseq_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">Rseq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">RFseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>.<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">R</span> → <span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <span class="id" type="var">R</span> → <span class="id" type="var">R</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Morphism of functions on R -&gt; R to sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_plus</span> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> + <span class="id" type="var">gn</span> <span class="id" type="var">n</span>)%F.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_mult</span> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> × <span class="id" type="var">gn</span> <span class="id" type="var">n</span>)%F.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_opp</span> <span class="id" type="var">fn</span> <span class="id" type="var">n</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">Ropp</span> (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>))%F.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_inv</span> <span class="id" type="var">fn</span> <span class="id" type="var">n</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">Rinv</span> (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>))%F.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "+" := <span class="id" type="var">RFseq_plus</span> : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "×" := <span class="id" type="var">RFseq_mult</span> : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "- u" := (<span class="id" type="var">RFseq_opp</span> <span class="id" type="var">u</span>) : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> "/ u" := (<span class="id" type="var">RFseq_inv</span> <span class="id" type="var">u</span>) : <span class="id" type="var">RFseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_minus</span> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> - <span class="id" type="var">gn</span> <span class="id" type="var">n</span>)%F.<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_div</span> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> / <span class="id" type="var">gn</span> <span class="id" type="var">n</span>)%F.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> "-" := <span class="id" type="var">RFseq_minus</span> : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> "/" := <span class="id" type="var">RFseq_div</span> : <span class="id" type="var">RFseq_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">Convergence of functions sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_cv</span> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> := ∀ <span class="id" type="var">x</span>, <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f</span> <span class="id" type="var">x</span>).<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_cv_interv</span> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> : <span class="id" type="var">R</span>) := ∀ <span class="id" type="var">x</span>, <span class="id" type="var">lb</span> &lt; <span class="id" type="var">x</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">ub</span> → <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>) (<span class="id" type="var">f</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">RFseq_cvu</span> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> (<span class="id" type="var">x</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">posreal</span>) := ∀ <span class="id" type="var">eps</span> : <span class="id" type="var">R</span>, 0 &lt; <span class="id" type="var">eps</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">N</span> : <span class="id" type="var">nat</span>, ∀ <span class="id" type="var">n</span> (<span class="id" type="var">y</span> : <span class="id" type="var">R</span>), (<span class="id" type="var">N</span> ≤ <span class="id" type="var">n</span>)%nat → <span class="id" type="var">Boule</span> <span class="id" type="var">x</span> <span class="id" type="var">r</span> <span class="id" type="var">y</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">R_dist</span> (<span class="id" type="var">fn</span> <span class="id" type="var">n</span> <span class="id" type="var">y</span>) (<span class="id" type="var">f</span> <span class="id" type="var">y</span>) &lt; <span class="id" type="var">eps</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

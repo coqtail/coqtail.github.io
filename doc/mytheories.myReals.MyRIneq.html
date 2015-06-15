@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>mytheories.myReals.MyRIneq</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library mytheories.myReals.MyRIneq</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <span class="id" type="var">Raxioms</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RIneq</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rfunctions</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">r</span> : <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmin_opp_opp_Rmax</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">Rmin</span> (-r1) (-r2) = - (<span class="id" type="var">Rmax</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmax_opp_opp_Rmin</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">Rmax</span> (-r1) (-r2) = - (<span class="id" type="var">Rmin</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmin_eq_l</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">r1</span> ≤ <span class="id" type="var">r2</span> → <span class="id" type="var">Rmin</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span> = <span class="id" type="var">r1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmin_eq_r</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">r1</span> ≤ <span class="id" type="var">r2</span> → <span class="id" type="var">Rmin</span> <span class="id" type="var">r2</span> <span class="id" type="var">r1</span> = <span class="id" type="var">r1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmax_eq_l</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">r2</span> ≤ <span class="id" type="var">r1</span> → <span class="id" type="var">Rmax</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span> = <span class="id" type="var">r1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmax_eq_r</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">r2</span> ≤ <span class="id" type="var">r1</span> → <span class="id" type="var">Rmax</span> <span class="id" type="var">r2</span> <span class="id" type="var">r1</span> = <span class="id" type="var">r1</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rabs_eq_compat</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">r1</span> = <span class="id" type="var">r2</span> → <span class="id" type="var">Rabs</span> <span class="id" type="var">r1</span> = <span class="id" type="var">Rabs</span> <span class="id" type="var">r2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Req_dec</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, {<span class="id" type="var">r1</span> = <span class="id" type="var">r2</span>} + {<span class="id" type="var">r1</span> ≠ <span class="id" type="var">r2</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Req_or_neq</span> : ∀ <span class="id" type="var">r</span>, {<span class="id" type="var">r</span> = 0} + {<span class="id" type="var">r</span> ≠ 0}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rplus_eq_compat_r</span> : ∀ <span class="id" type="var">r</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span>, <span class="id" type="var">r1</span> = <span class="id" type="var">r2</span> → <span class="id" type="var">r1</span> + <span class="id" type="var">r</span> = <span class="id" type="var">r2</span> + <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmult_eq_compat_r</span> : ∀ <span class="id" type="var">r1</span> <span class="id" type="var">r2</span> <span class="id" type="var">r</span>, <span class="id" type="var">r1</span> = <span class="id" type="var">r2</span> → <span class="id" type="var">r1</span> × <span class="id" type="var">r</span> = <span class="id" type="var">r2</span> × <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmax_lt_lt_lt</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">Rmax</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &lt; <span class="id" type="var">z</span> ↔ <span class="id" type="var">x</span> &lt; <span class="id" type="var">z</span> ∧ <span class="id" type="var">y</span> &lt; <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmax_le_le_le</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">Rmax</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> ≤ <span class="id" type="var">z</span> ↔ <span class="id" type="var">x</span> ≤ <span class="id" type="var">z</span> ∧ <span class="id" type="var">y</span> ≤ <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmin_gt_gt_gt</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">Rmin</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> &gt; <span class="id" type="var">z</span> ↔ <span class="id" type="var">x</span> &gt; <span class="id" type="var">z</span> ∧ <span class="id" type="var">y</span> &gt; <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rmin_ge_ge_ge</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, <span class="id" type="var">Rmin</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> ≥ <span class="id" type="var">z</span> ↔ <span class="id" type="var">x</span> ≥ <span class="id" type="var">z</span> ∧ <span class="id" type="var">y</span> ≥ <span class="id" type="var">z</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rle_neq_lt</span> : ∀ <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <span class="id" type="var">x</span> ≤ <span class="id" type="var">y</span> ∧ <span class="id" type="var">x</span> ≠ <span class="id" type="var">y</span> → <span class="id" type="var">x</span> &lt; <span class="id" type="var">y</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

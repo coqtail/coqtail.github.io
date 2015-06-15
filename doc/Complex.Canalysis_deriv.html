@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Canalysis_deriv</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Canalysis_deriv</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">MyRIneq</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_diff</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cnorm</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cderiv</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ctacfield</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_step1</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">h</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ <span class="id" type="var">h</span> ≠ 0) <span class="id" type="var">l1</span> 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">h</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ <span class="id" type="var">h</span> ≠ 0) <span class="id" type="var">l2</span> 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">l1</span> = <span class="id" type="var">l2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_step2</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">h</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ <span class="id" type="var">h</span> ≠ 0) <span class="id" type="var">l</span> 0.<br/>
+ 
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_step3</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">limit1_in</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ (<span class="id" type="var">f</span> (<span class="id" type="var">x</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">x</span>) / <span class="id" type="var">h</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">h</span> ⇒ <span class="id" type="var">h</span> ≠ 0) <span class="id" type="var">l</span> 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">uniqueness_limite</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l2</span> → <span class="id" type="var">l1</span> = <span class="id" type="var">l2</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_eq</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> (<span class="id" type="var">pr</span>:derivable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span> ↔ <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_eq_0</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> (<span class="id" type="var">pr</span>:derivable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> → <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_eq_1</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> (<span class="id" type="var">pr</span>:derivable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab1"></a><h1 class="section">Equivalence of this definition with the one using limit concept</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derive_pt_D_in</span> : ∀ (<span class="id" type="var">f</span> <span class="id" type="var">df</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x</span>:C) (<span class="id" type="var">pr</span>:derivable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">no_cond</span> <span class="id" type="var">x</span> ↔ <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">pr</span> = <span class="id" type="var">df</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_D_in</span> : ∀ <span class="id" type="var">f</span> (<span class="id" type="var">df</span>:C → <span class="id" type="var">C</span>) (<span class="id" type="var">x</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">D_in</span> <span class="id" type="var">f</span> <span class="id" type="var">df</span> <span class="id" type="var">no_cond</span> <span class="id" type="var">x</span> ↔ <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">df</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab2"></a><h1 class="section">derivability -&gt; continuity</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_derive</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> (<span class="id" type="var">pr</span>:derivable_pt <span class="id" type="var">f</span> <span class="id" type="var">x</span>),<br/>
+&nbsp;∃ <span class="id" type="var">l</span>, <span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">pr</span> = <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">derivable_continuous_pt</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> → <span class="id" type="var">continuity_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">derivable_continuous</span> : ∀ <span class="id" type="var">f</span>, <span class="id" type="var">derivable</span> <span class="id" type="var">f</span> → <span class="id" type="var">continuity</span> <span class="id" type="var">f</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab3"></a><h1 class="section">derivability -&gt; differentiability</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_differentiable_pt_abs</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> → ∀ <span class="id" type="var">v</span>, <span class="id" type="var">differentiable_pt_abs</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span> <span class="id" type="var">l</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">derivable_differentiable_pt</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> → ∀ <span class="id" type="var">v</span>, <span class="id" type="var">differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">v</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab4"></a><h1 class="section">Main rules</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_add</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">l2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">f1</span> + <span class="id" type="var">f2</span>) <span class="id" type="var">x</span> (<span class="id" type="var">l1</span> + <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_opp</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>, <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (- <span class="id" type="var">f</span>) <span class="id" type="var">x</span> (- <span class="id" type="var">l</span>).<br/>
+ 
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_minus</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> → <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">l2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">f1</span> - <span class="id" type="var">f2</span>) <span class="id" type="var">x</span> (<span class="id" type="var">l1</span> - <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_const</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">x</span>, <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">a</span>) <span class="id" type="var">x</span> 0.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_mult</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> <span class="id" type="var">l2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">f1</span> × <span class="id" type="var">f2</span>) <span class="id" type="var">x</span> (<span class="id" type="var">l1</span> × <span class="id" type="var">f2</span> <span class="id" type="var">x</span> + <span class="id" type="var">f1</span> <span class="id" type="var">x</span> × <span class="id" type="var">l2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_scal</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">a</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span> → <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">a</span> × <span class="id" type="var">f</span> <span class="id" type="var">x</span>) <span class="id" type="var">x</span> (<span class="id" type="var">a</span> × <span class="id" type="var">l</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_id</span> : ∀ <span class="id" type="var">x</span>:C, <span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">id</span> <span class="id" type="var">x</span> <span class="id" type="var">C1</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_comp</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span> <span class="id" type="var">l1</span> <span class="id" type="var">l2</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> <span class="id" type="var">l1</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> <span class="id" type="var">f2</span> (<span class="id" type="var">f1</span> <span class="id" type="var">x</span>) <span class="id" type="var">l2</span> → <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">comp</span> <span class="id" type="var">f2</span> <span class="id" type="var">f1</span>) <span class="id" type="var">x</span> (<span class="id" type="var">l2</span> × <span class="id" type="var">l1</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab5"></a><h1 class="section">derivable_pt compatibility lemmas</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_add</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> (<span class="id" type="var">f1</span> + <span class="id" type="var">f2</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_opp</span> : ∀ <span class="id" type="var">f</span> (<span class="id" type="var">x</span>:C), <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> (- <span class="id" type="var">f</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_minus</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> (<span class="id" type="var">f1</span> - <span class="id" type="var">f2</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_mult</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span> (<span class="id" type="var">x</span>:C),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt</span> <span class="id" type="var">f1</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f2</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> (<span class="id" type="var">f1</span> × <span class="id" type="var">f2</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_const</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">x</span>:C, <span class="id" type="var">derivable_pt</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">a</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_scal</span> : ∀ <span class="id" type="var">f</span> (<span class="id" type="var">a</span> <span class="id" type="var">x</span>:C), <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> →<br/>
+&nbsp;<span class="id" type="var">derivable_pt</span> (<span class="id" type="var">mult_real_fct</span> <span class="id" type="var">a</span> <span class="id" type="var">f</span>) <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_id</span> : ∀ <span class="id" type="var">x</span>:C, <span class="id" type="var">derivable_pt</span> <span class="id" type="var">id</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab6"></a><h1 class="section">derivable compatibility lemmas</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_add</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable</span> <span class="id" type="var">f1</span> → <span class="id" type="var">derivable</span> <span class="id" type="var">f2</span> → <span class="id" type="var">derivable</span> (<span class="id" type="var">f1</span> + <span class="id" type="var">f2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_opp</span> : ∀ <span class="id" type="var">f</span>, <span class="id" type="var">derivable</span> <span class="id" type="var">f</span> → <span class="id" type="var">derivable</span> (- <span class="id" type="var">f</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_minus</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable</span> <span class="id" type="var">f1</span> → <span class="id" type="var">derivable</span> <span class="id" type="var">f2</span> → <span class="id" type="var">derivable</span> (<span class="id" type="var">f1</span> - <span class="id" type="var">f2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_mult</span> : ∀ <span class="id" type="var">f1</span> <span class="id" type="var">f2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable</span> <span class="id" type="var">f1</span> → <span class="id" type="var">derivable</span> <span class="id" type="var">f2</span> → <span class="id" type="var">derivable</span> (<span class="id" type="var">f1</span> × <span class="id" type="var">f2</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_const</span> : ∀ <span class="id" type="var">a</span>, <span class="id" type="var">derivable</span> (<span class="id" type="var">fct_cte</span> <span class="id" type="var">a</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_scal</span> : ∀ <span class="id" type="var">f</span> <span class="id" type="var">a</span>, <span class="id" type="var">derivable</span> <span class="id" type="var">f</span> →<br/>
+&nbsp;<span class="id" type="var">derivable</span> (<span class="id" type="var">mult_real_fct</span> <span class="id" type="var">a</span> <span class="id" type="var">f</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_id</span> : <span class="id" type="var">derivable</span> <span class="id" type="var">id</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab7"></a><h1 class="section">fully differentiability -/-&gt; derivability</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">fully_differentiable_pt_not_derivable_pt</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">f</span> <span class="id" type="var">x</span>, <span class="id" type="var">fully_differentiable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span>) → <span class="id" type="var">False</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab8"></a><h1 class="section">MVT (weak version : the strong one is false when f has complex values</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">MVT_Cre</span> : ∀ (<span class="id" type="var">f</span> : <span class="id" type="var">C</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">z</span> <span class="id" type="var">h</span> : <span class="id" type="var">C</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_deriv</span> : ∀ (<span class="id" type="var">t</span> : <span class="id" type="var">R</span>), <span class="id" type="var">interval</span> 0 1 <span class="id" type="var">t</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">z</span> + <span class="id" type="var">t</span>*h)), <span class="id" type="var">h</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">u</span> : <span class="id" type="var">R</span>, ∃ <span class="id" type="var">u_in_I</span> : <span class="id" type="var">interval</span> 0 1 <span class="id" type="var">u</span>, <span class="id" type="var">Cre</span> ((<span class="id" type="var">f</span> (<span class="id" type="var">z</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">z</span>) / <span class="id" type="var">h</span>) = <span class="id" type="var">Cre</span> (<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">z</span> + <span class="id" type="var">u</span> × <span class="id" type="var">h</span>) (<span class="id" type="var">f_deriv</span> <span class="id" type="var">u</span> <span class="id" type="var">u_in_I</span>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <span class="id" type="var">MVT_Cim</span> : ∀ (<span class="id" type="var">f</span> : <span class="id" type="var">C</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">z</span> <span class="id" type="var">h</span> : <span class="id" type="var">C</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">f_deriv</span> : ∀ (<span class="id" type="var">t</span> : <span class="id" type="var">R</span>), <span class="id" type="var">interval</span> 0 1 <span class="id" type="var">t</span> → <span class="id" type="var">derivable_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">z</span> + <span class="id" type="var">t</span>*h)), <span class="id" type="var">h</span> ≠ 0 →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∃ <span class="id" type="var">u</span> : <span class="id" type="var">R</span>, ∃ <span class="id" type="var">u_in_I</span> : <span class="id" type="var">interval</span> 0 1 <span class="id" type="var">u</span>, <span class="id" type="var">Cim</span> ((<span class="id" type="var">f</span> (<span class="id" type="var">z</span> + <span class="id" type="var">h</span>) - <span class="id" type="var">f</span> <span class="id" type="var">z</span>) / <span class="id" type="var">h</span>) = <span class="id" type="var">Cim</span> (<span class="id" type="var">derive_pt</span> <span class="id" type="var">f</span> (<span class="id" type="var">z</span> + <span class="id" type="var">u</span> × <span class="id" type="var">h</span>) (<span class="id" type="var">f_deriv</span> <span class="id" type="var">u</span> <span class="id" type="var">u_in_I</span>)).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

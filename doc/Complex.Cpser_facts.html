@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Complex.Cpser_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Complex.Cpser_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Ranalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rpser_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rpser_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Rseries_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">RFsequence_facts</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cpser_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">CFsequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">CFsequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Csequence_facts</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cmet</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cnorm</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Cprop_base</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_def</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_cont</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_deriv</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="var">Canalysis_basic_facts</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_norm_abs_Cre</span> : <br/>
+∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>), {<span class="id" type="var">l</span> | <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt;(Cnorm (<span class="id" type="var">An</span> <span class="id" type="var">n</span>))) <span class="id" type="var">n</span>) <span class="id" type="var">l</span>} → <br/>
+{<span class="id" type="var">l</span> | <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt;(Rabs (<span class="id" type="var">Cre</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>))))<span class="id" type="var">n</span>) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rseq_norm_abs_Cim</span> : <br/>
+∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>), {<span class="id" type="var">l</span> | <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt;(Cnorm (<span class="id" type="var">An</span> <span class="id" type="var">n</span>)))<span class="id" type="var">n</span>) <span class="id" type="var">l</span>} → <br/>
+{<span class="id" type="var">l</span> | <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt;(Rabs (<span class="id" type="var">Cim</span> (<span class="id" type="var">An</span> <span class="id" type="var">n</span>))))<span class="id" type="var">n</span>) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cseq_norm_Rseq</span> :<br/>
+∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>), {<span class="id" type="var">l</span> | <span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sum_f_R0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt;(Cnorm (<span class="id" type="var">An</span> <span class="id" type="var">n</span>)))<span class="id" type="var">n</span>) <span class="id" type="var">l</span>} → <br/>
+{<span class="id" type="var">l</span> | <span class="id" type="var">Cseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> =&gt;((An <span class="id" type="var">n</span>)))<span class="id" type="var">n</span>) <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_abel</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> → ∀ <span class="id" type="var">x</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span> → {<span class="id" type="var">l</span> | <span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Definition of the sum of a power serie (0 outside the cv-disc) and proof that it's really the sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">weaksum_r</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) : <span class="id" type="var">C</span> → <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">weaksum_r_sums</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> (<span class="id" type="var">weaksum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">weaksum_r_unique</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">weaksum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">x</span> = <span class="id" type="var">weaksum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">weaksum_r_unique_strong</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr1</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Pr2</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r2</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>), <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r1</span> → <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">weaksum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r1</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">x</span> = <span class="id" type="var">weaksum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r2</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">sum_r</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) : <span class="id" type="var">C</span> → <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_r_sums</span> : ∀  (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> (<span class="id" type="var">sum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_r_unique</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">sum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">x</span> = <span class="id" type="var">sum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_r_unique_strong</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr1</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Pr2</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r2</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>), <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r1</span> → <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r2</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">sum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r1</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">x</span> = <span class="id" type="var">sum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r2</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">sum</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>) : <span class="id" type="var">C</span> → <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_sums</span> : ∀  (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">x</span>, <span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> (<span class="id" type="var">sum</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_unique</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>) (<span class="id" type="var">x</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">sum</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">x</span> = <span class="id" type="var">sum</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Abel's lemma : Normal convergence of the power serie 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_abel2_prelim</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> → ∀ <span class="id" type="var">x</span>, <span class="id" type="var">Cnorm</span> <span class="id" type="var">x</span> &lt; <span class="id" type="var">r</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" type="var">l</span> | <span class="id" type="var">Pser_norm</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>}.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_abel2</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>), <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> → ∀ <span class="id" type="var">r0</span> : <span class="id" type="var">posreal</span>, <span class="id" type="var">r0</span> &lt; <span class="id" type="var">r</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">CVN_r</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">gt_Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> <span class="id" type="var">n</span>) <span class="id" type="var">r0</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Rminus_Rlt</span> : ∀ <span class="id" type="var">a</span> <span class="id" type="var">b</span>, 0 &lt; <span class="id" type="var">a</span> - <span class="id" type="var">b</span> → <span class="id" type="var">b</span> &lt; <span class="id" type="var">a</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_alembert_prelim</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">M</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 &lt; <span class="id" type="var">M</span> → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">An</span> <span class="id" type="var">n</span> ≠ <span class="id" type="var">C0</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cseq_bound</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ (<span class="id" type="var">An</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) / <span class="id" type="var">An</span> <span class="id" type="var">n</span>)) <span class="id" type="var">M</span> → ∀ <span class="id" type="var">r</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rabs</span> <span class="id" type="var">r</span> &lt; / <span class="id" type="var">M</span> → <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_alembert_prelim2</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">M</span> : <span class="id" type="var">R</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 &lt; <span class="id" type="var">M</span> → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">An</span> <span class="id" type="var">n</span> ≠ <span class="id" type="var">C0</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cseq_eventually</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">Un</span> ⇒ <span class="id" type="var">Cseq_bound</span> <span class="id" type="var">Un</span> <span class="id" type="var">M</span>) (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ (<span class="id" type="var">An</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) / <span class="id" type="var">An</span> <span class="id" type="var">n</span>)) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∀ <span class="id" type="var">r</span>, <span class="id" type="var">Rabs</span> <span class="id" type="var">r</span> &lt; / <span class="id" type="var">M</span> → <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_alembert_prelim3</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">lambda</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 &lt; <span class="id" type="var">Cnorm</span> (<span class="id" type="var">lambda</span>) → (∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">An</span> <span class="id" type="var">n</span> ≠ <span class="id" type="var">C0</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Cnorm</span> (<span class="id" type="var">An</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) / <span class="id" type="var">An</span> <span class="id" type="var">n</span>)) (<span class="id" type="var">Cnorm</span> <span class="id" type="var">lambda</span>) → ∀ <span class="id" type="var">r</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rabs</span> <span class="id" type="var">r</span> &lt; / (<span class="id" type="var">Cnorm</span> <span class="id" type="var">lambda</span>) → <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_alembert_prelim4</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀ <span class="id" type="var">n</span> : <span class="id" type="var">nat</span>, <span class="id" type="var">An</span> <span class="id" type="var">n</span> ≠ <span class="id" type="var">C0</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Rseq_cv</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> : <span class="id" type="var">nat</span> ⇒ <span class="id" type="var">Cnorm</span> (<span class="id" type="var">An</span> (<span class="id" type="var">S</span> <span class="id" type="var">n</span>) / <span class="id" type="var">An</span> <span class="id" type="var">n</span>)) <span class="id" type="var">R0</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_bound_criteria</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">z</span> <span class="id" type="var">l</span> : <span class="id" type="var">C</span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">z</span> <span class="id" type="var">l</span> → <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A sufficient condition for the radius of convergence
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_finite_cv_radius_caracterization</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">z</span> <span class="id" type="var">l</span> : <span class="id" type="var">C</span>) :<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">z</span> <span class="id" type="var">l</span> → (∀ <span class="id" type="var">l'</span> : <span class="id" type="var">R</span>, ¬ <span class="id" type="var">Pser_norm</span> <span class="id" type="var">An</span> <span class="id" type="var">z</span> <span class="id" type="var">l'</span>)  → <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> (<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_infinite_cv_radius_caracterization</span> <span class="id" type="var">An</span> : (∀ <span class="id" type="var">x</span>, {<span class="id" type="var">l</span> | <span class="id" type="var">Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span> <span class="id" type="var">l</span>}) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cv_radius_weak_derivable_compat</span> : ∀ <span class="id" type="var">An</span> <span class="id" type="var">r</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> → ∀ <span class="id" type="var">r'</span>, <span class="id" type="var">Rabs</span> <span class="id" type="var">r'</span> &lt; <span class="id" type="var">Rabs</span> <span class="id" type="var">r</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cv_radius_weak</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">r'</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Derivability of partial sums 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">Cpser_partial_sum_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span> := <span class="id" type="keyword">match</span> <span class="id" type="var">n</span> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0%nat ⇒ <span class="id" type="var">C0</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" type="var">S</span> <span class="id" type="var">_</span>      ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="var">gt_Pser</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">x</span>) (<span class="id" type="var">pred</span> <span class="id" type="var">n</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">Cpser_derive_finite_sum</span> : ∀ <span class="id" type="var">An</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <span class="id" type="var">sum_f_C0</span> (<span class="id" type="var">gt_Pser</span> <span class="id" type="var">An</span> <span class="id" type="var">x</span>) <span class="id" type="var">n</span>) <span class="id" type="var">x</span> (<span class="id" type="var">Cpser_partial_sum_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">n</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Sum of the formal derivative 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">weaksum_r_derive</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Rho</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">sum_r_derive</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Rho</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="var">sum_derive</span> (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Rho</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>) : <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">weaksum_r_derive_sums</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">Pser</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">z</span> (<span class="id" type="var">weaksum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">weaksum_r_derive_unique</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">weaksum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">z</span> = <span class="id" type="var">weaksum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">z</span> .<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_r_derive_sums</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">Pser</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">z</span> (<span class="id" type="var">sum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_r_derive_unique</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">r</span> : <span class="id" type="var">R</span>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">sum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">z</span> = <span class="id" type="var">sum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">z</span> .<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_derive_sums</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Pr</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Pser</span> (<span class="id" type="var">An_deriv</span> <span class="id" type="var">An</span>) <span class="id" type="var">z</span> (<span class="id" type="var">sum_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">sum_derive_unique</span> : ∀ (<span class="id" type="var">An</span> : <span class="id" type="var">nat</span> → <span class="id" type="var">C</span>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>) (<span class="id" type="var">z</span> : <span class="id" type="var">C</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">sum_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">z</span> = <span class="id" type="var">sum_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">z</span> .<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_weaksum_r</span> (<span class="id" type="var">An</span>:nat-&gt;C) (<span class="id" type="var">r</span>:R) (<span class="id" type="var">Pr</span> : <span class="id" type="var">Cv_radius_weak</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) : ∀ <span class="id" type="var">z</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">weaksum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span>) <span class="id" type="var">z</span> (<span class="id" type="var">weaksum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_sum_r</span> (<span class="id" type="var">An</span>:nat-&gt;C) (<span class="id" type="var">r</span>:R) (<span class="id" type="var">Pr</span> : <span class="id" type="var">finite_cv_radius</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span>) : ∀ <span class="id" type="var">z</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">Cnorm</span> <span class="id" type="var">z</span> &lt; <span class="id" type="var">r</span> → <span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">sum_r</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span>) <span class="id" type="var">z</span> (<span class="id" type="var">sum_r_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">z</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <span class="id" type="var">derivable_pt_lim_sum</span> (<span class="id" type="var">An</span>:nat-&gt;C) (<span class="id" type="var">Pr</span> : <span class="id" type="var">infinite_cv_radius</span> <span class="id" type="var">An</span>) : ∀ <span class="id" type="var">z</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="var">derivable_pt_lim</span> (<span class="id" type="var">sum</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr</span>) <span class="id" type="var">z</span> (<span class="id" type="var">sum_derive</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr</span> <span class="id" type="var">z</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://www.lix.polytechnique.fr/coq/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
