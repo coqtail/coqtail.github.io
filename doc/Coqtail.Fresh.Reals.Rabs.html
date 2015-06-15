@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Fresh.Reals.Rabs</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Fresh.Reals.Rabs</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#"><span class="id" type="library">Raxiom</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rconvenient.html#"><span class="id" type="library">Rconvenient</span></a> <a class="idref" href="Coqtail.Fresh.Reals.IZR.html#"><span class="id" type="library">IZR</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Repsilon.html#"><span class="id" type="library">Repsilon</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rapprox.html#"><span class="id" type="library">Rapprox</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rseq.html#"><span class="id" type="library">Rseq</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Arith.html#"><span class="id" type="library">Arith</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Module</span> <a name="Rabs"><span class="id" type="module">Rabs</span></a> (<span class="id" type="keyword">Import</span> <span class="id" type="var">T</span> : <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals"><span class="id" type="module">CReals</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <a name="Rabs.Rconvenient"><span class="id" type="module">Rconvenient</span></a> := <a class="idref" href="Coqtail.Fresh.Reals.Rconvenient.html#Rconvenient"><span class="id" type="module">Rconvenient</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T"><span class="id" type="module">T</span></a>. <span class="id" type="keyword">Import</span> <span class="id" type="var">Rconvenient</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <a name="Rabs.IZR"><span class="id" type="module">IZR</span></a> := <a class="idref" href="Coqtail.Fresh.Reals.IZR.html#IZR"><span class="id" type="module">IZR</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T"><span class="id" type="module">T</span></a>. <span class="id" type="keyword">Import</span> <span class="id" type="var">IZR</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <a name="Rabs.Repsilon"><span class="id" type="module">Repsilon</span></a> := <a class="idref" href="Coqtail.Fresh.Reals.Repsilon.html#Repsilon"><span class="id" type="module">Repsilon</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T"><span class="id" type="module">T</span></a>. <span class="id" type="keyword">Import</span> <span class="id" type="var">Repsilon</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <a name="Rabs.Rsequence"><span class="id" type="module">Rsequence</span></a> := <a class="idref" href="Coqtail.Fresh.Reals.Rseq.html#Rsequence"><span class="id" type="module">Rsequence</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T"><span class="id" type="module">T</span></a>. <span class="id" type="keyword">Import</span> <span class="id" type="var">Rsequence</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Module</span> <a name="Rabs.Rapprox"><span class="id" type="module">Rapprox</span></a> := <a class="idref" href="Coqtail.Fresh.Reals.Rapprox.html#Rapprox"><span class="id" type="module">Rapprox</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T"><span class="id" type="module">T</span></a>. <span class="id" type="keyword">Import</span> <span class="id" type="var">Rapprox</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <a name="Rabs.Rseq_abs"><span class="id" type="definition">Rseq_abs</span></a> : <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rsequence.Rseq"><span class="id" type="definition">Rseq</span></a> := <span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> <span class="id" type="var">n</span> ⇒ (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.IZR"><span class="id" type="definition">IZR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.ZArith.BinInt.html#Zabs"><span class="id" type="abbreviation">Zabs</span></a> (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.Rup"><span class="id" type="axiom">Rup</span></a> (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rapprox.po"><span class="id" type="definition">po</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#n"><span class="id" type="variable">n</span></a>))) <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rapprox.po"><span class="id" type="definition">po</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#n"><span class="id" type="variable">n</span></a>) (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rapprox.pop"><span class="id" type="definition">pop</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="Rabs.Rseq_cauchy_abs"><span class="id" type="lemma">Rseq_cauchy_abs</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.Rseq_Cauchy"><span class="id" type="definition">Rseq_Cauchy</span></a> (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rseq_abs"><span class="id" type="definition">Rseq_abs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="var">Admitted</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <a name="Rabs.Rabs"><span class="id" type="definition">Rabs</span></a> (<span class="id" type="var">x</span> : <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R"><span class="id" type="axiom">R</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#projT1"><span class="id" type="definition">projT1</span></a> (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.Rcomplete"><span class="id" type="axiom">Rcomplete</span></a> (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rseq_abs"><span class="id" type="definition">Rseq_abs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a>) (<a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rseq_cauchy_abs"><span class="id" type="axiom">Rseq_cauchy_abs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a>)).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="Rabs.Rabs_pos"><span class="id" type="lemma">Rabs_pos</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R0"><span class="id" type="axiom">R0</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'##'_x"><span class="id" type="notation">##</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R0"><span class="id" type="axiom">R0</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">Admitted</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="Rabs.Rabs_eq_compat"><span class="id" type="lemma">Rabs_eq_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'=='_x"><span class="id" type="notation">==</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#y"><span class="id" type="variable">y</span></a> → <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'=='_x"><span class="id" type="notation">==</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#y"><span class="id" type="variable">y</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">Admitted</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="Rabs.Rabs_0"><span class="id" type="lemma">Rabs_0</span></a> : <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs.Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R0"><span class="id" type="axiom">R0</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Raxiom.html#CReals.:R_scope:x_'=='_x"><span class="id" type="notation">==</span></a> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#T.R0"><span class="id" type="axiom">R0</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">Admitted</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Fresh.Reals.Rabs.html#Rabs"><span class="id" type="module">Rabs</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

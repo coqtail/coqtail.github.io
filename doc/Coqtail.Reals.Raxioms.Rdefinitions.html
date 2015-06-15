@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Raxioms.Rdefinitions</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Raxioms.Rdefinitions</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+         Definitions for the axiomatization          
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.ZArith.ZArith_base.html#"><span class="id" type="library">ZArith_base</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <a name="R"><span class="id" type="axiom">R</span></a> : <span class="id" type="keyword">Set</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Bind</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">R</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Parameter</span> <a name="R0"><span class="id" type="axiom">R0</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Parameter</span> <a name="R1"><span class="id" type="axiom">R1</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Parameter</span> <a name="Rplus"><span class="id" type="axiom">Rplus</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Parameter</span> <a name="Rmult"><span class="id" type="axiom">Rmult</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Parameter</span> <a name="Ropp"><span class="id" type="axiom">Ropp</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+</div>
+
+<div class="doc">
+WATCH OUT 
+</div>
+<div class="code">
+<span class="id" type="keyword">Parameter</span> <a name="Rinv"><span class="id" type="axiom">Rinv</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">r</span> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">≠</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R0"><span class="id" type="axiom">R0</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Parameter</span> <a name="Rlt"><span class="id" type="axiom">Rlt</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <span class="id" type="keyword">Prop</span>.<br/>
+<span class="id" type="keyword">Parameter</span> <a name="up"><span class="id" type="axiom">up</span></a> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" type="inductive">Z</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'+'_x"><span class="id" type="notation">"</span></a>+" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rplus"><span class="id" type="axiom">Rplus</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'*'_x"><span class="id" type="notation">"</span></a>×" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rmult"><span class="id" type="axiom">Rmult</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":R_scope:'-'_x"><span class="id" type="notation">"</span></a>- x" := (<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Ropp"><span class="id" type="axiom">Ropp</span></a> <span class="id" type="var">x</span>) : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":R_scope:'/'_x_x"><span class="id" type="notation">"</span></a>/ x H" := (<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rinv"><span class="id" type="axiom">Rinv</span></a> <span class="id" type="var">x</span> <span class="id" type="var">H</span>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 0) : <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'<'_x"><span class="id" type="notation">"</span></a>&lt;" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rlt"><span class="id" type="axiom">Rlt</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rgt"><span class="id" type="definition">Rgt</span></a> (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span>:<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <span class="id" type="keyword">Prop</span> := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rle"><span class="id" type="definition">Rle</span></a> (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span>:<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <span class="id" type="keyword">Prop</span> := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rge"><span class="id" type="definition">Rge</span></a> (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span>:<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <span class="id" type="keyword">Prop</span> := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rgt"><span class="id" type="definition">Rgt</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'\/'_x"><span class="id" type="notation">∨</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rminus"><span class="id" type="definition">Rminus</span></a> (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span>:<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rdiv"><span class="id" type="definition">Rdiv</span></a> (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span>:<a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">H</span> : <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">≠</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R0"><span class="id" type="axiom">R0</span></a>): <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rinv"><span class="id" type="axiom">Rinv</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#H"><span class="id" type="variable">H</span></a><a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'-'_x"><span class="id" type="notation">"</span></a>-" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rminus"><span class="id" type="definition">Rminus</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'/'_x"><span class="id" type="notation">"</span></a>/" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rdiv"><span class="id" type="definition">Rdiv</span></a>   : <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'<='_x"><span class="id" type="notation">"</span></a>≤" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rle"><span class="id" type="definition">Rle</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'>='_x"><span class="id" type="notation">"</span></a>≥" := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rge"><span class="id" type="definition">Rge</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":R_scope:x_'>'_x"><span class="id" type="notation">"</span></a>&gt;"  := <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#Rgt"><span class="id" type="definition">Rgt</span></a> : <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name=":R_scope:x_'<='_x_'<='_x"><span class="id" type="notation">"</span></a>x &lt;= y &lt;= z" := (<span class="id" type="var">x</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <span class="id" type="var">y</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <span class="id" type="var">z</span>) : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":R_scope:x_'<='_x_'<'_x"><span class="id" type="notation">"</span></a>x &lt;= y &lt; z"  := (<span class="id" type="var">x</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <span class="id" type="var">y</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a>  <span class="id" type="var">z</span>) : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":R_scope:x_'<'_x_'<'_x"><span class="id" type="notation">"</span></a>x &lt; y &lt; z"   := (<span class="id" type="var">x</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a>  <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <span class="id" type="var">y</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a>  <span class="id" type="var">z</span>) : <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":R_scope:x_'<'_x_'<='_x"><span class="id" type="notation">"</span></a>x &lt; y &lt;= z"  := (<span class="id" type="var">x</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a>  <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <span class="id" type="var">y</span> <a class="idref" href="Coqtail.Reals.Raxioms.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <span class="id" type="var">z</span>) : <span class="id" type="var">R_scope</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

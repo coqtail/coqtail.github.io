@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Topology.Metrics</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Topology.Metrics</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab9"></a><h1 class="section">Topological space</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#"><span class="id" type="library">Ensembles</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Topology.Topology.html#"><span class="id" type="library">Topology</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab10"></a><h1 class="section">Metric Space</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Class</span> <a name="Metric_Space"><span class="id" type="record">Metric_Space</span></a><br/>
+&nbsp;&nbsp;(<span class="id" type="var">X</span> : <span class="id" type="keyword">Type</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">d</span> : <a class="idref" href="Coqtail.Topology.Metrics.html#X"><span class="id" type="variable">X</span></a> → <a class="idref" href="Coqtail.Topology.Metrics.html#X"><span class="id" type="variable">X</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>)<br/>
+:= {<br/>
+&nbsp;&nbsp;<a name="metric_pos"><span class="id" type="projection">metric_pos</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>, (0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">R</span>;<br/>
+&nbsp;&nbsp;<a name="metric_sym"><span class="id" type="projection">metric_sym</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>, <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a>;<br/>
+&nbsp;&nbsp;<a name="metric_refl"><span class="id" type="projection">metric_refl</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>, (<a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<->'_x"><span class="id" type="notation">↔</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">R</span>;<br/>
+&nbsp;&nbsp;<a name="metric_tri"><span class="id" type="projection">metric_tri</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span>, (<a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">R</span><br/>
+}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab11"></a><h1 class="section">Open sets</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Open_sets"><span class="id" type="section">Open_sets</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Open_sets.X"><span class="id" type="variable">X</span></a> : <span class="id" type="keyword">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Open_sets.d"><span class="id" type="variable">d</span></a> : <a class="idref" href="Coqtail.Topology.Metrics.html#Open_sets.X"><span class="id" type="variable">X</span></a> → <a class="idref" href="Coqtail.Topology.Metrics.html#Open_sets.X"><span class="id" type="variable">X</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <a name="metric_open"><span class="id" type="definition">metric_open</span></a> <span class="id" type="var">W</span>: <span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Topology.Metrics.html#W"><span class="id" type="variable">W</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">eps</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#eps"><span class="id" type="variable">eps</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">∀</span> <span class="id" type="var">y</span>, <a class="idref" href="Coqtail.Topology.Metrics.html#Open_sets.d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#eps"><span class="id" type="variable">eps</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Topology.Metrics.html#W"><span class="id" type="variable">W</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#y"><span class="id" type="variable">y</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Topology.Metrics.html#Open_sets"><span class="id" type="section">Open_sets</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab12"></a><h1 class="section">Balls</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Balls"><span class="id" type="section">Balls</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Balls.X"><span class="id" type="variable">X</span></a> : <span class="id" type="keyword">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Balls.d"><span class="id" type="variable">d</span></a> : <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.X"><span class="id" type="variable">X</span></a> → <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.X"><span class="id" type="variable">X</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Balls.E"><span class="id" type="variable">E</span></a> : <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_Space"><span class="id" type="class">Metric_Space</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.d"><span class="id" type="variable">d</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Inductive</span> <a name="open_ball"><span class="id" type="inductive">open_ball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> (<span class="id" type="var">rpos</span> : (0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#r"><span class="id" type="variable">r</span></a>)%<span class="id" type="var">R</span>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.X"><span class="id" type="variable">X</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="open_ball_intro"><span class="id" type="constructor">open_ball_intro</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, (<a class="idref" href="Coqtail.Topology.Metrics.html#Balls.d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <span class="id" type="var">c</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <span class="id" type="var">r</span>)%<span class="id" type="var">R</span> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Topology.Metrics.html#open_ball"><span class="id" type="inductive">open_ball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">rpos</span>) <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Inductive</span> <a name="closed_ball"><span class="id" type="inductive">closed_ball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> (<span class="id" type="var">rpos</span> : (0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#r"><span class="id" type="variable">r</span></a>)%<span class="id" type="var">R</span>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.X"><span class="id" type="variable">X</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="closed_ball_intro"><span class="id" type="constructor">closed_ball_intro</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, (<a class="idref" href="Coqtail.Topology.Metrics.html#Balls.d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <span class="id" type="var">c</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <span class="id" type="var">r</span>)%<span class="id" type="var">R</span> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Topology.Metrics.html#closed_ball"><span class="id" type="inductive">closed_ball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">rpos</span>) <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="open_ball_is_open"><span class="id" type="lemma">open_ball_is_open</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">rpos</span>, <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.d"><span class="id" type="variable">d</span></a> (<a class="idref" href="Coqtail.Topology.Metrics.html#open_ball"><span class="id" type="inductive">open_ball</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#rpos"><span class="id" type="variable">rpos</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">rpos</span> <span class="id" type="var">x</span> <span class="id" type="var">Hx</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">Hx</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">x</span> <span class="id" type="var">Hxc</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">∃</span> (<span class="id" type="var">r</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls.d"><span class="id" type="variable">d</span></a> <span class="id" type="var">x</span> <span class="id" type="var">c</span>)%<span class="id" type="var">R</span>; <span class="id" type="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtopology.html#Rlt_Rminus"><span class="id" type="lemma">Rlt_Rminus</span></a>; <span class="id" type="tactic">auto</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">y</span> <span class="id" type="var">Hxy</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_lt_trans"><span class="id" type="lemma">Rle_lt_trans</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="Coqtail.Topology.Metrics.html#metric_tri"><span class="id" type="method">metric_tri</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">x</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> (<a class="idref" href="Coqtail.Topology.Metrics.html#metric_sym"><span class="id" type="method">metric_sym</span></a> <span class="id" type="var">y</span> <span class="id" type="var">x</span>); <span class="id" type="tactic">fourier</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Topology.Metrics.html#Balls"><span class="id" type="section">Balls</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab13"></a><h1 class="section">A metric space defines a topology</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Metric_topology"><span class="id" type="section">Metric_topology</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Metric_topology.X"><span class="id" type="variable">X</span></a> : <span class="id" type="keyword">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Metric_topology.d"><span class="id" type="variable">d</span></a> : <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> → <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Fact</span> <a name="metric_open_empty_set"><span class="id" type="lemma">metric_open_empty_set</span></a> : <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Empty_set"><span class="id" type="inductive">Empty_set</span></a> <span class="id" type="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Fact</span> <a name="metric_open_full_set"><span class="id" type="lemma">metric_open_full_set</span></a> : <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Full_set"><span class="id" type="inductive">Full_set</span></a> <span class="id" type="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">_</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">∃</span> 1%<span class="id" type="var">R</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">split</span>. <span class="id" type="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">y</span> <span class="id" type="var">_</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Fact</span> <a name="metric_intersection_stable"><span class="id" type="lemma">metric_intersection_stable</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <span class="id" type="var">_</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#B"><span class="id" type="variable">B</span></a> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Intersection"><span class="id" type="inductive">Intersection</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Topology.Metrics.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#B"><span class="id" type="variable">B</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">OA</span> <span class="id" type="var">OB</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> [<span class="id" type="var">y</span> <span class="id" type="var">yA</span> <span class="id" type="var">yB</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">elim</span> (<span class="id" type="var">OA</span> <span class="id" type="var">y</span>). <span class="id" type="tactic">intros</span> <span class="id" type="var">epsa</span> [<span class="id" type="var">epsapos</span> <span class="id" type="var">opena</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">elim</span> (<span class="id" type="var">OB</span> <span class="id" type="var">y</span>). <span class="id" type="tactic">intros</span> <span class="id" type="var">epsb</span> [<span class="id" type="var">epsbpos</span> <span class="id" type="var">openb</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">∃</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rmin"><span class="id" type="definition">Rmin</span></a> <span class="id" type="var">epsa</span> <span class="id" type="var">epsb</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rmin_Rgt_r"><span class="id" type="lemma">Rmin_Rgt_r</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">split</span>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x'</span> <span class="id" type="var">inx'</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rmin_Rgt_l"><span class="id" type="lemma">Rmin_Rgt_l</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">inx'</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">ax'</span> <span class="id" type="var">bx'</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Intersection_intro"><span class="id" type="constructor">Intersection_intro</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" type="tactic">apply</span> <span class="id" type="var">opena</span> | <span class="id" type="tactic">apply</span> <span class="id" type="var">openb</span>];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rgt_lt"><span class="id" type="lemma">Rgt_lt</span></a>; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Fact</span> <a name="metric_union_stable"><span class="id" type="lemma">metric_union_stable</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">I</span> : <span class="id" type="keyword">Type</span>, <span class="id" type="keyword">∀</span> <span class="id" type="var">Ai</span> : <a class="idref" href="Coqtail.Topology.Metrics.html#I"><span class="id" type="variable">I</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <span class="id" type="var">_</span>,<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" type="keyword">∀</span> <span class="id" type="var">i</span> : <a class="idref" href="Coqtail.Topology.Metrics.html#I"><span class="id" type="variable">I</span></a>, <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> (<a class="idref" href="Coqtail.Topology.Metrics.html#Ai"><span class="id" type="variable">Ai</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#i"><span class="id" type="variable">i</span></a>)) → <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a> (<a class="idref" href="Coqtail.Topology.Topology.html#Infinite_Union"><span class="id" type="inductive">Infinite_Union</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Topology.Metrics.html#I"><span class="id" type="variable">I</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Ai"><span class="id" type="variable">Ai</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">I</span> <span class="id" type="var">Ai</span> <span class="id" type="var">openAi</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">xinU</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">xinU</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">elim</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">intros</span> <span class="id" type="var">i</span> <span class="id" type="var">inxAi</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">elim</span> (<span class="id" type="var">openAi</span> <span class="id" type="var">i</span> <span class="id" type="var">x</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">eps</span> [<span class="id" type="var">epspos</span> <span class="id" type="var">B</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">∃</span> <span class="id" type="var">eps</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">exact</span> <span class="id" type="var">epspos</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">y</span> <span class="id" type="var">yinB</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">∃</span>. <span class="id" type="tactic">∃</span> <span class="id" type="var">i</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<span class="id" type="var">B</span> <span class="id" type="var">_</span> <span class="id" type="var">yinB</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Instance</span> <a name="metric_space_topological"><span class="id" type="instance">metric_space_topological</span></a> : <a class="idref" href="Coqtail.Topology.Topology.html#Topological_Space"><span class="id" type="class">Topological_Space</span></a> <span class="id" type="var">_</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Full_set"><span class="id" type="inductive">Full_set</span></a> <span class="id" type="var">_</span>) (<a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology.d"><span class="id" type="variable">d</span></a>) := {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Topology.html#open_empty_set"><span class="id" type="method">open_empty_set</span></a> := <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open_empty_set"><span class="id" type="lemma">metric_open_empty_set</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Topology.html#open_full_set"><span class="id" type="method">open_full_set</span></a> := <a class="idref" href="Coqtail.Topology.Metrics.html#metric_open_full_set"><span class="id" type="lemma">metric_open_full_set</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Topology.html#intersection_stable"><span class="id" type="method">intersection_stable</span></a> := <a class="idref" href="Coqtail.Topology.Metrics.html#metric_intersection_stable"><span class="id" type="lemma">metric_intersection_stable</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Topology.html#union_stable"><span class="id" type="method">union_stable</span></a> := <a class="idref" href="Coqtail.Topology.Metrics.html#metric_union_stable"><span class="id" type="lemma">metric_union_stable</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_topology"><span class="id" type="section">Metric_topology</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab14"></a><h1 class="section">A metric space is separated</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="metric_space_is_separated"><span class="id" type="lemma">metric_space_is_separated</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">d</span> (<span class="id" type="var">MX</span> : <a class="idref" href="Coqtail.Topology.Metrics.html#Metric_Space"><span class="id" type="class">Metric_Space</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.Topology.html#separated_space"><span class="id" type="definition">separated_space</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#X"><span class="id" type="variable">X</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Full_set"><span class="id" type="inductive">Full_set</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#X"><span class="id" type="variable">X</span></a>) (<a class="idref" href="Coqtail.Topology.Metrics.html#metric_open"><span class="id" type="definition">metric_open</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#d"><span class="id" type="variable">d</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">X</span> <span class="id" type="var">d</span> <span class="id" type="var">MX</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#proj1"><span class="id" type="lemma">proj1</span></a> (<a class="idref" href="Coqtail.Topology.Metrics.html#metric_refl"><span class="id" type="method">metric_refl</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span>)).<br/>
+<span class="id" type="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rtotal_order"><span class="id" type="lemma">Rtotal_order</span></a> (<span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>) 0%<span class="id" type="var">R</span>) <span class="id" type="keyword">as</span> [|[|]]; <span class="id" type="tactic">auto</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_not_lt"><span class="id" type="lemma">RIneq.Rle_not_lt</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Topology.Metrics.html#metric_pos"><span class="id" type="method">metric_pos</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">pose</span> (<span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> 2)%<span class="id" type="var">R</span> <span class="id" type="keyword">as</span> <span class="id" type="var">r</span>.<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">rpos</span> : 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <span class="id" type="var">r</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">r</span>; <span class="id" type="tactic">fourier</span>.<br/>
+&nbsp;<span class="id" type="tactic">pose</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">c</span> ⇒ <a class="idref" href="Coqtail.Topology.Metrics.html#open_ball"><span class="id" type="inductive">open_ball</span></a> <span class="id" type="var">X</span> <span class="id" type="var">d</span> <a class="idref" href="Coqtail.Topology.Metrics.html#c"><span class="id" type="variable">c</span></a> <span class="id" type="var">r</span> <span class="id" type="var">rpos</span>) <span class="id" type="keyword">as</span> <span class="id" type="var">ball</span>.<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">centerinball</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <span class="id" type="var">ball</span> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Topology.Metrics.html#x"><span class="id" type="variable">x</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#proj2"><span class="id" type="lemma">proj2</span></a> (<a class="idref" href="Coqtail.Topology.Metrics.html#metric_refl"><span class="id" type="method">metric_refl</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span>)); <span class="id" type="tactic">auto</span>.<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> (<span class="id" type="var">ball</span> <span class="id" type="var">x</span>) (<span class="id" type="var">ball</span> <span class="id" type="var">y</span>)<br/>
+&nbsp;&nbsp;(<a class="idref" href="Coqtail.Topology.Metrics.html#open_ball_is_open"><span class="id" type="lemma">open_ball_is_open</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>)<br/>
+&nbsp;&nbsp;(<a class="idref" href="Coqtail.Topology.Metrics.html#open_ball_is_open"><span class="id" type="lemma">open_ball_is_open</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">centerinball</span> <span class="id" type="var">_</span>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">centerinball</span> <span class="id" type="var">_</span>)) <span class="id" type="keyword">as</span> [<span class="id" type="var">z</span> []].<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H1</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">z</span> <span class="id" type="var">H1</span>].<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">H2</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">z</span> <span class="id" type="var">H2</span>].<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <span class="id" type="var">r</span> <span class="id" type="keyword">in</span> ×.<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_lt_trans"><span class="id" type="lemma">Rle_lt_trans</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">d</span> <span class="id" type="var">z</span> <span class="id" type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">d</span> <span class="id" type="var">z</span> <span class="id" type="var">y</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Topology.Metrics.html#metric_sym"><span class="id" type="method">metric_sym</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">z</span> <span class="id" type="var">x</span>; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Topology.Metrics.html#metric_tri"><span class="id" type="method">metric_tri</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">replace</span> (<span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span>) <span class="id" type="keyword">with</span> (<span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> 2 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">d</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> 2) <span class="id" type="tactic">by</span> <span class="id" type="tactic">field</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rplus_lt_compat"><span class="id" type="lemma">Rplus_lt_compat</span></a>; <span class="id" type="tactic">auto</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_irrefl"><span class="id" type="lemma">Rlt_irrefl</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">H3</span>.<br/>
+&nbsp;<span class="id" type="var">contradiction</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

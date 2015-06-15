@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Rsequence.Rsequence_ring</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Rsequence.Rsequence_ring</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.NArith.Nnat.html#"><span class="id" type="library">Nnat</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Arith.html#"><span class="id" type="library">Arith</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.setoid_ring.Ring.html#"><span class="id" type="library">Ring</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#"><span class="id" type="library">Rsequence_def</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Setoids.Setoid.html#"><span class="id" type="library">Setoid</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">Morphism</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_plus"><span class="id" type="definition">Rseq_plus</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">signature</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.Morphisms.html#ProperNotations.:signature_scope:x_'==>'_x"><span class="id" type="notation">==&gt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.Morphisms.html#ProperNotations.:signature_scope:x_'==>'_x"><span class="id" type="notation">==&gt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <span class="id" type="keyword">as</span> <span class="id" type="var">Rseq_plus_Rseq_eq_compat</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_plus"><span class="id" type="definition">Rseq_plus</span></a>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Huv</span> <span class="id" type="var">Xn</span> <span class="id" type="var">Yn</span> <span class="id" type="var">Hxy</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Huv</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Hxy</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">Morphism</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_minus"><span class="id" type="definition">Rseq_minus</span></a> : <span class="id" type="var">Rseq_minus_Rseq_eq_compat</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_minus"><span class="id" type="definition">Rseq_minus</span></a>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Huv</span> <span class="id" type="var">Xn</span> <span class="id" type="var">Yn</span> <span class="id" type="var">Hxy</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Huv</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Hxy</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">Morphism</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_mult"><span class="id" type="definition">Rseq_mult</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">signature</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.Morphisms.html#ProperNotations.:signature_scope:x_'==>'_x"><span class="id" type="notation">==&gt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.Morphisms.html#ProperNotations.:signature_scope:x_'==>'_x"><span class="id" type="notation">==&gt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <span class="id" type="keyword">as</span> <span class="id" type="var">Rseq_mult_Rseq_eq_compat</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_mult"><span class="id" type="definition">Rseq_mult</span></a>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">Vn</span> <span class="id" type="var">Huv</span> <span class="id" type="var">Xn</span> <span class="id" type="var">Yn</span> <span class="id" type="var">Hxy</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Huv</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Hxy</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">Morphism</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_opp"><span class="id" type="definition">Rseq_opp</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">signature</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.Morphisms.html#ProperNotations.:signature_scope:x_'==>'_x"><span class="id" type="notation">==&gt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <span class="id" type="keyword">as</span> <span class="id" type="var">Rseq_opp_Rseq_eq_compat</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">H</span> <span class="id" type="var">i</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_opp"><span class="id" type="definition">Rseq_opp</span></a>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_setoid_theory"><span class="id" type="lemma">Rseq_setoid_theory</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Setoids.Setoid.html#Setoid_Theory"><span class="id" type="definition">Setoid_Theory</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">constructor</span>; <span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.RelationClasses.html#Reflexive"><span class="id" type="class">Reflexive</span></a>; <span class="id" type="tactic">trivial</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.RelationClasses.html#Symmetric"><span class="id" type="class">Symmetric</span></a>; <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.RelationClasses.html#Transitive"><span class="id" type="class">Transitive</span></a>; <span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">z</span> <span class="id" type="var">H1</span> <span class="id" type="var">H2</span> <span class="id" type="var">n</span>;<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">H1</span>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">H2</span>; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_ring_theory"><span class="id" type="lemma">Rseq_ring_theory</span></a> : @<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.setoid_ring.Ring_theory.html#ring_theory"><span class="id" type="record">ring_theory</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a> (0%<span class="id" type="var">R</span>) (1%<span class="id" type="var">R</span>) <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_plus"><span class="id" type="definition">Rseq_plus</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_mult"><span class="id" type="definition">Rseq_mult</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_minus"><span class="id" type="definition">Rseq_minus</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_opp"><span class="id" type="definition">Rseq_opp</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>; <span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_plus"><span class="id" type="definition">Rseq_plus</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_mult"><span class="id" type="definition">Rseq_mult</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_minus"><span class="id" type="definition">Rseq_minus</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_constant"><span class="id" type="definition">Rseq_constant</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_opp"><span class="id" type="definition">Rseq_opp</span></a>;<br/>
+<span class="id" type="tactic">intros</span>; <span class="id" type="tactic">ring</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">Setoid</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_eq"><span class="id" type="definition">Rseq_eq</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_ring.html#Rseq_setoid_theory"><span class="id" type="lemma">Rseq_setoid_theory</span></a> <span class="id" type="keyword">as</span> <span class="id" type="var">Rseq_eq_setoid</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Add</span> <span class="id" type="var">Ring</span> <span class="id" type="var">Rseq_Ring</span> : <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_ring.html#Rseq_ring_theory"><span class="id" type="lemma">Rseq_ring_theory</span></a>(<span class="id" type="tactic">abstract</span>).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Sets.My_Sets_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Sets.My_Sets_facts</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#"><span class="id" type="library">Ensembles</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Ensembles"><span class="id" type="section">Ensembles</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variable</span> <a name="Ensembles.U"><span class="id" type="variable">U</span></a> : <span class="id" type="keyword">Type</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Union_comm"><span class="id" type="lemma">Union_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Extensionality_Ensembles"><span class="id" type="axiom">Extensionality_Ensembles</span></a>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Intersection_comm"><span class="id" type="lemma">Intersection_comm</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>, <br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Intersection"><span class="id" type="inductive">Intersection</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Intersection"><span class="id" type="inductive">Intersection</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Extensionality_Ensembles"><span class="id" type="axiom">Extensionality_Ensembles</span></a>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Union_empty_set_left"><span class="id" type="lemma">Union_empty_set_left</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Empty_set"><span class="id" type="inductive">Empty_set</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>) <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Extensionality_Ensembles"><span class="id" type="axiom">Extensionality_Ensembles</span></a>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Union_empty_set_right"><span class="id" type="lemma">Union_empty_set_right</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Empty_set"><span class="id" type="inductive">Empty_set</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Extensionality_Ensembles"><span class="id" type="axiom">Extensionality_Ensembles</span></a>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">inversion</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Union_assoc"><span class="id" type="lemma">Union_assoc</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Y</span> <span class="id" type="var">Z</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a>) <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Z"><span class="id" type="variable">Z</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Z"><span class="id" type="variable">Z</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Extensionality_Ensembles"><span class="id" type="axiom">Extensionality_Ensembles</span></a>.<br/>
+<span class="id" type="tactic">split</span>.<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>. <span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>. <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>. <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>. <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>. <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>. <span class="id" type="tactic">auto</span>.<br/>
+
+<br/>
+<span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>. <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>. <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>. <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>. <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_intror"><span class="id" type="constructor">Union_intror</span></a>. <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Union_add_left"><span class="id" type="lemma">Union_add_left</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>, <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>:<a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<span class="id" type="keyword">Add</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><span class="id" type="keyword">Add</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a>) <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="keyword">Add</span>.<br/>
+<span class="id" type="tactic">replace</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <span class="id" type="var">X</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Singleton"><span class="id" type="inductive">Singleton</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <span class="id" type="var">x</span>)) <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Singleton"><span class="id" type="inductive">Singleton</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">X</span>).<br/>
+<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_assoc"><span class="id" type="lemma">Union_assoc</span></a>.<br/>
+<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_comm"><span class="id" type="lemma">Union_comm</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_comm"><span class="id" type="lemma">Union_comm</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Union_add_right"><span class="id" type="lemma">Union_add_right</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>, <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>:<a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> (<span class="id" type="keyword">Add</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#x"><span class="id" type="variable">x</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><span class="id" type="keyword">Add</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a>) <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">replace</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <span class="id" type="var">Y</span> <span class="id" type="var">X</span>) <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <span class="id" type="var">X</span> <span class="id" type="var">Y</span>).<br/>
+<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_add_left"><span class="id" type="lemma">Union_add_left</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_comm"><span class="id" type="lemma">Union_comm</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_comm"><span class="id" type="lemma">Union_comm</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Disjoint_downward_closed"><span class="id" type="lemma">Disjoint_downward_closed</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Z</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Disjoint"><span class="id" type="inductive">Disjoint</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Z"><span class="id" type="variable">Z</span></a> → <span class="id" type="keyword">∀</span> <span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>, <br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Included"><span class="id" type="definition">Included</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Disjoint"><span class="id" type="inductive">Disjoint</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Z"><span class="id" type="variable">Z</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">intro</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H1</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span> <span class="id" type="keyword">with</span> <span class="id" type="var">x</span>.<br/>
+<span class="id" type="tactic">constructor</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="included_in_union"><span class="id" type="lemma">included_in_union</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">X</span> <span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Included"><span class="id" type="definition">Included</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union"><span class="id" type="inductive">Union</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#X"><span class="id" type="variable">X</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Y"><span class="id" type="variable">Y</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">intro</span>. <span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Union_introl"><span class="id" type="constructor">Union_introl</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Singleton_is_add_empty"><span class="id" type="lemma">Singleton_is_add_empty</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>:<a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Singleton"><span class="id" type="inductive">Singleton</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#x"><span class="id" type="variable">x</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a><span class="id" type="keyword">Add</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Empty_set"><span class="id" type="inductive">Empty_set</span></a> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles.U"><span class="id" type="variable">U</span></a>) <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">unfold</span> <span class="id" type="keyword">Add</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Union_empty_set_left"><span class="id" type="lemma">Union_empty_set_left</span></a>.<br/>
+<span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Sets.My_Sets_facts.html#Ensembles"><span class="id" type="section">Ensembles</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

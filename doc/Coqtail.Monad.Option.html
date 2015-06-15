@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Monad.Option</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Monad.Option</h1>
+
+<div class="code">
+<span class="id" type="keyword">Definition</span> <a name="Return"><span class="id" type="definition">Return</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>), <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <span class="id" type="keyword">Bind</span> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> → (<a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#B"><span class="id" type="variable">B</span></a> :=<br/>
+<span class="id" type="keyword">fun</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">Oa</span> <span class="id" type="var">f</span> ⇒ <span class="id" type="keyword">match</span> <a class="idref" href="Coqtail.Monad.Option.html#Oa"><span class="id" type="variable">Oa</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a>   ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <span class="id" type="var">a</span> ⇒ <a class="idref" href="Coqtail.Monad.Option.html#f"><span class="id" type="variable">f</span></a> <span class="id" type="var">a</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Map"><span class="id" type="definition">Map</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Coqtail.Monad.Option.html#B"><span class="id" type="variable">B</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#B"><span class="id" type="variable">B</span></a> :=<br/>
+<span class="id" type="keyword">fun</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">f</span> <span class="id" type="var">Oa</span> ⇒ <span class="id" type="keyword">match</span> <a class="idref" href="Coqtail.Monad.Option.html#Oa"><span class="id" type="variable">Oa</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a>   ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <span class="id" type="var">a</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> (<a class="idref" href="Coqtail.Monad.Option.html#f"><span class="id" type="variable">f</span></a> <span class="id" type="var">a</span>)<br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Join"><span class="id" type="definition">Join</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a>) → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#A"><span class="id" type="variable">A</span></a> :=<br/>
+<span class="id" type="keyword">fun</span> <span class="id" type="var">A</span> <span class="id" type="var">OOa</span> ⇒ <span class="id" type="keyword">match</span> <a class="idref" href="Coqtail.Monad.Option.html#OOa"><span class="id" type="variable">OOa</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a>          ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a>     ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#None"><span class="id" type="constructor">None</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <span class="id" type="var">a</span>) ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#Some"><span class="id" type="constructor">Some</span></a> <span class="id" type="var">a</span><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit Arguments</span> <a class="idref" href="Coqtail.Monad.Option.html#Return"><span class="id" type="definition">Return</span></a> [<span class="id" type="var">A</span>].<br/>
+<span class="id" type="keyword">Implicit Arguments</span> <span class="id" type="keyword">Bind</span> [<span class="id" type="var">A</span> <span class="id" type="var">B</span>].<br/>
+<span class="id" type="keyword">Implicit Arguments</span> <a class="idref" href="Coqtail.Monad.Option.html#Map"><span class="id" type="definition">Map</span></a> [<span class="id" type="var">A</span> <span class="id" type="var">B</span>].<br/>
+<span class="id" type="keyword">Implicit Arguments</span> <a class="idref" href="Coqtail.Monad.Option.html#Join"><span class="id" type="definition">Join</span></a> [<span class="id" type="var">A</span>].<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Monad_properties"><span class="id" type="section">Monad_properties</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <a name="Monad_properties.A"><span class="id" type="variable">A</span></a> <a name="Monad_properties.B"><span class="id" type="variable">B</span></a> <a name="Monad_properties.C"><span class="id" type="variable">C</span></a> : <span class="id" type="keyword">Type</span>.<br/>
+<span class="id" type="keyword">Variable</span> <a name="Monad_properties.a"><span class="id" type="variable">a</span></a> : <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.A"><span class="id" type="variable">A</span></a>.<br/>
+<span class="id" type="keyword">Variable</span> <a name="Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.A"><span class="id" type="variable">A</span></a>.<br/>
+<span class="id" type="keyword">Variable</span> <a name="Monad_properties.OOa"><span class="id" type="variable">OOa</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.A"><span class="id" type="variable">A</span></a>).<br/>
+<span class="id" type="keyword">Variable</span> <a name="Monad_properties.f"><span class="id" type="variable">f</span></a> : <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.A"><span class="id" type="variable">A</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.B"><span class="id" type="variable">B</span></a>.<br/>
+<span class="id" type="keyword">Variable</span> <a name="Monad_properties.g"><span class="id" type="variable">g</span></a> : <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.B"><span class="id" type="variable">B</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#option"><span class="id" type="inductive">option</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.C"><span class="id" type="variable">C</span></a>.<br/>
+<span class="id" type="keyword">Variable</span> <a name="Monad_properties.h"><span class="id" type="variable">h</span></a> : <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.B"><span class="id" type="variable">B</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Return_Bind"><span class="id" type="definition">Return_Bind</span></a> : <span class="id" type="keyword">Bind</span> (<a class="idref" href="Coqtail.Monad.Option.html#Return"><span class="id" type="definition">Return</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.a"><span class="id" type="variable">a</span></a>) <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.f"><span class="id" type="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.a"><span class="id" type="variable">a</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Bind_Return"><span class="id" type="definition">Bind_Return</span></a> : <span class="id" type="keyword">Bind</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> (@<a class="idref" href="Coqtail.Monad.Option.html#Return"><span class="id" type="definition">Return</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.A"><span class="id" type="variable">A</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">destruct</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Bind_Bind"><span class="id" type="definition">Bind_Bind</span></a> : <span class="id" type="keyword">Bind</span> (<span class="id" type="keyword">Bind</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.f"><span class="id" type="variable">f</span></a>) <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.g"><span class="id" type="variable">g</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="keyword">Bind</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">r</span> ⇒ <span class="id" type="keyword">Bind</span> (<a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Monad.Option.html#r"><span class="id" type="variable">r</span></a>) <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.g"><span class="id" type="variable">g</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">destruct</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Map_is_Bind"><span class="id" type="definition">Map_is_Bind</span></a> : <a class="idref" href="Coqtail.Monad.Option.html#Map"><span class="id" type="definition">Map</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.h"><span class="id" type="variable">h</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="keyword">Bind</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.Oa"><span class="id" type="variable">Oa</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <a class="idref" href="Coqtail.Monad.Option.html#Return"><span class="id" type="definition">Return</span></a> (<a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.h"><span class="id" type="variable">h</span></a> <a class="idref" href="Coqtail.Monad.Option.html#x"><span class="id" type="variable">x</span></a>)).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Join_is_Bind"><span class="id" type="definition">Join_is_Bind</span></a> : <a class="idref" href="Coqtail.Monad.Option.html#Join"><span class="id" type="definition">Join</span></a> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.OOa"><span class="id" type="variable">OOa</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="keyword">Bind</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.OOa"><span class="id" type="variable">OOa</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <a class="idref" href="Coqtail.Monad.Option.html#x"><span class="id" type="variable">x</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">destruct</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties.OOa"><span class="id" type="variable">OOa</span></a> <span class="id" type="keyword">as</span> [<span class="id" type="var">Ob</span> |] ; [<span class="id" type="tactic">destruct</span> <span class="id" type="var">Ob</span> |] ; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Monad.Option.html#Monad_properties"><span class="id" type="section">Monad_properties</span></a>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

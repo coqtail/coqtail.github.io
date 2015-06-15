@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Complex.Cseries</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Complex.Cseries</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Complex.Complex.html#"><span class="id" type="library">Complex</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Complex.Csequence.html#"><span class="id" type="library">Csequence</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#"><span class="id" type="library">Rsequence_def</span></a>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Cseq_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab178"></a><h1 class="section">Convergence of series</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Definition</span> <a name="Cser_cv"><span class="id" type="definition">Cser_cv</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> := <a class="idref" href="Coqtail.Complex.Csequence_def.html#Cseq_cv"><span class="id" type="definition">Cseq_cv</span></a> (<a class="idref" href="Coqtail.Complex.Cfunctions.html#sum_f_C0"><span class="id" type="definition">sum_f_C0</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a>) <a class="idref" href="Coqtail.Complex.Cseries.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cser_abs_cv"><span class="id" type="definition">Cser_abs_cv</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cnorm"><span class="id" type="definition">Cnorm</span></a> (<a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#n"><span class="id" type="variable">n</span></a>))) <a class="idref" href="Coqtail.Complex.Cseries.html#l"><span class="id" type="variable">l</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cser_cv_infty"><span class="id" type="definition">Cser_cv_infty</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cnorm"><span class="id" type="definition">Cnorm</span></a> (<a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#n"><span class="id" type="variable">n</span></a>))).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab179"></a><h1 class="section">Bounds</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Definition</span> <a name="Cser_bound"><span class="id" type="definition">Cser_bound</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">M</span> := <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cnorm"><span class="id" type="definition">Cnorm</span></a> (<a class="idref" href="Coqtail.Complex.Cfunctions.html#sum_f_C0"><span class="id" type="definition">sum_f_C0</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#M"><span class="id" type="variable">M</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cser_abs_bound"><span class="id" type="definition">Cser_abs_bound</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">M</span> := <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">k</span> ⇒ <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cnorm"><span class="id" type="definition">Cnorm</span></a> (<a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#k"><span class="id" type="variable">k</span></a>)) <a class="idref" href="Coqtail.Complex.Cseries.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#M"><span class="id" type="variable">M</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab180"></a><h1 class="section">Remainders of series</h1>
+
+</div>
+<div class="code">
+<span class="id" type="keyword">Definition</span> <a name="Cser_rem"><span class="id" type="definition">Cser_rem</span></a> (<span class="id" type="var">Un</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Hcv</span> : <a class="idref" href="Coqtail.Complex.Cseries.html#Cser_cv"><span class="id" type="definition">Cser_cv</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#l"><span class="id" type="variable">l</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) := <br/>
+&nbsp;(<a class="idref" href="Coqtail.Complex.Cseries.html#l"><span class="id" type="variable">l</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'-'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cfunctions.html#sum_f_C0"><span class="id" type="definition">sum_f_C0</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Complex.Cseries.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'-'_x"><span class="id" type="notation">)</span></a>)%<span class="id" type="var">C</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Hierarchy.Type_class_instance_beta</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Hierarchy.Type_class_instance_beta</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Relations.Relation_Definitions.html#"><span class="id" type="library">Coq.Relations.Relation_Definitions</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Classes.SetoidClass.html#"><span class="id" type="library">SetoidClass</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#"><span class="id" type="library">Type_class_definition_beta</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.omega.Omega.html#"><span class="id" type="library">Omega</span></a>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">nat_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="aux_plus_0_l"><span class="id" type="lemma">aux_plus_0_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#x"><span class="id" type="variable">x</span></a> → 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">exact</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Plus.html#plus_0_l"><span class="id" type="abbreviation">plus_0_l</span></a> <span class="id" type="var">x</span>).<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="monoid_nat"><span class="id" type="instance">monoid_nat</span></a> : <a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#Monoid"><span class="id" type="class">Monoid</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#plus"><span class="id" type="definition">plus</span></a> 0 :=<br/>
+{<a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#monoid_iden_l"><span class="id" type="method">monoid_iden_l</span></a> := <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#aux_plus_0_l"><span class="id" type="lemma">aux_plus_0_l</span></a>}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="monoid_commutative_nat"><span class="id" type="instance">monoid_commutative_nat</span></a> : <a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#Monoid_Commutative"><span class="id" type="class">Monoid_Commutative</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#plus"><span class="id" type="definition">plus</span></a> 0 :=<br/>
+{<a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#monoid_comm_monoid"><span class="id" type="method">monoid_comm_monoid</span></a> := <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#monoid_nat"><span class="id" type="instance">monoid_nat</span></a>}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="aux_mult_1_l"><span class="id" type="lemma">aux_mult_1_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#x"><span class="id" type="variable">x</span></a> → 1 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>.<br/>
+<span class="id" type="tactic">exact</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Mult.html#mult_1_l"><span class="id" type="lemma">mult_1_l</span></a> <span class="id" type="var">x</span>).<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="monoid_nat_mult_1"><span class="id" type="instance">monoid_nat_mult_1</span></a> : <a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#Monoid"><span class="id" type="class">Monoid</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#mult"><span class="id" type="definition">mult</span></a> 1 :=<br/>
+{<a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#monoid_iden_l"><span class="id" type="method">monoid_iden_l</span></a> := <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#aux_mult_1_l"><span class="id" type="lemma">aux_mult_1_l</span></a> }.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="semiring_nat"><span class="id" type="instance">semiring_nat</span></a> : <a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#SemiRing"><span class="id" type="class">SemiRing</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#mult"><span class="id" type="definition">mult</span></a> 0 1 :=<br/>
+{<a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#semiring_monoid_comm"><span class="id" type="method">semiring_monoid_comm</span></a> := <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#monoid_commutative_nat"><span class="id" type="instance">monoid_commutative_nat</span></a>}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Instance</span> <a name="semiring_commutative_nat"><span class="id" type="instance">semiring_commutative_nat</span></a> : <a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#SemiRing_Commutative"><span class="id" type="class">SemiRing_Commutative</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#eq"><span class="id" type="inductive">eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#plus"><span class="id" type="definition">plus</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#mult"><span class="id" type="definition">mult</span></a> 0 1 :=<br/>
+{<a class="idref" href="Coqtail.Hierarchy.Type_class_definition_beta.html#semiring_comm_semiring"><span class="id" type="method">semiring_comm_semiring</span></a> := <a class="idref" href="Coqtail.Hierarchy.Type_class_instance_beta.html#semiring_nat"><span class="id" type="instance">semiring_nat</span></a>}.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="var">int_hierarchy</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

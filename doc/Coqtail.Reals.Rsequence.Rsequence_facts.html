@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Rsequence.Rsequence_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Rsequence.Rsequence_facts</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Properties of real sequences. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#"><span class="id" type="library">Rsequence_def</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_base_facts.html#"><span class="id" type="library">Rsequence_base_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_cv_facts.html#"><span class="id" type="library">Rsequence_cv_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_rel_facts.html#"><span class="id" type="library">Rsequence_rel_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_usual_facts.html#"><span class="id" type="library">Rsequence_usual_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_growing_constructive_limit"><span class="id" type="lemma">Rseq_growing_constructive_limit</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">Un</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_growing"><span class="id" type="definition">Rseq_growing</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> → (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a>) → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_'|'_x_'}'"><span class="id" type="notation">{</span></a><span class="id" type="var">l</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_'|'_x_'}'"><span class="id" type="notation">|</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_'|'_x_'}'"><span class="id" type="notation">}</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">Hg</span> <span class="id" type="var">Hl</span>.<br/>
+<span class="id" type="tactic">assert</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.SeqProp.html#has_ub"><span class="id" type="definition">has_ub</span></a> <span class="id" type="var">Un</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">Hl</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">l</span> <span class="id" type="var">Hl</span>]; <span class="id" type="tactic">∃</span> <span class="id" type="var">l</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">Hx</span>; <span class="id" type="tactic">destruct</span> <span class="id" type="var">Hx</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">n</span> <span class="id" type="var">Hn</span>]; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">Hn</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.SeqProp.html#growing_ineq"><span class="id" type="lemma">growing_ineq</span></a>; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.SeqProp.html#growing_cv"><span class="id" type="lemma">growing_cv</span></a>; <span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A sequence cannot both converge and diverge to infinity 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_not_infty"><span class="id" type="lemma">Rseq_cv_not_infty</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">Un</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'/\'_x"><span class="id" type="notation">∧</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">)</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">Hf</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">Hf</span> <span class="id" type="keyword">as</span> [[<span class="id" type="var">l</span> <span class="id" type="var">Hl</span>] <span class="id" type="var">Hinf</span>].<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">Hl</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">Hinf</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">Hinf</span> (<span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a>1)%<span class="id" type="var">R</span>) <span class="id" type="keyword">as</span> [ <span class="id" type="var">N</span> <span class="id" type="var">HN</span>].<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">Hl</span> 1) <span class="id" type="keyword">as</span> [<span class="id" type="var">N0</span> <span class="id" type="var">HN0</span>].<br/>
+<span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> ×.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_irrefl"><span class="id" type="lemma">Rlt_irrefl</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Max.html#max"><span class="id" type="abbreviation">Max.max</span></a> <span class="id" type="var">N</span> <span class="id" type="var">N0</span>)).<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#Rlt_trans"><span class="id" type="axiom">Rlt_trans</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a>1)%<span class="id" type="var">R</span>.<br/>
+<span class="id" type="tactic">replace</span> (<span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Max.html#max"><span class="id" type="abbreviation">Max.max</span></a> <span class="id" type="var">N</span> <span class="id" type="var">N0</span>)) <span class="id" type="keyword">with</span> (<span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+(</span></a><span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Max.html#max"><span class="id" type="abbreviation">Max.max</span></a> <span class="id" type="var">N</span> <span class="id" type="var">N0</span>)<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a><span class="id" type="var">l</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">)</span></a>)%<span class="id" type="var">R</span> <span class="id" type="tactic">by</span> <span class="id" type="tactic">ring</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#Rplus_lt_compat_l"><span class="id" type="axiom">Rplus_lt_compat_l</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_lt_trans"><span class="id" type="lemma">Rle_lt_trans</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> (<span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Max.html#max"><span class="id" type="abbreviation">Max.max</span></a> <span class="id" type="var">N</span> <span class="id" type="var">N0</span>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <span class="id" type="var">l</span>)).<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#RRle_abs"><span class="id" type="definition">RRle_abs</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">HN0</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Max.html#le_max_r"><span class="id" type="definition">Max.le_max_r</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">HN</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Max.html#le_max_l"><span class="id" type="definition">Max.le_max_l</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Rseq monotonic definitions implies usual meaning 
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_growing_trans"><span class="id" type="lemma">Rseq_growing_trans</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">an</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_growing"><span class="id" type="definition">Rseq_growing</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#an"><span class="id" type="variable">an</span></a> → <span class="id" type="keyword">∀</span> <span class="id" type="var">y</span> <span class="id" type="var">x</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <br/>
+&nbsp;&nbsp;(<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">nat</span> → (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#an"><span class="id" type="variable">an</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#an"><span class="id" type="variable">an</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">y</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">Hxy</span>; <span class="id" type="tactic">rewrite</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Le.html#le_n_O_eq"><span class="id" type="abbreviation">le_n_O_eq</span></a> <span class="id" type="var">x</span> <span class="id" type="var">Hxy</span>); <span class="id" type="tactic">intuition</span>.<br/>
+
+<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">Hxy</span>; <span class="id" type="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Compare.html#le_decide"><span class="id" type="lemma">Compare.le_decide</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Hxy</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">Hyx</span>|<span class="id" type="var">Hyx</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_trans"><span class="id" type="lemma">Rle_trans</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">an</span> <span class="id" type="var">y</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHy</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Gt.html#gt_S_le"><span class="id" type="lemma">gt_S_le</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Hyx</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">subst</span>; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_refl"><span class="id" type="lemma">Rle_refl</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_strictly_growing_trans"><span class="id" type="lemma">Rseq_strictly_growing_trans</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">an</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_strictly_growing"><span class="id" type="definition">Rseq_strictly_growing</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#an"><span class="id" type="variable">an</span></a> → <span class="id" type="keyword">∀</span> <span class="id" type="var">y</span> <span class="id" type="var">x</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>, <br/>
+&nbsp;&nbsp;(<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">nat</span> → (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#an"><span class="id" type="variable">an</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#an"><span class="id" type="variable">an</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#y"><span class="id" type="variable">y</span></a>)%<span class="id" type="var">R</span>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">y</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">Hx0</span>. <span class="id" type="tactic">inversion</span> <span class="id" type="var">Hx0</span>.<br/>
+
+<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">Hxy</span>.<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Compare.html#le_decide"><span class="id" type="lemma">Compare.le_decide</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Hxy</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">Hyx</span>|<span class="id" type="var">Hyx</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#Rlt_trans"><span class="id" type="axiom">Rlt_trans</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">an</span> <span class="id" type="var">y</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHy</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Gt.html#gt_S_le"><span class="id" type="lemma">gt_S_le</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Hyx</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">Hyx</span>. <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Sequences convergence shifting compatibility 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_shift_compat"><span class="id" type="lemma">Rseq_cv_shift_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>) <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> <span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">epspos</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">epspos</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">N</span> <span class="id" type="var">Hu</span>].<br/>
+<span class="id" type="tactic">∃</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">N</span>); <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>; [<span class="id" type="tactic">inversion</span> <span class="id" type="var">nSN</span> | ].<br/>
+<span class="id" type="tactic">replace</span> (<span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span>)) <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) <span class="id" type="tactic">by</span> <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_pos_infty_shift_compat"><span class="id" type="lemma">Rseq_cv_pos_infty_shift_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>) → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">H</span> <span class="id" type="var">M</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">M</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">N</span> <span class="id" type="var">Hu</span>].<br/>
+<span class="id" type="tactic">∃</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">N</span>); <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>; [<span class="id" type="tactic">inversion</span> <span class="id" type="var">nSN</span> | ].<br/>
+<span class="id" type="tactic">replace</span> (<span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span>)) <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) <span class="id" type="tactic">by</span> <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_neg_infty_shift_compat"><span class="id" type="lemma">Rseq_cv_neg_infty_shift_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_neg_infty"><span class="id" type="definition">Rseq_cv_neg_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>) → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_neg_infty"><span class="id" type="definition">Rseq_cv_neg_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">H</span> <span class="id" type="var">M</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">M</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">N</span> <span class="id" type="var">Hu</span>].<br/>
+<span class="id" type="tactic">∃</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">N</span>); <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>; [<span class="id" type="tactic">inversion</span> <span class="id" type="var">nSN</span> | ].<br/>
+<span class="id" type="tactic">replace</span> (<span class="id" type="var">Un</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span>)) <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <span class="id" type="var">Un</span> <span class="id" type="var">n</span>) <span class="id" type="tactic">by</span> <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_shift_compat_reciprocal"><span class="id" type="lemma">Rseq_cv_shift_compat_reciprocal</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>) <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> <span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">epspos</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">epspos</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">N</span> <span class="id" type="var">Hu</span>].<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">N</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hu</span>.<br/>
+<span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_pos_infty_shift_compat_reciprocal"><span class="id" type="lemma">Rseq_cv_pos_infty_shift_compat_reciprocal</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">H</span> <span class="id" type="var">M</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">M</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">N</span> <span class="id" type="var">Hu</span>].<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">N</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hu</span>.<br/>
+<span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_neg_infty_shift_compat_reciprocal"><span class="id" type="lemma">Rseq_cv_neg_infty_shift_compat_reciprocal</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_neg_infty"><span class="id" type="definition">Rseq_cv_neg_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_neg_infty"><span class="id" type="definition">Rseq_cv_neg_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">H</span> <span class="id" type="var">M</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">M</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">N</span> <span class="id" type="var">Hu</span>].<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">N</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hu</span>.<br/>
+<span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_shifts_compat"><span class="id" type="lemma">Rseq_cv_shifts_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">N</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shifts"><span class="id" type="definition">Rseq_shifts</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#N"><span class="id" type="variable">N</span></a>) <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">N</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> <span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">eps_pos</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">eps_pos</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">M</span> <span class="id" type="var">HM</span>].<br/>
+<span class="id" type="tactic">∃</span> (<span class="id" type="var">N</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">M</span>)%<span class="id" type="var">nat</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">assert</span> (<span class="id" type="var">Hrew</span>: (<span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="var">N</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">(</span></a><span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <span class="id" type="var">N</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>)%<span class="id" type="var">nat</span>) <span class="id" type="tactic">by</span> <span class="id" type="tactic">omega</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Hrew</span> ; <span class="id" type="tactic">apply</span> <span class="id" type="var">HM</span> ; <span class="id" type="tactic">omega</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_shifts_compat_reciprocal"><span class="id" type="lemma">Rseq_cv_shifts_compat_reciprocal</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">N</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shifts"><span class="id" type="definition">Rseq_shifts</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#N"><span class="id" type="variable">N</span></a>) <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#l"><span class="id" type="variable">l</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">N</span> <span class="id" type="var">Un</span> <span class="id" type="var">l</span> <span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">eps_pos</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">eps</span> <span class="id" type="var">eps_pos</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">M</span> <span class="id" type="var">HM</span>].<br/>
+<span class="id" type="tactic">∃</span> (<span class="id" type="var">M</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <span class="id" type="var">N</span>)%<span class="id" type="var">nat</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">HM</span> ; <span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_cv_pos_infty_shifts_compat"><span class="id" type="lemma">Rseq_cv_pos_infty_shifts_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">Un</span> <span class="id" type="var">N</span>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shifts"><span class="id" type="definition">Rseq_shifts</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#N"><span class="id" type="variable">N</span></a>) → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Un"><span class="id" type="variable">Un</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Un</span> <span class="id" type="var">N</span> <span class="id" type="var">H</span> <span class="id" type="var">M</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">H</span> <span class="id" type="var">M</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">P</span> <span class="id" type="var">HP</span>].<br/>
+<span class="id" type="tactic">∃</span> (<span class="id" type="var">N</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">P</span>)%<span class="id" type="var">nat</span>; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nSN</span>.<br/>
+<span class="id" type="tactic">assert</span> (<span class="id" type="var">Hrew</span>: (<span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="var">N</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">(</span></a><span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <span class="id" type="var">N</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">)</span></a>)%<span class="id" type="var">nat</span>) <span class="id" type="tactic">by</span> <span class="id" type="tactic">omega</span>.<br/>
+<span class="id" type="tactic">rewrite</span> <span class="id" type="var">Hrew</span> ; <span class="id" type="tactic">apply</span> <span class="id" type="var">HP</span> ; <span class="id" type="tactic">omega</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab57"></a><h1 class="section">Results which need classical</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Classical_facts"><span class="id" type="section">Classical_facts</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Variables</span> <a name="Classical_facts.Un"><span class="id" type="variable">Un</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Hypothesis</span> <a name="Classical_facts.NNPP"><span class="id" type="variable">NNPP</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">p</span> : <span class="id" type="keyword">Prop</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#p"><span class="id" type="variable">p</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#p"><span class="id" type="variable">p</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+An unbounded growing sequence goes to + infinity
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_unbounded_growing"><span class="id" type="lemma">Rseq_unbounded_growing</span></a>  : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_growing"><span class="id" type="definition">Rseq_growing</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a> → (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">M</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_bound_max"><span class="id" type="definition">Rseq_bound_max</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#M"><span class="id" type="variable">M</span></a>) → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Hgr</span> <span class="id" type="var">Hnmaj</span> <span class="id" type="var">m</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.NNPP"><span class="id" type="variable">NNPP</span></a>; <span class="id" type="tactic">intro</span> <span class="id" type="var">Hf</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Hnmaj</span>.<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">m</span>; <span class="id" type="tactic">intro</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.NNPP"><span class="id" type="variable">NNPP</span></a>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">Hff</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hf</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rnot_le_lt"><span class="id" type="lemma">Rnot_le_lt</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">Hff</span>.<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">p</span> <span class="id" type="var">Hp</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_le_trans"><span class="id" type="lemma">Rlt_le_trans</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a> <span class="id" type="var">n</span>); [ <span class="id" type="tactic">apply</span> <span class="id" type="var">Hff</span> | <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rge_le"><span class="id" type="lemma">Rge_le</span></a>].<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rseries.html#growing_prop"><span class="id" type="lemma">growing_prop</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hgr</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hp</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+An unbounded decreasing sequence goes to - infinity
+</div>
+<div class="code">
+<span class="id" type="keyword">Lemma</span> <a name="Rseq_unbounded_decreasing"><span class="id" type="lemma">Rseq_unbounded_decreasing</span></a> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_decreasing"><span class="id" type="definition">Rseq_decreasing</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a> → (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'~'_x"><span class="id" type="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">M</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_bound_min"><span class="id" type="definition">Rseq_bound_min</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#M"><span class="id" type="variable">M</span></a>) → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_neg_infty"><span class="id" type="definition">Rseq_cv_neg_infty</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">Hgr</span> <span class="id" type="var">Hnmin</span> <span class="id" type="var">m</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.NNPP"><span class="id" type="variable">NNPP</span></a>; <span class="id" type="tactic">intro</span> <span class="id" type="var">Hf</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Hnmin</span>.<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">m</span>; <span class="id" type="tactic">intro</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.NNPP"><span class="id" type="variable">NNPP</span></a>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">Hff</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hf</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rnot_le_lt"><span class="id" type="lemma">Rnot_le_lt</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">Hff</span>.<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">n</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">p</span> <span class="id" type="var">Hp</span>.<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_lt_trans"><span class="id" type="lemma">Rle_lt_trans</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts.Un"><span class="id" type="variable">Un</span></a> <span class="id" type="var">n</span>).<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.SeqProp.html#decreasing_prop"><span class="id" type="lemma">decreasing_prop</span></a>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hgr</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hp</span>.<br/>
+<span class="id" type="tactic">apply</span> <span class="id" type="var">Hff</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Classical_facts"><span class="id" type="section">Classical_facts</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Close</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

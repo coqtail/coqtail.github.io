@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Complex.Cdefinitions</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Complex.Cdefinitions</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab224"></a><h2 class="section">Definition of C and basic operations over C</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="C"><span class="id" type="definition">C</span></a> : <span class="id" type="keyword">Set</span> := (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#prod"><span class="id" type="inductive">prod</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<span class="id" type="var">a</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">b</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#a"><span class="id" type="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">,</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#b"><span class="id" type="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:core_scope:'('_x_','_x_','_'..'_','_x_')'"><span class="id" type="notation">)</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Bind</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab225"></a><h2 class="section">Basic definitions and notations</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="C0"><span class="id" type="definition">C0</span></a> := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> 0 0.<br/>
+<span class="id" type="keyword">Definition</span> <a name="C1"><span class="id" type="definition">C1</span></a> := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> 1 0.<br/>
+<span class="id" type="keyword">Definition</span> <a name="Ci"><span class="id" type="definition">Ci</span></a> := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> 0 1.<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="::'0'"><span class="id" type="notation">"</span></a>0" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C0"><span class="id" type="definition">C0</span></a>.<br/>
+<span class="id" type="keyword">Notation</span> <a name="::'1'"><span class="id" type="notation">"</span></a>1" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C1"><span class="id" type="definition">C1</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cre"><span class="id" type="definition">Cre</span></a> (<span class="id" type="var">z</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> (<span class="id" type="var">r1</span>, <span class="id" type="var">i1</span>) := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z"><span class="id" type="variable">z</span></a> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#r1"><span class="id" type="variable">r1</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cim"><span class="id" type="definition">Cim</span></a> (<span class="id" type="var">z</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">let</span> (<span class="id" type="var">r1</span>, <span class="id" type="var">i1</span>) := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z"><span class="id" type="variable">z</span></a> <span class="id" type="keyword">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#i1"><span class="id" type="variable">i1</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cadd"><span class="id" type="definition">Cadd</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) (<span class="id" type="var">z2</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z2"><span class="id" type="variable">z2</span></a>) (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z2"><span class="id" type="variable">z2</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cmult"><span class="id" type="definition">Cmult</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) (<span class="id" type="var">z2</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z2"><span class="id" type="variable">z2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z2"><span class="id" type="variable">z2</span></a>) (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z2"><span class="id" type="variable">z2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z2"><span class="id" type="variable">z2</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Copp"><span class="id" type="definition">Copp</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) :<a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a>) (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cinv"><span class="id" type="definition">Cinv</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">)</span></a>) (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">)</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cconj"><span class="id" type="definition">Cconj</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a>) (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cnorm_sqr"><span class="id" type="definition">Cnorm_sqr</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> := <br/>
+&nbsp;&nbsp;(<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cnorm"><span class="id" type="definition">Cnorm</span></a> (<span class="id" type="var">z1</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> := <br/>
+&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.R_sqrt.html#sqrt"><span class="id" type="definition">sqrt</span></a> (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cnorm_sqr"><span class="id" type="definition">Cnorm_sqr</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z1"><span class="id" type="variable">z1</span></a>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cscal"><span class="id" type="definition">Cscal</span></a> (<span class="id" type="var">lambda</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">z</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> := <br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#lambda"><span class="id" type="variable">lambda</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cre"><span class="id" type="definition">Cre</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z"><span class="id" type="variable">z</span></a>) (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#lambda"><span class="id" type="variable">lambda</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cim"><span class="id" type="definition">Cim</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z"><span class="id" type="variable">z</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="IRC"><span class="id" type="definition">IRC</span></a> (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> := (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#x"><span class="id" type="variable">x</span></a> 0%<span class="id" type="var">R</span>).<br/>
+
+<br/>
+<span class="id" type="keyword">Coercion</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#IRC"><span class="id" type="definition">IRC</span></a> : <span class="id" type="var">R</span> &gt;-&gt; <span class="id" type="var">C</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'+'_x"><span class="id" type="notation">"</span></a>+" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cadd"><span class="id" type="definition">Cadd</span></a> : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'*'_x"><span class="id" type="notation">"</span></a>×" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cmult"><span class="id" type="definition">Cmult</span></a> : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":C_scope:'-'_x"><span class="id" type="notation">"</span></a>- z" := (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Copp"><span class="id" type="definition">Copp</span></a> <span class="id" type="var">z</span>) : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":C_scope:'/'_x"><span class="id" type="notation">"</span></a>/ z" := (<a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cinv"><span class="id" type="definition">Cinv</span></a> <span class="id" type="var">z</span>) : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'`*'_x"><span class="id" type="notation">"</span></a>`*" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cscal"><span class="id" type="definition">Cscal</span></a> (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 0): <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cminus"><span class="id" type="definition">Cminus</span></a> (<span class="id" type="var">c1</span> <span class="id" type="var">c2</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#c1"><span class="id" type="variable">c1</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#c2"><span class="id" type="variable">c2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cdiv"><span class="id" type="definition">Cdiv</span></a> (<span class="id" type="var">c1</span> <span class="id" type="var">c2</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#c1"><span class="id" type="variable">c1</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#c2"><span class="id" type="variable">c2</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'-'_x"><span class="id" type="notation">"</span></a>-" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cminus"><span class="id" type="definition">Cminus</span></a> : <span class="id" type="var">C_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'/'_x"><span class="id" type="notation">"</span></a>/" := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#Cdiv"><span class="id" type="definition">Cdiv</span></a>   : <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'+i'_x"><span class="id" type="notation">"</span></a> '+i' " := <a class="idref" href="Coqtail.Complex.Cdefinitions.html#R_R_to_C"><span class="id" type="definition">R_R_to_C</span></a> (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 60) : <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab226"></a><h2 class="section">Injection from <span class="inlinecode"><a class="idref" href="Coqtail.Reals.Ediff.Evect.html#Useful_definitions.N"><span class="id" type="variable">N</span></a></span> to <span class="inlinecode"><a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="INC"><span class="id" type="definition">INC</span></a> (<span class="id" type="var">n</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#O"><span class="id" type="constructor">O</span></a> ⇒ 0<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#O"><span class="id" type="constructor">O</span></a> ⇒ 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Complex.Cdefinitions.html#INC"><span class="id" type="definition">INC</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'+'_x"><span class="id" type="notation">+</span></a> 1<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="var">Arguments</span> <span class="id" type="keyword">Scope</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#INC"><span class="id" type="definition">INC</span></a> [<span class="id" type="var">nat_scope</span>].<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab227"></a><h2 class="section">Injection from <span class="inlinecode"><a class="idref" href="Coqtail.Fresh.Inhabited.Functions.html#Z"><span class="id" type="constructor">Z</span></a></span> to <span class="inlinecode"><a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a></span></h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="IZC"><span class="id" type="definition">IZC</span></a> (<span class="id" type="var">z</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Numbers.BinNums.html#Z"><span class="id" type="inductive">Z</span></a>) : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">match</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#z"><span class="id" type="variable">z</span></a> <span class="id" type="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Numbers.BinNums.html#Z0"><span class="id" type="constructor">Z0</span></a> ⇒ 0<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Numbers.BinNums.html#Zpos"><span class="id" type="constructor">Zpos</span></a> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Complex.Cdefinitions.html#INC"><span class="id" type="definition">INC</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.PArith.BinPos.html#nat_of_P"><span class="id" type="abbreviation">nat_of_P</span></a> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Numbers.BinNums.html#Zneg"><span class="id" type="constructor">Zneg</span></a> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#INC"><span class="id" type="definition">INC</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.PArith.BinPos.html#nat_of_P"><span class="id" type="abbreviation">nat_of_P</span></a> <span class="id" type="var">n</span>)<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">end</span>.<br/>
+<span class="id" type="var">Arguments</span> <span class="id" type="keyword">Scope</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#IZC"><span class="id" type="definition">IZC</span></a> [<span class="id" type="var">Z_scope</span>].<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Ranalysis.Rfunction_classes_usual</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Ranalysis.Rfunction_classes_usual</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#"><span class="id" type="library">Rsequence_def</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_facts.html#"><span class="id" type="library">Rfunction_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#"><span class="id" type="library">Rinterval</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#"><span class="id" type="library">Ranalysis_def</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def_simpl.html#"><span class="id" type="library">Ranalysis_def_simpl</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_facts.html#"><span class="id" type="library">Ranalysis_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_continuity.html#"><span class="id" type="library">Ranalysis_continuity</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_derivability.html#"><span class="id" type="library">Ranalysis_derivability</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_monotonicity.html#"><span class="id" type="library">Ranalysis_monotonicity</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#"><span class="id" type="library">Rfunction_classes_def</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#"><span class="id" type="library">Rfunction_classes_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rextensionality.html#"><span class="id" type="library">Rextensionality</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#"><span class="id" type="library">Rpser_def</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#"><span class="id" type="library">Rpser_def</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_cv_facts.html#"><span class="id" type="library">Rpser_cv_facts</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#"><span class="id" type="library">Rpser_sums</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums_facts.html#"><span class="id" type="library">Rpser_sums_facts</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#"><span class="id" type="library">Rpser_derivative</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab131"></a><h1 class="section">Classification of common functions</h1>
+
+<div class="paragraph"> </div>
+
+ Polynoms 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_zero"><span class="id" type="lemma">C_infty_zero</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> 0).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_const"><span class="id" type="lemma">derivable_const</span></a> 0) ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> 0) ; [| <span class="id" type="tactic">assumption</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> , <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> ; <span class="id" type="tactic">symmetry</span> ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt_eq"><span class="id" type="lemma">derive_pt_eq</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_pt_lim_const"><span class="id" type="lemma">derivable_pt_lim_const</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_const"><span class="id" type="lemma">C_infty_const</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">c</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#c"><span class="id" type="variable">c</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">c</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span> ; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_const"><span class="id" type="lemma">derivable_const</span></a> <span class="id" type="var">c</span>) ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> 0).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="tactic">symmetry</span> ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt_eq"><span class="id" type="lemma">derive_pt_eq</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_pt_lim_const"><span class="id" type="lemma">derivable_pt_lim_const</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_zero"><span class="id" type="lemma">C_infty_zero</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_id"><span class="id" type="lemma">C_infty_id</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#id"><span class="id" type="definition">id</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span> ; <span class="id" type="var">reg</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_id"><span class="id" type="lemma">derivable_id</span></a> ;<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> 1).<br/>
+&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="tactic">symmetry</span> ;<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt_eq"><span class="id" type="lemma">derive_pt_eq</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_pt_lim_id"><span class="id" type="lemma">derivable_pt_lim_id</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_const"><span class="id" type="lemma">C_infty_const</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_monomial"><span class="id" type="lemma">C_infty_monomial</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">d</span> <span class="id" type="var">a</span>,  <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#Rmult"><span class="id" type="axiom">Rmult</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#a"><span class="id" type="variable">a</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rpow_def.html#pow"><span class="id" type="definition">pow</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#d"><span class="id" type="variable">d</span></a>)).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">d</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">d</span> ; <span class="id" type="tactic">intros</span> <span class="id" type="var">a</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#fct_cte"><span class="id" type="definition">fct_cte</span></a> <span class="id" type="var">a</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span> ; <span class="id" type="var">ring_simplify</span> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_const"><span class="id" type="lemma">C_infty_const</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>; <span class="id" type="tactic">intro</span>; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">pr</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable"><span class="id" type="definition">derivable</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> ⇒ (<span class="id" type="var">a</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#:R_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">d</span>)%<span class="id" type="var">R</span>)) <span class="id" type="tactic">by</span> <span class="id" type="var">reg</span> ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">pr</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ (<span class="id" type="var">a</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">d</span>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rpow_def.html#pow"><span class="id" type="definition">pow</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#x"><span class="id" type="variable">x</span></a> <span class="id" type="var">d</span>)%<span class="id" type="var">R</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">pose</span> (<span class="id" type="var">fmod</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#mult_real_fct"><span class="id" type="definition">mult_real_fct</span></a> <span class="id" type="var">a</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">x0</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> ⇒ (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#x0"><span class="id" type="variable">x0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#:R_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">d</span>)%<span class="id" type="var">R</span>)) ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">transitivity</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt"><span class="id" type="definition">derive_pt</span></a> <span class="id" type="var">_</span> <span class="id" type="var">x</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_pt_scal"><span class="id" type="lemma">derivable_pt_scal</span></a> <span class="id" type="var">_</span> <span class="id" type="var">a</span> <span class="id" type="var">x</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_pt_pow"><span class="id" type="lemma">derivable_pt_pow</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">d</span>) <span class="id" type="var">_</span>))).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#pr_nu"><span class="id" type="lemma">pr_nu</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt_scal"><span class="id" type="lemma">derive_pt_scal</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#Rmult_assoc"><span class="id" type="axiom">Rmult_assoc</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rmult_eq_compat_l"><span class="id" type="lemma">Rmult_eq_compat_l</span></a> ;<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt_pow"><span class="id" type="lemma">derive_pt_pow</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">eapply</span> <span class="id" type="var">IHd</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Stdlib's trigonometric functions 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_cos_sin"><span class="id" type="lemma">C_cos_sin</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C"><span class="id" type="definition">C</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#sin"><span class="id" type="definition">sin</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:type_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C"><span class="id" type="definition">C</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#cos"><span class="id" type="definition">cos</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:type_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C"><span class="id" type="definition">C</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#n"><span class="id" type="variable">n</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#sin"><span class="id" type="definition">sin</span></a>)%<span class="id" type="var">F</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#:type_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C"><span class="id" type="definition">C</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#n"><span class="id" type="variable">n</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#cos"><span class="id" type="definition">cos</span></a>)%<span class="id" type="var">F</span>.<br/>
+<span class="id" type="tactic">intro</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">repeat</span> <span class="id" type="tactic">split</span>; <span class="id" type="tactic">constructor</span>; <span class="id" type="var">reg</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">IHn</span> <span class="id" type="keyword">as</span> [[[<span class="id" type="var">IHs</span> <span class="id" type="var">IHc</span>] <span class="id" type="var">IHns</span>] <span class="id" type="var">IHnc</span>].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">repeat</span> <span class="id" type="tactic">split</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_reg.html#derivable_sin"><span class="id" type="lemma">derivable_sin</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#cos"><span class="id" type="definition">cos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_reg.html#derivable_cos"><span class="id" type="lemma">derivable_cos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#sin"><span class="id" type="definition">sin</span></a>)%<span class="id" type="var">F</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">dns</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable"><span class="id" type="definition">derivable</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#sin"><span class="id" type="definition">sin</span></a>)) <span class="id" type="tactic">by</span> <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">dns</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#cos"><span class="id" type="definition">cos</span></a>)%<span class="id" type="var">F</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">dnc</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable"><span class="id" type="definition">derivable</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:'-'_x"><span class="id" type="notation">-</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#cos"><span class="id" type="definition">cos</span></a>)) <span class="id" type="tactic">by</span> <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> <span class="id" type="var">dnc</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#sin"><span class="id" type="definition">sin</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="var">reg</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_sin"><span class="id" type="lemma">C_infty_sin</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#sin"><span class="id" type="definition">sin</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intro</span> ; <span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_cos_sin"><span class="id" type="lemma">C_cos_sin</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_cos"><span class="id" type="lemma">C_infty_cos</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#cos"><span class="id" type="definition">cos</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intro</span> ; <span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_cos_sin"><span class="id" type="lemma">C_cos_sin</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Stdlib's exponential 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C_infty_exp"><span class="id" type="lemma">C_infty_exp</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#exp"><span class="id" type="definition">exp</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable_continuous"><span class="id" type="lemma">derivable_continuous</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis4.html#derivable_exp"><span class="id" type="lemma">derivable_exp</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_S"><span class="id" type="constructor">C_S</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis4.html#derivable_exp"><span class="id" type="lemma">derivable_exp</span></a>) ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#C_ext"><span class="id" type="lemma">C_ext</span></a> <span class="id" type="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rtrigo_def.html#exp"><span class="id" type="definition">exp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">rewrite</span> &lt;- (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis4.html#derive_pt_exp"><span class="id" type="lemma">derive_pt_exp</span></a> <span class="id" type="var">x</span>) ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis4.html#pr_nu_var"><span class="id" type="lemma">pr_nu_var</span></a> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHn</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Power series 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="D_infty_Rpser"><span class="id" type="lemma">D_infty_Rpser</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a>) (<span class="id" type="var">Rho</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#An"><span class="id" type="variable">An</span></a>),<br/>
+&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_infty"><span class="id" type="definition">D_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#Rho"><span class="id" type="variable">Rho</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">rho</span> <span class="id" type="var">n</span> ; <span class="id" type="var">revert</span> <span class="id" type="var">rho</span> ; <span class="id" type="var">revert</span> <span class="id" type="var">An</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">Rho</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_S"><span class="id" type="constructor">D_S</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#derivable_sum"><span class="id" type="lemma">derivable_sum</span></a> <span class="id" type="var">An</span> <span class="id" type="var">Rho</span>) ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#D_ext"><span class="id" type="lemma">D_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#sum_derive"><span class="id" type="definition">sum_derive</span></a> <span class="id" type="var">An</span> <span class="id" type="var">Rho</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">x</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive_pt_eq_0"><span class="id" type="lemma">derive_pt_eq_0</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#derivable_pt_lim_sum"><span class="id" type="lemma">derivable_pt_lim_sum</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHn</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="D_Rball_infty_Rpser"><span class="id" type="lemma">D_Rball_infty_Rpser</span></a>: <span class="id" type="keyword">∀</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> (<span class="id" type="var">rho</span>: <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#r"><span class="id" type="variable">r</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_Rball_infty"><span class="id" type="definition">D_Rball_infty</span></a> 0 <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#r"><span class="id" type="variable">r</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#rho"><span class="id" type="variable">rho</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">rho</span> <span class="id" type="var">n</span> ; <span class="id" type="var">revert</span> <span class="id" type="var">rho</span> ; <span class="id" type="var">revert</span> <span class="id" type="var">r</span> ; <span class="id" type="var">revert</span> <span class="id" type="var">An</span> ;<br/>
+&nbsp;<span class="id" type="tactic">induction</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">rho</span>.<br/>
+&nbsp;<span class="id" type="tactic">constructor</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#Db_S"><span class="id" type="constructor">Db_S</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#derivable_Rball_sum_r"><span class="id" type="lemma">derivable_Rball_sum_r</span></a> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">rho</span>).<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_facts.html#D_Rball_ext"><span class="id" type="lemma">D_Rball_ext</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#sum_r_derive"><span class="id" type="definition">sum_r_derive</span></a> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">rho</span>).<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">x_in</span> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_derivability.html#derivable_pt_lim_in_derive_Rball"><span class="id" type="lemma">derivable_pt_lim_in_derive_Rball</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#derivable_pt_lim_in_sum_r"><span class="id" type="lemma">derivable_pt_lim_in_sum_r</span></a> ; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHn</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Handy abstractions: a function together with the proof
+that it is C_infty 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cinfty_zero"><span class="id" type="definition">Cinfty_zero</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#Cinfty"><span class="id" type="definition">Cinfty</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#existT"><span class="id" type="constructor">existT</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_zero"><span class="id" type="lemma">C_infty_zero</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_const"><span class="id" type="lemma">C_infty_const</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_id"><span class="id" type="lemma">C_infty_id</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_monomial"><span class="id" type="lemma">C_infty_monomial</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_sin"><span class="id" type="lemma">C_infty_sin</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_cos"><span class="id" type="lemma">C_infty_cos</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#C_infty_exp"><span class="id" type="lemma">C_infty_exp</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+<span class="id" type="keyword">Hint Resolve</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#D_infty_Rpser"><span class="id" type="lemma">D_infty_Rpser</span></a> : <span class="id" type="var">CD_hint</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

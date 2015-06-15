@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Triangular</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Triangular</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_RiemannInt.html#"><span class="id" type="library">Rseries_RiemannInt</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_facts.html#"><span class="id" type="library">Rseries_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rtactic.html#"><span class="id" type="library">Rtactic</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#"><span class="id" type="library">Rsequence_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="triangle"><span class="id" type="definition">triangle</span></a> <span class="id" type="var">n</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> 2.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="triangle_sum"><span class="id" type="lemma">triangle_sum</span></a> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">induction</span> 0.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>; <span class="id" type="tactic">field</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.PartSum.html#tech5"><span class="id" type="lemma">tech5</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">elim_ident</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">field</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="triangle_non_negative"><span class="id" type="lemma">triangle_non_negative</span></a> <span class="id" type="var">n</span> : 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;<span class="id" type="var">INR_solve</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="triangle_positive"><span class="id" type="lemma">triangle_positive</span></a> <span class="id" type="var">n</span> : 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;<span class="id" type="var">INR_solve</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_consecutive_triangle"><span class="id" type="lemma">sum_consecutive_triangle</span></a> <span class="id" type="var">n</span> : <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;<span class="id" type="var">elim_ident</span>.<br/>
+&nbsp;<span class="id" type="tactic">field</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="difference_consecutive_triangle"><span class="id" type="lemma">difference_consecutive_triangle</span></a> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#:R_scope:x_'²'"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#:R_scope:x_'²'"><span class="id" type="notation">)²</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> "²", <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;<span class="id" type="var">elim_ident</span>.<br/>
+&nbsp;<span class="id" type="tactic">field</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_triangular_tetrahedral"><span class="id" type="lemma">sum_triangular_tetrahedral</span></a> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'/'_x"><span class="id" type="notation">/</span></a> 6.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">induction</span> 0.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">field</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.PartSum.html#tech5"><span class="id" type="lemma">tech5</span></a>, <span class="id" type="var">IHn</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">elim_ident</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">field</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="inv_snssn"><span class="id" type="definition">inv_snssn</span></a> <span class="id" type="var">n</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="inv_sn"><span class="id" type="definition">inv_sn</span></a> <span class="id" type="var">n</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="diff_inv_snssn"><span class="id" type="lemma">diff_inv_snssn</span></a> <span class="id" type="var">n</span> : <a class="idref" href="Coqtail.Reals.Triangular.html#inv_snssn"><span class="id" type="definition">inv_snssn</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a>, <a class="idref" href="Coqtail.Reals.Triangular.html#inv_snssn"><span class="id" type="definition">inv_snssn</span></a>.<br/>
+&nbsp;<span class="id" type="var">elim_ident</span>.<br/>
+&nbsp;<span class="id" type="tactic">field</span>.<br/>
+&nbsp;<span class="id" type="var">INR_solve</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_inv_snssn"><span class="id" type="lemma">sum_inv_snssn</span></a> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_snssn"><span class="id" type="definition">inv_snssn</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 1 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">induction</span> 0.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">compute</span>; <span class="id" type="tactic">field</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Reals.Triangular.html#diff_inv_snssn"><span class="id" type="lemma">diff_inv_snssn</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">ring</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="inv_sn_cv_0"><span class="id" type="lemma">inv_sn_cv_0</span></a> : <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a> 0.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">e</span> <span class="id" type="var">epos</span>.<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">upepos</span> : (0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.ZArith.BinInt.html#:Z_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#up"><span class="id" type="axiom">up</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <span class="id" type="var">e</span>))%<span class="id" type="var">Z</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#lt_IZR"><span class="id" type="lemma">lt_IZR</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#Rlt_trans"><span class="id" type="axiom">Rlt_trans</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;2:<span class="id" type="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#archimed"><span class="id" type="axiom">archimed</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a><span class="id" type="var">e</span>)).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> ×.<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">upenneg</span> : (0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.ZArith.BinInt.html#:Z_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#up"><span class="id" type="axiom">up</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <span class="id" type="var">e</span>))%<span class="id" type="var">Z</span>) <span class="id" type="tactic">by</span> <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> ×.<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#IZN"><span class="id" type="lemma">IZN</span></a> <span class="id" type="var">_</span> <span class="id" type="var">upenneg</span>) <span class="id" type="keyword">as</span> (<span class="id" type="var">N</span>, <span class="id" type="var">HN</span>).<br/>
+&nbsp;<span class="id" type="tactic">∃</span> <span class="id" type="var">N</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">Hn</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#R_dist"><span class="id" type="definition">R_dist</span></a>, <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rminus_0_r"><span class="id" type="lemma">Rminus_0_r</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Reals.Rtactic.html#Rabs_Rinv_pos"><span class="id" type="lemma">Rabs_Rinv_pos</span></a>; [ | <span class="id" type="var">INR_solve</span> ].<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rinv_involutive"><span class="id" type="lemma">Rinv_involutive</span></a> <span class="id" type="var">e</span>); <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> ×.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rinv_lt_contravar"><span class="id" type="lemma">Rinv_lt_contravar</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rmult_lt_0_compat"><span class="id" type="lemma">Rmult_lt_0_compat</span></a>; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> ×.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_lt_trans"><span class="id" type="lemma">Rle_lt_trans</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#INR"><span class="id" type="definition">INR</span></a> <span class="id" type="var">n</span>); [ | <span class="id" type="var">INR_solve</span> ].<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_trans"><span class="id" type="lemma">Rle_trans</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#IZR"><span class="id" type="definition">IZR</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#up"><span class="id" type="axiom">up</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <span class="id" type="var">e</span>))).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Raxioms.html#archimed"><span class="id" type="axiom">archimed</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <span class="id" type="var">e</span>)).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">HN</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#INR_IZR_INZ"><span class="id" type="lemma">INR_IZR_INZ</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="var">INR_solve</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="ser_cv_inv_snssn"><span class="id" type="lemma">ser_cv_inv_snssn</span></a> : <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Rser_cv"><span class="id" type="definition">Rser_cv</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_snssn"><span class="id" type="definition">inv_snssn</span></a> 1.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">replace</span> 1 <span class="id" type="keyword">with</span> (1 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> 0) <span class="id" type="tactic">by</span> <span class="id" type="tactic">ring</span>.<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_base_facts.html#Rseq_cv_eq_compat"><span class="id" type="lemma">Rseq_cv_eq_compat</span></a>.<br/>
+&nbsp;&nbsp;2:<span class="id" type="tactic">apply</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_cv_facts.html#Rseq_cv_minus_compat"><span class="id" type="lemma">Rseq_cv_minus_compat</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> ⇒ 1) (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn"><span class="id" type="definition">inv_sn</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_minus"><span class="id" type="definition">Rseq_minus</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_shift"><span class="id" type="definition">Rseq_shift</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Triangular.html#sum_inv_snssn"><span class="id" type="lemma">sum_inv_snssn</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_cv_facts.html#Rseq_constant_cv"><span class="id" type="lemma">Rseq_constant_cv</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#Rseq_cv_shift_compat_reciprocal"><span class="id" type="lemma">Rseq_cv_shift_compat_reciprocal</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_sn_cv_0"><span class="id" type="lemma">inv_sn_cv_0</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_reciprocal_triangular"><span class="id" type="lemma">sum_reciprocal_triangular</span></a> : <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Rser_cv"><span class="id" type="definition">Rser_cv</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#n"><span class="id" type="variable">n</span></a>)) 2.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" type="tactic">replace</span> 2 <span class="id" type="keyword">with</span> (2 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'*'_x"><span class="id" type="notation">×</span></a> 1) <span class="id" type="tactic">by</span> (<span class="id" type="tactic">compute</span>; <span class="id" type="tactic">field</span>).<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_base_facts.html#Rseq_cv_eq_compat"><span class="id" type="lemma">Rseq_cv_eq_compat</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_mult"><span class="id" type="definition">Rseq_mult</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_constant"><span class="id" type="definition">Rseq_constant</span></a> 2) (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#sum_f_R0"><span class="id" type="definition">sum_f_R0</span></a> <a class="idref" href="Coqtail.Reals.Triangular.html#inv_snssn"><span class="id" type="definition">inv_snssn</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_mult"><span class="id" type="definition">Rseq_mult</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_inv"><span class="id" type="definition">Rseq_inv</span></a>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_constant"><span class="id" type="definition">Rseq_constant</span></a>, <a class="idref" href="Coqtail.Reals.Triangular.html#inv_snssn"><span class="id" type="definition">inv_snssn</span></a>, <a class="idref" href="Coqtail.Reals.Triangular.html#triangle"><span class="id" type="definition">triangle</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.PartSum.html#scal_sum"><span class="id" type="lemma">scal_sum</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_sums_facts.html#Rseq_sum_ext"><span class="id" type="lemma">Rseq_sum_ext</span></a>; <span class="id" type="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">elim_ident</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">field</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="var">INR_solve</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_cv_facts.html#Rseq_cv_mult_compat"><span class="id" type="lemma">Rseq_cv_mult_compat</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Triangular.html#ser_cv_inv_snssn"><span class="id" type="lemma">ser_cv_inv_snssn</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

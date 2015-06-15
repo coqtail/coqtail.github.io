@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Fresh.Inhabited.Choice_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Fresh.Inhabited.Choice_facts</h1>
+
+<div class="code">
+<span class="id" type="keyword">Axiom</span> <a name="choice"><span class="id" type="axiom">choice</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> (<span class="id" type="var">B</span> : <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Type</span>), (<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#inhabited"><span class="id" type="inductive">inhabited</span></a> (<a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#x"><span class="id" type="variable">x</span></a>)) → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#inhabited"><span class="id" type="inductive">inhabited</span></a> (<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#x"><span class="id" type="variable">x</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="epsilon"><span class="id" type="definition">epsilon</span></a> := <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span> (<span class="id" type="var">B</span> : <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a> → <span class="id" type="keyword">Prop</span>), (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#x"><span class="id" type="variable">x</span></a>) → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_'|'_x_'}'"><span class="id" type="notation">{</span></a><span class="id" type="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_'|'_x_'}'"><span class="id" type="notation">|</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#B"><span class="id" type="variable">B</span></a> <span class="id" type="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_'|'_x_'}'"><span class="id" type="notation">}</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="T"><span class="id" type="definition">T</span></a> <span class="id" type="var">A</span> := <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#epsilon"><span class="id" type="definition">epsilon</span></a> → <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="U"><span class="id" type="definition">U</span></a> <span class="id" type="var">A</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#inhabited"><span class="id" type="inductive">inhabited</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="U_T"><span class="id" type="lemma">U_T</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span>, <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#T"><span class="id" type="definition">T</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#U"><span class="id" type="definition">U</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">A</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#T"><span class="id" type="definition">T</span></a>, <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#U"><span class="id" type="definition">U</span></a> <span class="id" type="keyword">in</span> ×.<br/>
+<span class="id" type="tactic">assert</span> (<span class="id" type="var">Hi</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#inhabited"><span class="id" type="inductive">inhabited</span></a> ((<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#inhabited"><span class="id" type="inductive">inhabited</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#epsilon"><span class="id" type="definition">epsilon</span></a>) → <span class="id" type="var">A</span>)).<br/>
+<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#choice"><span class="id" type="axiom">choice</span></a>; <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">intros</span> [<span class="id" type="var">Hi</span>]; <span class="id" type="tactic">constructor</span>; <span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">Hi</span> <span class="id" type="keyword">as</span> [<span class="id" type="var">Hi</span>]; <span class="id" type="tactic">constructor</span>; <span class="id" type="tactic">apply</span> <span class="id" type="var">Hi</span>.<br/>
+<span class="id" type="tactic">clear</span>; <span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#epsilon"><span class="id" type="definition">epsilon</span></a>.<br/>
+<span class="id" type="tactic">apply</span> (<a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#choice"><span class="id" type="axiom">choice</span></a> <span class="id" type="keyword">Type</span>); <span class="id" type="tactic">intros</span> <span class="id" type="var">A</span>; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#choice"><span class="id" type="axiom">choice</span></a>; <span class="id" type="tactic">intros</span> <span class="id" type="var">B</span>; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#choice"><span class="id" type="axiom">choice</span></a>.<br/>
+<span class="id" type="tactic">intros</span> [<span class="id" type="var">x</span> <span class="id" type="var">Hx</span>]; <span class="id" type="tactic">constructor</span>; <span class="id" type="tactic">eauto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="T_U"><span class="id" type="lemma">T_U</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">A</span>, <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#U"><span class="id" type="definition">U</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#T"><span class="id" type="definition">T</span></a> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#A"><span class="id" type="variable">A</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">A</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#T"><span class="id" type="definition">T</span></a>, <a class="idref" href="Coqtail.Fresh.Inhabited.Choice_facts.html#U"><span class="id" type="definition">U</span></a> <span class="id" type="keyword">in</span> *; <span class="id" type="tactic">intros</span> <span class="id" type="var">Heps</span>.<br/>
+<span class="id" type="tactic">destruct</span> (<span class="id" type="var">Heps</span> <span class="id" type="var">A</span> (<span class="id" type="keyword">fun</span> <span class="id" type="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#True"><span class="id" type="inductive">True</span></a>)); <span class="id" type="tactic">auto</span>.<br/>
+<span class="id" type="tactic">destruct</span> <span class="id" type="var">H</span>; <span class="id" type="tactic">eauto</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

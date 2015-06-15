@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Arith.Ninductions</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Arith.Ninductions</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Arith.html#"><span class="id" type="library">Arith</span></a> <a class="idref" href="Coqtail.mytheories.MyNat.html#"><span class="id" type="library">MyNat</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="nat_strong"><span class="id" type="lemma">nat_strong</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">P</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Prop</span>), <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#O"><span class="id" type="constructor">O</span></a> →<br/>
+&nbsp;(<span class="id" type="keyword">∀</span> <span class="id" type="var">N</span>, (<span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, (<a class="idref" href="Coqtail.Arith.Ninductions.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#N"><span class="id" type="variable">N</span></a>)%<span class="id" type="var">nat</span> → <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#n"><span class="id" type="variable">n</span></a>) → <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#N"><span class="id" type="variable">N</span></a>)) → <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">P</span> <span class="id" type="var">PO</span> <span class="id" type="var">PS</span> ; <span class="id" type="tactic">assert</span> (<span class="id" type="var">H</span> : <span class="id" type="keyword">∀</span> <span class="id" type="var">N</span> <span class="id" type="var">n</span>, (<a class="idref" href="Coqtail.Arith.Ninductions.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#N"><span class="id" type="variable">N</span></a>)%<span class="id" type="var">nat</span> → <span class="id" type="var">P</span> <a class="idref" href="Coqtail.Arith.Ninductions.html#n"><span class="id" type="variable">n</span></a>).<br/>
+&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">N</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">N</span> ; <span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">nleN</span> ; <span class="id" type="tactic">inversion_clear</span> <span class="id" type="var">nleN</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">PS</span>, <span class="id" type="var">IHN</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">IHN</span> ; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;<span class="id" type="tactic">intro</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">apply</span> <span class="id" type="var">H</span> <span class="id" type="keyword">with</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="nat_ind2"><span class="id" type="lemma">nat_ind2</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">P</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Prop</span>), <br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#O"><span class="id" type="constructor">O</span></a> → <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#O"><span class="id" type="constructor">O</span></a>) → (<span class="id" type="keyword">∀</span> <span class="id" type="var">m</span>, <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#m"><span class="id" type="variable">m</span></a> → <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#m"><span class="id" type="variable">m</span></a>))) → <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Arith.Ninductions.html#P"><span class="id" type="variable">P</span></a> <a class="idref" href="Coqtail.Arith.Ninductions.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">P</span> <span class="id" type="var">P0</span> <span class="id" type="var">P1</span> <span class="id" type="var">PSS</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Arith.Ninductions.html#nat_strong"><span class="id" type="lemma">nat_strong</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> [] <span class="id" type="var">HN</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">PSS</span>, <span class="id" type="var">HN</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Le.html#le_n_Sn"><span class="id" type="lemma">le_n_Sn</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

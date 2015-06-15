@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Rpser.Rpser_sums</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Rpser.Rpser_sums</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#"><span class="id" type="library">Rinterval</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#"><span class="id" type="library">Rpser_def</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#"><span class="id" type="library">Rpser_base_facts</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_cv_facts.html#"><span class="id" type="library">Rpser_cv_facts</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+In this library, we define the sum of a power serie with respect to the
+3 notions of convergence radius that we used until now.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> weaksum_r sums a power serie on a disk that is smaller than the maximal
+
+</li>
+</ul>
+convergence disk
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> sum_r sums a power serie on its (finite) convergence disk
+
+</li>
+<li> sum sums a power serie on its (infinite) convergence disk
+
+</li>
+</ul>
+In all the cases, the function outputed is proved to be unique and is
+exactly the one that equals the sum of the power serie inside the cv disk
+and is equal to 0 outside. 
+<div class="paragraph"> </div>
+
+<a name="lab90"></a><h1 class="section">Definition of weaksum_r</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="weaksum_r"><span class="id" type="definition">weaksum_r</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Cv_radius_weak"><span class="id" type="definition">Cv_radius_weak</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Rho</span> <span class="id" type="var">x</span>.<br/>
+&nbsp;<span class="id" type="tactic">case</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_le_dec"><span class="id" type="lemma">Rlt_le_dec</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">r</span>) ; <span class="id" type="tactic">intro</span> <span class="id" type="var">x_bd</span>.<br/>
+&nbsp;<span class="id" type="tactic">elim</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_cv_facts.html#Rpser_abel"><span class="id" type="lemma">Rpser_abel</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Rho</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>) ; <span class="id" type="tactic">intros</span> <span class="id" type="var">y</span> <span class="id" type="var">Hy</span> ; <span class="id" type="tactic">exact</span> <span class="id" type="var">y</span>.<br/>
+&nbsp;<span class="id" type="tactic">exact</span> 0.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof that it is really the sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Cv_radius_weak"><span class="id" type="definition">Cv_radius_weak</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> → <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Rpser"><span class="id" type="definition">Rpser</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr"><span class="id" type="variable">Pr</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span> <span class="id" type="var">x_bd</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> ; <span class="id" type="tactic">case</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_le_dec"><span class="id" type="lemma">Rlt_le_dec</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">r</span>) ; <span class="id" type="tactic">intro</span> <span class="id" type="var">s</span>.<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_cv_facts.html#Rpser_abel"><span class="id" type="lemma">Rpser_abel</span></a> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span> <span class="id" type="var">s</span>) <span class="id" type="keyword">as</span> (<span class="id" type="var">l</span>,<span class="id" type="var">Hl</span>) ; <span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False_ind"><span class="id" type="definition">False_ind</span></a> ; <span class="id" type="tactic">fourier</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof that the sum is unique 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="weaksum_r_unique"><span class="id" type="lemma">weaksum_r_unique</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Cv_radius_weak"><span class="id" type="definition">Cv_radius_weak</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> → <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr1"><span class="id" type="variable">Pr1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr2"><span class="id" type="variable">Pr2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span> <span class="id" type="var">x_bd</span> ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T1</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T2</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#Rpser_unique"><span class="id" type="lemma">Rpser_unique</span></a> ; <span class="id" type="var">eassumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="weaksum_r_unique_strong"><span class="id" type="lemma">weaksum_r_unique_strong</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr1</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Cv_radius_weak"><span class="id" type="definition">Cv_radius_weak</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r1"><span class="id" type="variable">r1</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Pr2</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Cv_radius_weak"><span class="id" type="definition">Cv_radius_weak</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r2"><span class="id" type="variable">r2</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r1"><span class="id" type="variable">r1</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r2"><span class="id" type="variable">r2</span></a> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr1"><span class="id" type="variable">Pr1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr2"><span class="id" type="variable">Pr2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span> <span class="id" type="var">x_bd1</span> <span class="id" type="var">x_bd2</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T1</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd1</span>) ;<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T2</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd2</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#Rpser_unique"><span class="id" type="lemma">Rpser_unique</span></a> ; <span class="id" type="var">eassumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab91"></a><h1 class="section">Definition of sum_r</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="sum_r"><span class="id" type="definition">sum_r</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span>.<br/>
+&nbsp;<span class="id" type="tactic">case</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_le_dec"><span class="id" type="lemma">Rlt_le_dec</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">r</span>) ; <span class="id" type="tactic">intro</span> <span class="id" type="var">x_bd</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">rho</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Cv_radius_weak"><span class="id" type="definition">Cv_radius_weak</span></a> <span class="id" type="var">An</span> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#middle"><span class="id" type="definition">middle</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">r</span>)).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <span class="id" type="var">Pr</span>; <span class="id" type="tactic">split</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rle_trans"><span class="id" type="lemma">Rle_trans</span></a> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs_pos"><span class="id" type="lemma">Rabs_pos</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">left</span> ; <span class="id" type="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#proj1"><span class="id" type="lemma">proj1</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#middle_is_in_the_middle"><span class="id" type="lemma">middle_is_in_the_middle</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>)).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#proj2"><span class="id" type="lemma">proj2</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#middle_is_in_the_middle"><span class="id" type="lemma">middle_is_in_the_middle</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>)).<br/>
+&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <span class="id" type="var">An</span> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#middle"><span class="id" type="definition">middle</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">r</span>) <span class="id" type="var">rho</span> <span class="id" type="var">x</span>).<br/>
+&nbsp;<span class="id" type="tactic">exact</span> 0.<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof that it is really the sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_r_sums"><span class="id" type="lemma">sum_r_sums</span></a> : <span class="id" type="keyword">∀</span>  (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> → <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Rpser"><span class="id" type="definition">Rpser</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr"><span class="id" type="variable">Pr</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span> <span class="id" type="var">x_ub</span>.<br/>
+&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> ; <span class="id" type="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#Rlt_le_dec"><span class="id" type="lemma">Rlt_le_dec</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">x</span>) <span class="id" type="var">r</span>) <span class="id" type="keyword">as</span> [<span class="id" type="var">x_bd</span> | <span class="id" type="var">x_nbd</span>].<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#proj1"><span class="id" type="lemma">proj1</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#middle_is_in_the_middle"><span class="id" type="lemma">middle_is_in_the_middle</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>)).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#False_ind"><span class="id" type="definition">False_ind</span></a> ; <span class="id" type="tactic">fourier</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof that the sum is unique 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_r_unique"><span class="id" type="lemma">sum_r_unique</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> → <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr1"><span class="id" type="variable">Pr1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr2"><span class="id" type="variable">Pr2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span> <span class="id" type="var">x_bd</span> ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T1</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r_sums"><span class="id" type="lemma">sum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T2</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r_sums"><span class="id" type="lemma">sum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#Rpser_unique"><span class="id" type="lemma">Rpser_unique</span></a> ; <span class="id" type="var">eassumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_r_unique_strong"><span class="id" type="lemma">sum_r_unique_strong</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r1</span> <span class="id" type="var">r2</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr1</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r1"><span class="id" type="variable">r1</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" type="var">Pr2</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r2"><span class="id" type="variable">r2</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r1"><span class="id" type="variable">r1</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r2"><span class="id" type="variable">r2</span></a> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r1"><span class="id" type="variable">r1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr1"><span class="id" type="variable">Pr1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#r2"><span class="id" type="variable">r2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr2"><span class="id" type="variable">Pr2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r1</span> <span class="id" type="var">r2</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span> <span class="id" type="var">x_bd1</span> <span class="id" type="var">x_bd2</span> ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T1</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r_sums"><span class="id" type="lemma">sum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd1</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T2</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r_sums"><span class="id" type="lemma">sum_r_sums</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">_</span> <span class="id" type="var">x_bd2</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#Rpser_unique"><span class="id" type="lemma">Rpser_unique</span></a> ; <span class="id" type="var">eassumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab92"></a><h1 class="section">Definition of sum</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="sum"><span class="id" type="definition">sum</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr</span> <span class="id" type="var">r</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r"><span class="id" type="definition">weaksum_r</span></a> <span class="id" type="var">An</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">r</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a>1) (<span class="id" type="var">Pr</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbasic_fun.html#Rabs"><span class="id" type="definition">Rabs</span></a> <span class="id" type="var">r</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'+'_x"><span class="id" type="notation">+</span></a> 1)) <span class="id" type="var">r</span>).<br/>
+<span class="id" type="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof that it is really the sum 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_sums"><span class="id" type="lemma">sum_sums</span></a> : <span class="id" type="keyword">∀</span>  (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#Rpser"><span class="id" type="definition">Rpser</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr"><span class="id" type="variable">Pr</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr</span> <span class="id" type="var">x</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#weaksum_r_sums"><span class="id" type="lemma">weaksum_r_sums</span></a> ; <span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proof that the sum is unique 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="sum_unique"><span class="id" type="lemma">sum_unique</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr1"><span class="id" type="variable">Pr1</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#Pr2"><span class="id" type="variable">Pr2</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span> ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T1</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_sums"><span class="id" type="lemma">sum_sums</span></a>  <span class="id" type="var">_</span> <span class="id" type="var">Pr1</span> <span class="id" type="var">x</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">T2</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_sums"><span class="id" type="lemma">sum_sums</span></a>  <span class="id" type="var">_</span> <span class="id" type="var">Pr2</span> <span class="id" type="var">x</span>) ;<br/>
+&nbsp;<span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#Rpser_unique"><span class="id" type="lemma">Rpser_unique</span></a> ; <span class="id" type="var">eassumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

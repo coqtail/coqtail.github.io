@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Rseries.Rseries_def</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Rseries.Rseries_def</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Common definitions of real series, based on real sequences definitions. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#"><span class="id" type="library">Rsequence_def</span></a>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">Rseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">Un</span> : <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab37"></a><h1 class="section">Convergence of series</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_cv"><span class="id" type="definition">Rser_cv</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_abs_cv"><span class="id" type="definition">Rser_abs_cv</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#:Rseq_scope:'|'_x_'|'"><span class="id" type="notation">|</span></a><a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a><a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#:Rseq_scope:'|'_x_'|'"><span class="id" type="notation">|</span></a>)).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_cv_pos_infty"><span class="id" type="definition">Rser_cv_pos_infty</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_pos_infty"><span class="id" type="definition">Rseq_cv_pos_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_cv_neg_infty"><span class="id" type="definition">Rser_cv_neg_infty</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv_neg_infty"><span class="id" type="definition">Rseq_cv_neg_infty</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab38"></a><h1 class="section">Bounds</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_bound_max"><span class="id" type="definition">Rser_bound_max</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_bound_max"><span class="id" type="definition">Rseq_bound_max</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_bound_min"><span class="id" type="definition">Rser_bound_min</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_bound_min"><span class="id" type="definition">Rseq_bound_min</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_bound"><span class="id" type="definition">Rser_bound</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_bound"><span class="id" type="definition">Rseq_bound</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a>).<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_abs_bound"><span class="id" type="definition">Rser_abs_bound</span></a> <span class="id" type="var">Un</span> := <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_bound"><span class="id" type="definition">Rseq_bound</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> (<a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#:Rseq_scope:'|'_x_'|'"><span class="id" type="notation">|</span></a><a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a><a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#:Rseq_scope:'|'_x_'|'"><span class="id" type="notation">|</span></a>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab39"></a><h1 class="section">Remainders of series</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Rser_rem"><span class="id" type="definition">Rser_rem</span></a> (<span class="id" type="var">Un</span> : <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a>) (<span class="id" type="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">Hcv</span> : <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Rser_cv"><span class="id" type="definition">Rser_cv</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#l"><span class="id" type="variable">l</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) :=  (<a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#l"><span class="id" type="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_sum"><span class="id" type="definition">Rseq_sum</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#Un"><span class="id" type="variable">Un</span></a> <a class="idref" href="Coqtail.Reals.Rseries.Rseries_def.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'-'_x"><span class="id" type="notation">)</span></a>)%<span class="id" type="var">R</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

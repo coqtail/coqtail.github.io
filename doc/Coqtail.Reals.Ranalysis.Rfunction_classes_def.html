@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Ranalysis.Rfunction_classes_def</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Ranalysis.Rfunction_classes_def</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rbase.html#"><span class="id" type="library">Rbase</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis.html#"><span class="id" type="library">Ranalysis</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#"><span class="id" type="library">Rinterval</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#"><span class="id" type="library">Ranalysis_def</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Local</span>&nbsp;<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab137"></a><h1 class="section">Being of Class D_n.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="DClass"><span class="id" type="inductive">DClass</span></a> (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <a name="D_0"><span class="id" type="constructor">D_0</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass"><span class="id" type="inductive">DClass</span></a> <span class="id" type="var">f</span> 0<br/>
+&nbsp;&nbsp;| <a name="D_S"><span class="id" type="constructor">D_S</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> (<span class="id" type="var">pr</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable"><span class="id" type="definition">derivable</span></a> <span class="id" type="var">f</span>), <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass"><span class="id" type="inductive">DClass</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> <span class="id" type="var">f</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#pr"><span class="id" type="variable">pr</span></a>) <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> → <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass"><span class="id" type="inductive">DClass</span></a> <span class="id" type="var">f</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="D"><span class="id" type="definition">D</span></a> <span class="id" type="var">n</span> <span class="id" type="var">f</span> := <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass"><span class="id" type="inductive">DClass</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Restriction to a specific Rball. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="DClass_Rball"><span class="id" type="inductive">DClass_Rball</span></a> (<span class="id" type="var">c</span> <span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <a name="Db_0"><span class="id" type="constructor">Db_0</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass_Rball"><span class="id" type="inductive">DClass_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> 0<br/>
+&nbsp;&nbsp;| <a name="Db_S"><span class="id" type="constructor">Db_S</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> (<span class="id" type="var">pr</span> : <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#derivable_Rball"><span class="id" type="definition">derivable_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass_Rball"><span class="id" type="inductive">DClass_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> (<a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#derive_Rball"><span class="id" type="definition">derive_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#pr"><span class="id" type="variable">pr</span></a>) <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass_Rball"><span class="id" type="inductive">DClass_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="D_Rball"><span class="id" type="definition">D_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> := <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#DClass_Rball"><span class="id" type="inductive">DClass_Rball</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Being D_infty 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="D_infty"><span class="id" type="definition">D_infty</span></a> (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) := <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D"><span class="id" type="definition">D</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="D_Rball_infty"><span class="id" type="definition">D_Rball_infty</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> := <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_Rball"><span class="id" type="definition">D_Rball</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Dn"><span class="id" type="definition">Dn</span></a> (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#sigT"><span class="id" type="inductive">sigT</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D"><span class="id" type="definition">D</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Definition</span> <a name="Dn_Rball"><span class="id" type="definition">Dn_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">n</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#sigT"><span class="id" type="inductive">sigT</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_Rball"><span class="id" type="definition">D_Rball</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Dinfty"><span class="id" type="definition">Dinfty</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#sigT"><span class="id" type="inductive">sigT</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_infty"><span class="id" type="definition">D_infty</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab138"></a><h1 class="section">Being of Class C_n</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="CClass"><span class="id" type="inductive">CClass</span></a> (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <a name="C_0"><span class="id" type="constructor">C_0</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#continuity"><span class="id" type="definition">continuity</span></a> <span class="id" type="var">f</span> → <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass"><span class="id" type="inductive">CClass</span></a> <span class="id" type="var">f</span> 0<br/>
+&nbsp;&nbsp;| <a name="C_S"><span class="id" type="constructor">C_S</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> (<span class="id" type="var">pr</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derivable"><span class="id" type="definition">derivable</span></a> <span class="id" type="var">f</span>), <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass"><span class="id" type="inductive">CClass</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> <span class="id" type="var">f</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#pr"><span class="id" type="variable">pr</span></a>) <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> → <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass"><span class="id" type="inductive">CClass</span></a> <span class="id" type="var">f</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="C"><span class="id" type="definition">C</span></a> <span class="id" type="var">n</span> <span class="id" type="var">f</span> := (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass"><span class="id" type="inductive">CClass</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Restriction to a specific Rball. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Inductive</span> <a name="CClass_Rball"><span class="id" type="inductive">CClass_Rball</span></a> (<span class="id" type="var">c</span> <span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <span class="id" type="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <a name="Cb_0"><span class="id" type="constructor">Cb_0</span></a> : <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#continuity_Rball"><span class="id" type="definition">continuity_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> → <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass_Rball"><span class="id" type="inductive">CClass_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> 0<br/>
+&nbsp;&nbsp;| <a name="Cb_S"><span class="id" type="constructor">Cb_S</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> (<span class="id" type="var">pr</span> : <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#derivable_Rball"><span class="id" type="definition">derivable_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass_Rball"><span class="id" type="inductive">CClass_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> (<a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#derive_Rball"><span class="id" type="definition">derive_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#pr"><span class="id" type="variable">pr</span></a>) <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass_Rball"><span class="id" type="inductive">CClass_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="C_Rball"><span class="id" type="definition">C_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">n</span> <span class="id" type="var">f</span> := <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#CClass_Rball"><span class="id" type="inductive">CClass_Rball</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Being C_infty 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="C_infty"><span class="id" type="definition">C_infty</span></a> (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) := <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C"><span class="id" type="definition">C</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="C_Rball_infty"><span class="id" type="definition">C_Rball_infty</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">f</span> := <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_Rball"><span class="id" type="definition">C_Rball</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#f"><span class="id" type="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cn"><span class="id" type="definition">Cn</span></a> (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) : <span class="id" type="keyword">Type</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#sigT"><span class="id" type="inductive">sigT</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C"><span class="id" type="definition">C</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cn_Rball"><span class="id" type="definition">Cn_Rball</span></a> <span class="id" type="var">c</span> <span class="id" type="var">r</span> <span class="id" type="var">n</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#sigT"><span class="id" type="inductive">sigT</span></a> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_Rball"><span class="id" type="definition">C_Rball</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#n"><span class="id" type="variable">n</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="Cinfty"><span class="id" type="definition">Cinfty</span></a> : <span class="id" type="keyword">Type</span> := <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#sigT"><span class="id" type="inductive">sigT</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#C_infty"><span class="id" type="definition">C_infty</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

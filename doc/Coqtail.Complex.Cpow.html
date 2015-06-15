@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Complex.Cpow</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Complex.Cpow</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Export</span> <a class="idref" href="Coqtail.Complex.Cbase.html#"><span class="id" type="library">Cbase</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.omega.Omega.html#"><span class="id" type="library">Omega</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab211"></a><h1 class="section">Power definition on C</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Fixpoint</span> <a name="Cpow"><span class="id" type="definition">Cpow</span></a> (<span class="id" type="var">z</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) {<span class="id" type="keyword">struct</span> <span class="id" type="var">n</span>} : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>  :=<br/>
+<span class="id" type="keyword">match</span> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <span class="id" type="keyword">with</span><br/>
+| 0%<span class="id" type="var">nat</span> ⇒ 1<br/>
+| <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">m</span> ⇒ <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#Cpow"><span class="id" type="definition">Cpow</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <span class="id" type="var">m</span><a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">)</span></a><br/>
+<span class="id" type="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":C_scope:x_'^'_x"><span class="id" type="notation">"</span></a>^" := <a class="idref" href="Coqtail.Complex.Cpow.html#Cpow"><span class="id" type="definition">Cpow</span></a> : <span class="id" type="var">C_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Rewrite lemmas on Cpow 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Cpow_0"><span class="id" type="lemma">Cpow_0</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">z</span>, <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 1.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">complex</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="C0_pow"><span class="id" type="lemma">C0_pow</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, (0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a>)%<span class="id" type="var">nat</span> → 0 <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> 0.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">n_lb</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;<span class="id" type="tactic">inversion</span> <span class="id" type="var">n_lb</span>.<br/>
+&nbsp;<span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;<span class="id" type="tactic">destruct</span> (0 <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <span class="id" type="var">n</span>) ; <span class="id" type="var">CusingR_f</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Cpow_S"><span class="id" type="lemma">Cpow_S</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">z</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) (<span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>), <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span>. <span class="id" type="tactic">simpl</span>. <span class="id" type="tactic">intuition</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Cpow_add"><span class="id" type="lemma">Cpow_add</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">z</span> : <a class="idref" href="Coqtail.Complex.Cdefinitions.html#C"><span class="id" type="definition">C</span></a>) (<span class="id" type="var">n</span> <span class="id" type="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>), <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#m"><span class="id" type="variable">m</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">z</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;<span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">complex</span>.<br/>
+&nbsp;<span class="id" type="tactic">replace</span> (<span class="id" type="var">z</span> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">m</span>)%<span class="id" type="var">nat</span>) <span class="id" type="keyword">with</span> (<span class="id" type="var">z</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <span class="id" type="var">z</span> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> (<span class="id" type="var">n</span><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a><span class="id" type="var">m</span>)%<span class="id" type="var">nat</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn</span>. <span class="id" type="tactic">replace</span> (<span class="id" type="var">z</span> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span>) <span class="id" type="keyword">with</span> (<span class="id" type="var">z</span> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">(</span></a><span class="id" type="var">z</span> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <span class="id" type="var">n</span><a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">)</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">complex</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">complex</span>.<br/>
+&nbsp;<span class="id" type="tactic">replace</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">m</span>)%<span class="id" type="var">nat</span> <span class="id" type="keyword">with</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> (<span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">m</span>))%<span class="id" type="var">nat</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">destruct</span> <span class="id" type="var">n</span>; <span class="id" type="tactic">destruct</span> <span class="id" type="var">m</span> ; <span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">auto</span> <span class="id" type="keyword">with</span> <span class="id" type="var">complex</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Cpow_mul"><span class="id" type="lemma">Cpow_mul</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">z</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span>, <a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#m"><span class="id" type="variable">m</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#z"><span class="id" type="variable">z</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#m"><span class="id" type="variable">m</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">z</span> <span class="id" type="var">n</span> <span class="id" type="var">m</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">m</span>.<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Arith.Mult.html#mult_0_r"><span class="id" type="lemma">mult_0_r</span></a> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;<span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">rewrite</span> &lt;- <span class="id" type="var">IHm</span> ; <span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Coqtail.Complex.Cpow.html#Cpow_add"><span class="id" type="lemma">Cpow_add</span></a> ;<br/>
+&nbsp;<span class="id" type="tactic">replace</span> (<span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#S"><span class="id" type="constructor">S</span></a> <span class="id" type="var">m</span>)%<span class="id" type="var">nat</span> <span class="id" type="keyword">with</span> (<span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <span class="id" type="var">n</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <span class="id" type="var">m</span>)%<span class="id" type="var">nat</span> <span class="id" type="tactic">by</span> <span class="id" type="tactic">ring</span> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="Cpow_mul_distr_l"><span class="id" type="lemma">Cpow_mul_distr_l</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">(</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z2"><span class="id" type="variable">z2</span></a><a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z1"><span class="id" type="variable">z1</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#:C_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#z2"><span class="id" type="variable">z2</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">z1</span> <span class="id" type="var">z2</span> <span class="id" type="var">n</span>; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">simpl</span>; <span class="id" type="var">CusingR_f</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">repeat</span> <span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Complex.Cpow.html#Cpow_S"><span class="id" type="lemma">Cpow_S</span></a>; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Complex.Cbase.html#Cmult_assoc"><span class="id" type="lemma">Cmult_assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- (<a class="idref" href="Coqtail.Complex.Cbase.html#Cmult_assoc"><span class="id" type="lemma">Cmult_assoc</span></a> (<span class="id" type="var">z2</span> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <span class="id" type="var">n</span>) <span class="id" type="var">z1</span> <span class="id" type="var">z2</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> (<a class="idref" href="Coqtail.Complex.Cbase.html#Cmult_comm"><span class="id" type="lemma">Cmult_comm</span></a> (<span class="id" type="var">z2</span> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <span class="id" type="var">n</span>) <span class="id" type="var">z1</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">repeat</span> <span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Complex.Cbase.html#Cmult_assoc"><span class="id" type="lemma">Cmult_assoc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="IRC_pow_compat"><span class="id" type="lemma">IRC_pow_compat</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span> <span class="id" type="var">n</span>, <a class="idref" href="Coqtail.Complex.Cdefinitions.html#IRC"><span class="id" type="definition">IRC</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#:C_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Complex.Cdefinitions.html#IRC"><span class="id" type="definition">IRC</span></a> (<a class="idref" href="Coqtail.Complex.Cpow.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#:R_scope:x_'^'_x"><span class="id" type="notation">^</span></a> <a class="idref" href="Coqtail.Complex.Cpow.html#n"><span class="id" type="variable">n</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">x</span> <span class="id" type="var">n</span> ; <span class="id" type="tactic">induction</span> <span class="id" type="var">n</span>.<br/>
+&nbsp;<span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;<span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">rewrite</span> <span class="id" type="var">IHn</span>.<br/>
+&nbsp;<span class="id" type="var">CusingR_f</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

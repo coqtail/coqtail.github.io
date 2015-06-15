@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Rpser.Rpser_derivative_facts</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Rpser.Rpser_derivative_facts</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a> <a class="idref" href="Coqtail.Reals.Rpow_facts.html#"><span class="id" type="library">Rpow_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a> <a class="idref" href="Coqtail.mytheories.myReals.MyRIneq.html#"><span class="id" type="library">MyRIneq</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Ranalysis_def.html#"><span class="id" type="library">Ranalysis_def</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_def.html#"><span class="id" type="library">Rfunction_def</span></a> <a class="idref" href="Coqtail.Reals.Rextensionality.html#"><span class="id" type="library">Rextensionality</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_facts.html#"><span class="id" type="library">Rsequence_facts</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#"><span class="id" type="library">RFsequence</span></a> <a class="idref" href="Coqtail.Reals.RFsequence_facts.html#"><span class="id" type="library">RFsequence_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#"><span class="id" type="library">Rpser_def</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def_simpl.html#"><span class="id" type="library">Rpser_def_simpl</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_base_facts.html#"><span class="id" type="library">Rpser_base_facts</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_radius_facts.html#"><span class="id" type="library">Rpser_radius_facts</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#"><span class="id" type="library">Rpser_sums</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#"><span class="id" type="library">Rpser_derivative</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#"><span class="id" type="library">Rinterval</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes.html#"><span class="id" type="library">Rfunction_classes</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Nth_derivative_def.html#"><span class="id" type="library">Nth_derivative_def</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Nth_derivative_facts.html#"><span class="id" type="library">Nth_derivative_facts</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab102"></a><h1 class="section">An_nth_deriv is the general term of the nth derivative of sum An.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="nth_derive_Rball_sum_explicit"><span class="id" type="lemma">nth_derive_Rball_sum_explicit</span></a> (<span class="id" type="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>):<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">∀</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">x</span> (<span class="id" type="var">rAn</span>: <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">rAnk</span>: <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_nth_deriv"><span class="id" type="definition">An_nth_deriv</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#k"><span class="id" type="variable">k</span></a>) <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">rdAnk</span>: <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D_Rball"><span class="id" type="definition">D_Rball</span></a> 0 <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#k"><span class="id" type="variable">k</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rAn"><span class="id" type="variable">rAn</span></a>)),<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Rinterval.html#Rball"><span class="id" type="definition">Rball</span></a> 0 <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#x"><span class="id" type="variable">x</span></a> →<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Nth_derivative_def.html#nth_derive_Rball"><span class="id" type="definition">nth_derive_Rball</span></a> 0 <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rAn"><span class="id" type="variable">rAn</span></a>) <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rdAnk"><span class="id" type="variable">rdAnk</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#x"><span class="id" type="variable">x</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_nth_deriv"><span class="id" type="definition">An_nth_deriv</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#k"><span class="id" type="variable">k</span></a>) <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rAnk"><span class="id" type="variable">rAnk</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#x"><span class="id" type="variable">x</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">k</span> ; <span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">r</span> <span class="id" type="var">x</span> <span class="id" type="var">rAn</span> <span class="id" type="var">rAnk</span> <span class="id" type="var">rdAnk</span> <span class="id" type="var">x_in</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rextensionality.html#sum_r_ext"><span class="id" type="lemma">sum_r_ext</span></a> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def_simpl.html#An_nth_deriv_0"><span class="id" type="lemma">An_nth_deriv_0</span></a>.<br/>
+
+<br/>
+&nbsp;<span class="id" type="tactic">simpl</span> ; <span class="id" type="tactic">assert</span> (<span class="id" type="var">rdAn</span>: <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_deriv"><span class="id" type="definition">An_deriv</span></a> <span class="id" type="var">An</span>) <span class="id" type="var">r</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Coqtail.Reals.Rpser.Rpser_radius_facts.html#finite_cv_radius_derivable_compat"><span class="id" type="lemma">finite_cv_radius_derivable_compat</span></a> ; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Reals.Ranalysis.Nth_derivative_facts.html#nth_derive_Rball_ext"><span class="id" type="lemma">nth_derive_Rball_ext</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">g</span> := <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum_r"><span class="id" type="definition">sum_r</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_deriv"><span class="id" type="definition">An_deriv</span></a> <span class="id" type="var">An</span>) <span class="id" type="var">r</span> <span class="id" type="var">rdAn</span>)<br/>
+&nbsp;(<span class="id" type="var">pr2</span> := <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#D_Rball_infty_Rpser"><span class="id" type="lemma">D_Rball_infty_Rpser</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">rdAn</span> <span class="id" type="var">k</span>).<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">rdAnk'</span>: <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#finite_cv_radius"><span class="id" type="definition">finite_cv_radius</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_nth_deriv"><span class="id" type="definition">An_nth_deriv</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_deriv"><span class="id" type="definition">An_deriv</span></a> <span class="id" type="var">An</span>) <span class="id" type="var">k</span>) <span class="id" type="var">r</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Coqtail.Reals.Rpser.Rpser_radius_facts.html#finite_cv_radius_nth_derivable_compat"><span class="id" type="lemma">finite_cv_radius_nth_derivable_compat</span></a> ; <span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Reals.Rextensionality.html#sum_r_ext"><span class="id" type="lemma">sum_r_ext</span></a> <span class="id" type="keyword">with</span> (<span class="id" type="var">rBn</span> := <span class="id" type="var">rdAnk'</span>).<br/>
+&nbsp;<span class="id" type="var">erewrite</span> (<span class="id" type="var">IHk</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">rdAn</span> <span class="id" type="var">rdAnk'</span>) ; [<span class="id" type="tactic">reflexivity</span> | <span class="id" type="tactic">assumption</span>].<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def_simpl.html#An_nth_deriv_S'"><span class="id" type="lemma">An_nth_deriv_S'</span></a>.<br/>
+&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">y</span> <span class="id" type="var">y_in</span> ; <span class="id" type="tactic">rewrite</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#derive_Rball_sum_r"><span class="id" type="lemma">derive_Rball_sum_r</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rextensionality.html#sum_r_ext"><span class="id" type="lemma">sum_r_ext</span></a> ; <span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Lemma</span> <a name="nth_derive_sum_explicit"><span class="id" type="lemma">nth_derive_sum_explicit</span></a> (<span class="id" type="var">k</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>) :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">∀</span> (<span class="id" type="var">An</span> : <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq"><span class="id" type="definition">Rseq</span></a>) (<span class="id" type="var">rAn</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" type="var">rAnk</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_nth_deriv"><span class="id" type="definition">An_nth_deriv</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#An"><span class="id" type="variable">An</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#k"><span class="id" type="variable">k</span></a>))<br/>
+&nbsp;&nbsp;(<span class="id" type="var">rdAnk</span> : <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_def.html#D"><span class="id" type="definition">D</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#k"><span class="id" type="variable">k</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rAn"><span class="id" type="variable">rAn</span></a>)),<br/>
+&nbsp;&nbsp;<a class="idref" href="Coqtail.Reals.Ranalysis.Nth_derivative_def.html#nth_derive"><span class="id" type="definition">nth_derive</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rAn"><span class="id" type="variable">rAn</span></a>) <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rdAnk"><span class="id" type="variable">rdAnk</span></a> <a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_def.html#:Rfun_scope:x_'=='_x"><span class="id" type="notation">==</span></a> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> <span class="id" type="var">_</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative_facts.html#rAnk"><span class="id" type="variable">rAnk</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">induction</span> <span class="id" type="var">k</span> ; <span class="id" type="tactic">intros</span> <span class="id" type="var">An</span> <span class="id" type="var">rAn</span> <span class="id" type="var">rAnk</span> <span class="id" type="var">rdAn</span> <span class="id" type="var">x</span>.<br/>
+&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rextensionality.html#sum_ext"><span class="id" type="lemma">sum_ext</span></a> ; <span class="id" type="tactic">symmetry</span> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def_simpl.html#An_nth_deriv_0"><span class="id" type="lemma">An_nth_deriv_0</span></a>.<br/>
+
+<br/>
+&nbsp;<span class="id" type="tactic">simpl</span>.<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">rdAn'</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_deriv"><span class="id" type="definition">An_deriv</span></a> <span class="id" type="var">An</span>)) <span class="id" type="tactic">by</span><br/>
+&nbsp;&nbsp;(<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Coqtail.Reals.Rpser.Rpser_radius_facts.html#infinite_cv_radius_derivable_compat"><span class="id" type="lemma">infinite_cv_radius_derivable_compat</span></a> ; <span class="id" type="tactic">assumption</span>).<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> (<a class="idref" href="Coqtail.Reals.Ranalysis.Nth_derivative_facts.html#nth_derive_ext"><span class="id" type="lemma">nth_derive_ext</span></a> <span class="id" type="var">_</span> <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_sums.html#sum"><span class="id" type="definition">sum</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_deriv"><span class="id" type="definition">An_deriv</span></a> <span class="id" type="var">An</span>) <span class="id" type="var">rdAn'</span>) <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Reals.Ranalysis.Rfunction_classes_usual.html#D_infty_Rpser"><span class="id" type="lemma">D_infty_Rpser</span></a> <span class="id" type="var">_</span> <span class="id" type="var">rdAn'</span> <span class="id" type="var">k</span>)).<br/>
+
+<br/>
+&nbsp;<span class="id" type="tactic">assert</span> (<span class="id" type="var">rAnk'</span> : <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#infinite_cv_radius"><span class="id" type="definition">infinite_cv_radius</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_nth_deriv"><span class="id" type="definition">An_nth_deriv</span></a> (<a class="idref" href="Coqtail.Reals.Rpser.Rpser_def.html#An_deriv"><span class="id" type="definition">An_deriv</span></a> <span class="id" type="var">An</span>) <span class="id" type="var">k</span>)) <span class="id" type="tactic">by</span><br/>
+&nbsp;&nbsp;(<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Coqtail.Reals.Rpser.Rpser_radius_facts.html#infinite_cv_radius_nth_derivable_compat"><span class="id" type="lemma">infinite_cv_radius_nth_derivable_compat</span></a> ; <span class="id" type="tactic">assumption</span>).<br/>
+&nbsp;<span class="id" type="tactic">rewrite</span> (<span class="id" type="var">IHk</span> <span class="id" type="var">_</span> <span class="id" type="var">_</span> <span class="id" type="var">rAnk'</span>).<br/>
+&nbsp;<span class="id" type="var">erewrite</span> &lt;- <a class="idref" href="Coqtail.Reals.Rextensionality.html#sum_ext"><span class="id" type="lemma">sum_ext</span></a> ; [| <span class="id" type="tactic">eapply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_def_simpl.html#An_nth_deriv_S'"><span class="id" type="lemma">An_nth_deriv_S'</span></a>] ; <span class="id" type="tactic">reflexivity</span>.<br/>
+
+<br/>
+&nbsp;<span class="id" type="tactic">intro</span> ; <span class="id" type="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#derive"><span class="id" type="definition">derive</span></a> ; <span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Rpser.Rpser_derivative.html#derive_pt_sum"><span class="id" type="lemma">derive_pt_sum</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

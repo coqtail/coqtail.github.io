@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.Logic.Runcountable</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.Logic.Runcountable</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.fourier.Fourier.html#"><span class="id" type="library">Fourier</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab166"></a><h1 class="section">R is uncountable.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="R_uncountable_strong"><span class="id" type="lemma">R_uncountable_strong</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">∀</span> (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">x</span> <span class="id" type="var">y</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#y"><span class="id" type="variable">y</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}'"><span class="id" type="notation">{</span></a><span class="id" type="var">l</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}'"><span class="id" type="notation">:</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}'"><span class="id" type="notation">|</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <span class="id" type="var">l</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">≠</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}'"><span class="id" type="notation">&amp;</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x_'<='_x"><span class="id" type="notation">≤</span></a> <span class="id" type="var">l</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<='_x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#y"><span class="id" type="variable">y</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'&'_x_'}'"><span class="id" type="notation">}</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">intros</span> <span class="id" type="var">f</span> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">H</span>.<br/>
+<span class="id" type="tactic">pose</span> (<span class="id" type="var">lf</span> := <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#l"><span class="id" type="definition">l</span></a> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">H</span> <span class="id" type="var">f</span>).<br/>
+<span class="id" type="tactic">∃</span> <span class="id" type="var">lf</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">n</span> <span class="id" type="var">Hc</span>; <span class="id" type="tactic">destruct</span> (<a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#l_not_in_Rn"><span class="id" type="lemma">l_not_in_Rn</span></a> <span class="id" type="var">x</span> <span class="id" type="var">y</span> <span class="id" type="var">H</span> <span class="id" type="var">f</span> <span class="id" type="var">n</span>); <span class="id" type="tactic">unfold</span> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#Rn"><span class="id" type="definition">Rn</span></a>; <span class="id" type="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#l_in_segment"><span class="id" type="lemma">l_in_segment</span></a>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="R_uncountable"><span class="id" type="lemma">R_uncountable</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">f</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'}'"><span class="id" type="notation">{</span></a><span class="id" type="var">l</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'}'"><span class="id" type="notation">:</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'}'"><span class="id" type="notation">|</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span>, <span class="id" type="var">l</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'<>'_x"><span class="id" type="notation">≠</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#n"><span class="id" type="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Specif.html#:type_scope:'{'_x_':'_x_'|'_x_'}'"><span class="id" type="notation">}</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+<span class="id" type="tactic">apply</span> (<a class="idref" href="Coqtail.Reals.Logic.Runcountable.html#segment_uncountable"><span class="id" type="lemma">segment_uncountable</span></a> 0 1); <span class="id" type="tactic">fourier</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

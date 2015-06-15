@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Topology.TFunctions</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Topology.TFunctions</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#"><span class="id" type="library">Ensembles</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Topology.Topology.html#"><span class="id" type="library">Topology</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Section</span> <a name="Functions"><span class="id" type="section">Functions</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Variable</span> <a name="Functions.U"><span class="id" type="variable">U</span></a> <a name="Functions.V"><span class="id" type="variable">V</span></a> : <span class="id" type="keyword">Type</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Inductive</span> <a name="Image"><span class="id" type="inductive">Image</span></a> (<span class="id" type="var">X</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>) (<span class="id" type="var">f</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a> → <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="Image_intro"><span class="id" type="constructor">Image_intro</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> <span class="id" type="var">X</span> <a class="idref" href="Coqtail.Topology.TFunctions.html#x"><span class="id" type="variable">x</span></a> → <span class="id" type="keyword">∀</span> <span class="id" type="var">y</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>, <a class="idref" href="Coqtail.Topology.TFunctions.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="var">f</span> <a class="idref" href="Coqtail.Topology.TFunctions.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Topology.TFunctions.html#Image"><span class="id" type="inductive">Image</span></a> <span class="id" type="var">X</span> <span class="id" type="var">f</span>) <a class="idref" href="Coqtail.Topology.TFunctions.html#y"><span class="id" type="variable">y</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Inductive</span> <a name="Preimage"><span class="id" type="inductive">Preimage</span></a> (<span class="id" type="var">Y</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>) (<span class="id" type="var">f</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a> → <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="Inverse_Image_intro"><span class="id" type="constructor">Inverse_Image_intro</span></a> : <span class="id" type="keyword">∀</span> <span class="id" type="var">y</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> <span class="id" type="var">Y</span> <a class="idref" href="Coqtail.Topology.TFunctions.html#y"><span class="id" type="variable">y</span></a> → <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Topology.TFunctions.html#y"><span class="id" type="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <span class="id" type="var">f</span> <a class="idref" href="Coqtail.Topology.TFunctions.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Topology.TFunctions.html#Preimage"><span class="id" type="inductive">Preimage</span></a> <span class="id" type="var">Y</span> <span class="id" type="var">f</span>) <a class="idref" href="Coqtail.Topology.TFunctions.html#x"><span class="id" type="variable">x</span></a>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Definition</span> <a name="function"><span class="id" type="definition">function</span></a> (<span class="id" type="var">A</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>) (<span class="id" type="var">B</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>) : (<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>→<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>)-&gt;<span class="id" type="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">fun</span> <span class="id" type="var">f</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>→<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a> ⇒ <span class="id" type="keyword">∀</span> <span class="id" type="var">a</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#a"><span class="id" type="variable">a</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#In"><span class="id" type="definition">In</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#B"><span class="id" type="variable">B</span></a> (<a class="idref" href="Coqtail.Topology.TFunctions.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#a"><span class="id" type="variable">a</span></a>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Lemma</span> <a name="Image_in_arrival_space"><span class="id" type="lemma">Image_in_arrival_space</span></a> : <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>) (<span class="id" type="var">B</span>:<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Ensemble"><span class="id" type="definition">Ensemble</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>) (<span class="id" type="var">f</span>:<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.U"><span class="id" type="variable">U</span></a>→<a class="idref" href="Coqtail.Topology.TFunctions.html#Functions.V"><span class="id" type="variable">V</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Coqtail.Topology.TFunctions.html#function"><span class="id" type="definition">function</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#B"><span class="id" type="variable">B</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#f"><span class="id" type="variable">f</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Sets.Ensembles.html#Included"><span class="id" type="definition">Included</span></a> <span class="id" type="var">_</span> (<a class="idref" href="Coqtail.Topology.TFunctions.html#Image"><span class="id" type="inductive">Image</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#A"><span class="id" type="variable">A</span></a> <a class="idref" href="Coqtail.Topology.TFunctions.html#f"><span class="id" type="variable">f</span></a>) <a class="idref" href="Coqtail.Topology.TFunctions.html#B"><span class="id" type="variable">B</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">f</span> <span class="id" type="var">funf</span> <span class="id" type="var">y</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">intros</span> <span class="id" type="var">yIm</span>. <span class="id" type="tactic">induction</span> <span class="id" type="var">yIm</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> <span class="id" type="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" type="tactic">apply</span> (<span class="id" type="var">funf</span> <span class="id" type="var">x</span> <span class="id" type="var">H</span>).<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">End</span> <a class="idref" href="Coqtail.Topology.TFunctions.html#Functions"><span class="id" type="section">Functions</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

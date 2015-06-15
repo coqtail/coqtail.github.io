@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Coqtail.Reals.RFsequence</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Coqtail.Reals.RFsequence</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Common definitions of real functions sequences. 
+</div>
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Reals.html#"><span class="id" type="library">Reals</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#"><span class="id" type="library">Rsequence_def</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Delimit</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">RFseq_scope</span> <span class="id" type="keyword">with</span> <span class="id" type="var">Rseq</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">R_scope</span>.<br/>
+<span class="id" type="keyword">Open</span> <span class="id" type="keyword">Local</span> <span class="id" type="keyword">Scope</span> <span class="id" type="var">RFseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a>.<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+<span class="id" type="keyword">Implicit</span> <span class="id" type="keyword">Type</span> <span class="id" type="var">f</span> <span class="id" type="var">g</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab120"></a><h1 class="section">Morphism of functions on R -&gt; R to sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_plus"><span class="id" type="definition">RFseq_plus</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:x_'+'_x"><span class="id" type="notation">+</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#gn"><span class="id" type="variable">gn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a>)%<span class="id" type="var">F</span>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_mult"><span class="id" type="definition">RFseq_mult</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:x_'*'_x"><span class="id" type="notation">×</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#gn"><span class="id" type="variable">gn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a>)%<span class="id" type="var">F</span>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_opp"><span class="id" type="definition">RFseq_opp</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">n</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#Ropp"><span class="id" type="axiom">Ropp</span></a> (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a>))%<span class="id" type="var">F</span>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_inv"><span class="id" type="definition">RFseq_inv</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">n</span> := (<span class="id" type="keyword">fun</span> <span class="id" type="var">x</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#Rinv"><span class="id" type="axiom">Rinv</span></a> (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a>))%<span class="id" type="var">F</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":RFseq_scope:x_'+'_x"><span class="id" type="notation">"</span></a>+" := <a class="idref" href="Coqtail.Reals.RFsequence.html#RFseq_plus"><span class="id" type="definition">RFseq_plus</span></a> : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":RFseq_scope:x_'*'_x"><span class="id" type="notation">"</span></a>×" := <a class="idref" href="Coqtail.Reals.RFsequence.html#RFseq_mult"><span class="id" type="definition">RFseq_mult</span></a> : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":RFseq_scope:'-'_x"><span class="id" type="notation">"</span></a>- u" := (<a class="idref" href="Coqtail.Reals.RFsequence.html#RFseq_opp"><span class="id" type="definition">RFseq_opp</span></a> <span class="id" type="var">u</span>) : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Notation</span> <a name=":RFseq_scope:'/'_x"><span class="id" type="notation">"</span></a>/ u" := (<a class="idref" href="Coqtail.Reals.RFsequence.html#RFseq_inv"><span class="id" type="definition">RFseq_inv</span></a> <span class="id" type="var">u</span>) : <span class="id" type="var">RFseq_scope</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_minus"><span class="id" type="definition">RFseq_minus</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:x_'-'_x"><span class="id" type="notation">-</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#gn"><span class="id" type="variable">gn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a>)%<span class="id" type="var">F</span>.<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_div"><span class="id" type="definition">RFseq_div</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">gn</span> <span class="id" type="var">n</span> := (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Ranalysis1.html#:Rfun_scope:x_'/'_x"><span class="id" type="notation">/</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#gn"><span class="id" type="variable">gn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a>)%<span class="id" type="var">F</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Infix</span> <a name=":RFseq_scope:x_'-'_x"><span class="id" type="notation">"</span></a>-" := <a class="idref" href="Coqtail.Reals.RFsequence.html#RFseq_minus"><span class="id" type="definition">RFseq_minus</span></a> : <span class="id" type="var">RFseq_scope</span>.<br/>
+<span class="id" type="keyword">Infix</span> <a name=":RFseq_scope:x_'/'_x"><span class="id" type="notation">"</span></a>/" := <a class="idref" href="Coqtail.Reals.RFsequence.html#RFseq_div"><span class="id" type="definition">RFseq_div</span></a> : <span class="id" type="var">RFseq_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab121"></a><h1 class="section">Convergence of functions sequences.</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_cv"><span class="id" type="definition">RFseq_cv</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> := <span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a>) (<a class="idref" href="Coqtail.Reals.RFsequence.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a>).<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_cv_interv"><span class="id" type="definition">RFseq_cv_interv</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> (<span class="id" type="var">lb</span> <span class="id" type="var">ub</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" type="keyword">∀</span> <span class="id" type="var">x</span>, <a class="idref" href="Coqtail.Reals.RFsequence.html#lb"><span class="id" type="variable">lb</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a> → <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#ub"><span class="id" type="variable">ub</span></a> → <a class="idref" href="Coqtail.Reals.Rsequence.Rsequence_def.html#Rseq_cv"><span class="id" type="definition">Rseq_cv</span></a> (<span class="id" type="keyword">fun</span> <span class="id" type="var">n</span> ⇒ <a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a>) (<a class="idref" href="Coqtail.Reals.RFsequence.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="RFseq_cvu"><span class="id" type="definition">RFseq_cvu</span></a> <span class="id" type="var">fn</span> <span class="id" type="var">f</span> (<span class="id" type="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>) (<span class="id" type="var">r</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.RIneq.html#posreal"><span class="id" type="record">posreal</span></a>) := <span class="id" type="keyword">∀</span> <span class="id" type="var">eps</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>, 0 <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#eps"><span class="id" type="variable">eps</span></a> →<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">∃</span></a> <span class="id" type="var">N</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Datatypes.html#nat"><span class="id" type="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Logic.html#:type_scope:'exists'_x_'..'_x_','_x"><span class="id" type="notation">,</span></a> <span class="id" type="keyword">∀</span> <span class="id" type="var">n</span> (<span class="id" type="var">y</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#R"><span class="id" type="axiom">R</span></a>), (<a class="idref" href="Coqtail.Reals.RFsequence.html#N"><span class="id" type="variable">N</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Init.Peano.html#:nat_scope:x_'<='_x"><span class="id" type="notation">≤</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a>)%<span class="id" type="var">nat</span> → <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.PSeries_reg.html#Boule"><span class="id" type="definition">Boule</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#r"><span class="id" type="variable">r</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#y"><span class="id" type="variable">y</span></a> →<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rfunctions.html#R_dist"><span class="id" type="definition">R_dist</span></a> (<a class="idref" href="Coqtail.Reals.RFsequence.html#fn"><span class="id" type="variable">fn</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#n"><span class="id" type="variable">n</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#y"><span class="id" type="variable">y</span></a>) (<a class="idref" href="Coqtail.Reals.RFsequence.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#y"><span class="id" type="variable">y</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl5/stdlib/Coq.Reals.Rdefinitions.html#:R_scope:x_'<'_x"><span class="id" type="notation">&lt;</span></a> <a class="idref" href="Coqtail.Reals.RFsequence.html#eps"><span class="id" type="variable">eps</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
